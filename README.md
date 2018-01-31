@@ -17,5 +17,4 @@ This is going to be the data repository for the oyster field collection data and
 [Grub_box_surface_oyster_counts](Grub_box_surface_oyster_counts.csv) contains data on oyster counts within .25m^2 quadrats. Each sample contains information on GPS location of quadrat, date/time sampled, oysters live/dead, and number of oysters within quadrat. 
 
 
-"He's something like a pipe bomb ready to blow / And everything you built that's all for show goes up in flames"
--Jason Isbell
+"Some days you just kill it, some days you choke, some days you blastoff, some days you smoke." - Sturgill Simpson
