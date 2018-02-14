@@ -30,16 +30,16 @@ names(Dead1)[8] = 'Size'
 names(Dead2)[8] = 'Size'
 names(Dead3)[8] = 'Size'
 names(Dead4)[8] = 'Size'
-Live1$Live_Dead = rep('Li1')
-Live2$Live_Dead = rep('Li2')
-Live3$Live_Dead = rep('Li3')
-Live4$Live_Dead = rep('Li4')
-Live5$Live_Dead = rep('Li5')
-Live6$Live_Dead = rep('Li6')
-Dead1$Live_Dead = rep('D1')
-Dead2$Live_Dead = rep('D2')
-Dead3$Live_Dead = rep('D3')
-Dead4$Live_Dead = rep('D4')
+Live1$Live_Dead = rep('Li')
+Live2$Live_Dead = rep('Li')
+Live3$Live_Dead = rep('Li')
+Live4$Live_Dead = rep('Li')
+Live5$Live_Dead = rep('Li')
+Live6$Live_Dead = rep('Li')
+Dead1$Live_Dead = rep('D')
+Dead2$Live_Dead = rep('D')
+Dead3$Live_Dead = rep('D')
+Dead4$Live_Dead = rep('D')
 
 # Stack all these data frames together
 oyster_quadrats = rbind(Live1,Live2,Live3,Live4,Live5,Live6,Dead1,Dead2,Dead3,Dead4)
