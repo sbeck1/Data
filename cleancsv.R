@@ -14,7 +14,7 @@ write.csv(locations, "Grub_locations.csv")
 #2. Clean up bulk data- remove locations and change site.1 to site
 bulk = bulk[,-c(1,6,7)]
 colnames(bulk)[3]= "Site"
-write.csv(bulk, "Grub_oyster_size_weights")
+write.csv(bulk, "Grub_oyster_size_weights.csv")
 
 
 #3. Clean up surface count data = remove locations and change site.1 to site
