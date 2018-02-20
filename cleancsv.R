@@ -1,6 +1,8 @@
 ################ Cleaning up data ###########
 library(tidyverse)
 
+# Katie used this file to clean csv data
+
 # 1. Create location csv for Grub box 
 
 bulk = read.csv("/Users/katiezarada/Desktop/Oysters/Analyses/Data/Oyster_data/Grub/Grub_box_shell_bulk_weights.csv", header = TRUE)
