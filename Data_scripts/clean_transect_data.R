@@ -36,14 +36,16 @@ tran.2018 = tran.2018[,-c(12:18)] #removing locations
 tran.2012 = tran.2012[,-c(12:13)] #remove extra counts
 colnames(tran.2012)[12] = "Cnt_Live" #change Cnt to cnt live
 tran.2012$Cnt_Dead = rep("NA", 2546) #add in Cnt_dead col 
+tran.2012$Date = as.Date(tran.2012$Date, format = "%m/%d/%Y") #change Date to date format
+
 
 #clean 2018 data 
-tran.2018 = tran.2018[,-c(4,5,13)]
-colnames(tran.2018)[4] = "Start.time"
-colnames(tran.2018)[5] = "End.time"
+tran.2018 = tran.2018[,-c(4,5,13)] #removing Day, year, Recorder to match 2012 file
+colnames(tran.2018)[4] = "Start.time" #change col name to match 2012
+colnames(tran.2018)[5] = "End.time"   #change col name to match 2012
 
-tran.2018$Start.time= strftime(tran.2018$Start.time, format = "%H:%M")
-tran.2018$End.time = strftime(tran.2018$End.time, format = "%H:%M")
+tran.2018$Start.time= strftime(tran.2018$Start.time, format = "%H:%M") #change time to match 2012
+tran.2018$End.time = strftime(tran.2018$End.time, format = "%H:%M")   #change time to match 2012
 
 ##### FIX 2017 DATA ####
 #missing a lot of cols that the other two have...
@@ -79,17 +81,27 @@ tran.2017$Counter = rep(NA, 630)
 colnames(tran.2017)[4] = "TransLngth"
 
 #add in Locality, Site, Bar, Station 
-tran.2017$Locality = rep("LC", dim(tran.2017)[1])
-tran.2017$Site = rep("O", dim(tran.2017)[1])
+tran.2017$Locality = rep("LC", dim(tran.2017)[1]) #create locality
+tran.2017$Site = rep("O", dim(tran.2017)[1])  #create site
+
+## Dealing with Treatment, pre vs post; control vs restore 
+tran.2017$Treatment = apply(tran.2017, 1, function(x) ifelse(str_detect(x[2], pattern = "LCrestore"), paste0("restore", "_", x[7]), paste0("control", "_", x[7])))
+
+#split bar number from station
 tran.2017$Bar = apply(tran.2017, 1, function(x) ifelse(str_detect(x[2], pattern = "LCrestore") , strsplit(x[2], "e")[[1]][3], strsplit(x[2], "l")[[1]][2]))
-colnames(tran.2017)[2] = "Station"
-colnames(tran.2017)[7] = "Treatment"
-tran.2017 = tran.2017[,c(1,8,10,11, 13, 14, 15, 2, 12,4,5,6)]
+colnames(tran.2017)[2] = "Station"  #rename location to station
+colnames(tran.2017)[3] = "Replicate"  #rename transect number to replicate on bar
+tran.2017 = tran.2017[,c(1,8,10,11, 13, 14, 16, 2, 12,4,5,6,3, 15)]#rearrange to match 2012 
+tran.2017$Month = month.name[as.numeric(tran.2017$Month)] #change month numbers to month names
+tran.2017$Date = as.Date(tran.2017$Date, format = "%m/%d/%Y") #change date from character to actual date
 
 
 #Combind 2012 and 2018 data 
 transect = rbind(tran.2012, tran.2018)
-transect = transect[,-2]
+transect = transect[,-2] #remove trip number
+transect$Replicate = rep("1", dim(transect)[1])  #add in 1 for replicate because 2017 data has up to 3 replicates
+transect$Treatment = rep("control", dim(transect)[1])
+
 transect = rbind(transect, tran.2017)
 
 #write.csv(transect, "transect_combined.csv")
