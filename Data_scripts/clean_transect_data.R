@@ -3,6 +3,7 @@
 #load packages
 library(readxl) #to read xlsx file
 library(tidyverse)
+library(chron)
 
 #load data
 tran.2017 = read.csv("Oyster_data/Transect/LCR_oyster_transect_2017.csv", header = TRUE, stringsAsFactors = FALSE) #this is a combo of 2017 and 2013
@@ -44,6 +45,30 @@ colnames(tran.2012)[12] = "Cnt_Live" #change Cnt to cnt live
 tran.2012$Cnt_Dead = rep("NA", 2546) #add in Cnt_dead col 
 tran.2012$Date = as.Date(tran.2012$Date, format = "%m/%d/%Y") #change Date to date format
 
+stime = tran.2012$Start.time 
+stime.1 = strsplit(stime, ":")  #split time by :
+
+time = vector()
+for(i in 1: length(stime.1)){   #loop to paste time back together but only the ones that have real time
+  
+  time[i] = ifelse(length(stime.1[[i]]) == 2, paste0(stime.1[[i]][1], ":", stime.1[[i]][2]), "NA")
+  
+}
+
+tran.2012$Start.time = time
+
+
+etime = tran.2012$End.time 
+etime.1 = strsplit(etime, ":")  #split time by :
+
+time = vector()
+for(i in 1: length(etime.1)){   #loop to paste time back together but only the ones that have real time
+  
+  time[i] = ifelse(length(etime.1[[i]]) == 2, paste0(etime.1[[i]][1], ":", etime.1[[i]][2]), "NA")
+  
+}
+
+tran.2012$End.time = time
 
 #clean 2018 data 
 tran.2018 = tran.2018[,-c(4,5,13)] #removing Day, year, Recorder to match 2012 file
