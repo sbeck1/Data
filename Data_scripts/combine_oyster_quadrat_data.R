@@ -230,6 +230,8 @@ quadrat.locations = rbind.fill(quad2012.locations,quad2013.locations,quad2018.lo
 
 quadrat.combined = rbind(quad.2012,quad.2013,quad.2018,quad.2018b)
 
+# some of the Live oysters are recorded with "Li" instead of "L". Standardize.
+quadrat.combined$Live_Dead[quadrat.combined$Live_Dead=='Li'] = 'L'
 
 #write.csv(quadrat.locations,'Oyster_data/Quadrat/quadrat.locations.csv',row.names=F)
 #write.csv(quadrat.combined,'Oyster_data/Quadrat/quadrat_combined.csv',row.names = F)
