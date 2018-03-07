@@ -10,13 +10,7 @@ tran.2017 = read.csv("Oyster_data/Transect/LCR_oyster_transect_2017.csv", header
 tran.2018 = read_excel("Oyster_data/Transect/OysterData_30Jan2018_Transect.xlsx")
 tran.2012 = read.csv("Oyster_data/Transect/Transect_data_Nov_2012_bp.csv", stringsAsFactors = FALSE) #actually 2010 data?
 
-# convert Date column in 2018 file to match other files' format
 tran.2018 = as.data.frame(tran.2018)
-tran.2018$Date = as.Date(tran.2018$Date) %>% format('%m/%d/%Y')
-
-# convert Station column in 2018 file to match other files' format (Locality, Site, Bar)
-tran.2018$Station = paste0(tran.2018$Locality,tran.2018$Site,tran.2018$Bar)
-
 #1. Remove Location data from 2017 and 2018 data and make separate location files
 
 loc.2012 = tran.2012 %>% select(Date, Station, StartGPS_E, StartGPS_N, MidGPS_E, MidGPS_N, EndGPS_E, EndGPS_N, Orientation) %>% distinct()
@@ -32,7 +26,7 @@ loc.2018 = loc.2018[1,] #it was just a repeat but one row was missing orientatio
 
 
 transect.locations = rbind(loc.2012, loc.2018)
-#write.csv(transect.locations, "transect.locations.csv",row.names=F)
+#write.csv(transect.locations, "transect.locations.csv")
 
 tran.2012 = tran.2012[,-c(10:16)] #removing locations 
 tran.2018 = tran.2018[,-c(12:18)] #removing locations
