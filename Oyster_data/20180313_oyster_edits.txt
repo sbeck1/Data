@@ -1,3 +1,36 @@
+
+FILE: quadrat.locations.csv
+
+1) All Quad_type = SURFACE, Quad_area = 0.0625, Quad_Depth = NA (exception: Dec 20, 2017, Jan 17, 2018, and Jan 30 2018: LTI1)
+
+2) Nov 6-8, 2017: Several Dist_Alng and Dist_from values do not appear and quadrats with no oysters (zeroes) are not included as replicates. Example LCO8 (new station LCO9). This problem may extend back to earlier data converted from same style. For 2018 quadrat with no oysters we included two rows for zeroes (live and dead).
+
+3) March 2, 2018 data needs included
+
+
+FILE: quadrat_combined.csv
+
+1) Nov 6-8, 2017: Quadrats with no oysters (zeroes) are not included. Example LCO8 (new station LCO9). This problem may extend back to earlier data.  
+
+2) March 2, 2018 data needs included
+
+3) Treatments should all be "control" EXCEPT: LCO1,LCO2,LCO5,LCO6 from 2014 to present, where treatment="rocks".  It is important to make this change before renaming stations as per below.   
+
+
+FILE: transect_combined.csv
+
+1) 2013/14 and Jan 30, 2018 (LTI1) transect data not included
+
+2) Jan 30, 2018 start.time=9:44am end.time=10.12
+
+3) Treatments should all be "control" except LCO1,LCO2,LCO5,LCO4 from 2014 to present, where treatment="rocks".  It is important to make this change before renaming stations below.
+
+
+FILE: transect.locations.csv
+
+1) station LT1 should be LTI1, date format incorrect
+
+
 FILE: quadrat.locations.csv, quadrat_combined.csv, transect.locations.csv, transect_combined.csv
 
 1) Station name edits standardizing across projects/epochs:
@@ -25,29 +58,8 @@ Year	Current		New
 
 2) For all quadrat data pre-2018, sample coordinates are located in transect.locations.csv and can be linked via station name.  This is probably fine if we don't want data duplicated, the alternative is adding transect location columns to quadrat location file.
 
-FILE: quadrat.locations.csv
+3) 2015 data needs to be included 
 
-1) All Quad_type = SURFACE, Quad_area = 0.0625, Quad_Depth = NA (exception: Dec 20, 2017 and Jan 17, 2018)
-
-2) Nov 6-8, 2017: Several Dist_Alng and Dist_from values do not appear and quadrats with no oysters (zeroes) are not included as replicates. Example LCO8 (new station LCO9). This problem may extend back to earlier data. For 2018 quadrat with no oysters we included two rows for zeroes (live and dead).
-
-3) March 2, 2018 data needs included
-
-FILE: quadrat_combined.csv
-
-1) Nov 6-8, 2017: Quadrats with no oysters (zeroes) are not included. Example LCO8 (new station LCO9). This problem may extend back to earlier data.  
-
-2) March 2, 2018 data needs included
-
-FILE: transect_combined.csv
-
-1) 2013/14 and Jan 30, 2018 (LTI1) transect data not included
-
-2) Jan 30, 2018 start.time=9:44am end.time=10.12
-
-FILE: transect.locations.csv
-
-1) station LT1 should be LTI1, date format incorrect
 
 FILE: All raw data files
 
