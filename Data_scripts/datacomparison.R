@@ -4,56 +4,26 @@
 
 library(devtools)
 #read in data files
-dat1 = read.csv("/Users/katiezarada/Desktop/Oysters/OysterData_16Feb2018_Quadrat_SB.csv", header =TRUE, stringsAsFactors = FALSE)
-dat2 = read.csv("/Users/katiezarada/Desktop/Oysters/OysterData_16Feb2018_QuadratSL .csv", header =TRUE, stringsAsFactors = FALSE)
+dat1 = read.csv("/Users/fas/Desktop/Oysters/20180302_oyster_quadrat_MM.CSV", header =TRUE, stringsAsFactors = FALSE)
+dat2 = read.csv("/Users/fas/Desktop/Oysters/20180302_oyster_quadrat_SB.CSV", header =TRUE, stringsAsFactors = FALSE)
 
-
-#get the list for each column where there are no matches
-nomatch = list()
-for(i in 1:dim(dat2)[2]){
-  
-  nomatch[[i]] = which(dat2[,i] %in% dat1[,i] == "FALSE")
-  
-}
-
-nomatch.SL = nomatch[c(9,10,11,13)]
-names(nomatch.SL) = c("Quad_Lat", "Quad_Long", "Center_Lat", "Rand_Coord" )
-
-nomatch2 = list()
-for(i in 1:dim(dat1)[2]){
-  
-  nomatch2[[i]] = which(dat1[,i] %in% dat2[,i] == "FALSE")
-  
-}
-
-
-nomatch.SB = nomatch2[c(9,10,13)]
-names(nomatch.SB) = c("Quad_Lat", "Quad_Long", "Rand_Coord")
-
+#first, are the columns and rows the same? 
+dim(dat1)
+dim(dat2)
 
 
 #row by row comparison 
 
-mistakes = list()
+mistakes = list()       
 for(i in 1:dim(dat2)[1]) {
  
-    mistakes[[i]] = dat1[i,] %in% dat2[i,]
+    mistakes[[i]] = dat1[i,] %in% dat2[i,]  #row by row comparison of which dat2 is not in dat1
   
 }
 
-mistakes.df = data.frame()
+mistakes.df = do.call(rbind,mistakes) #change list to data.frame 
 
-for(i in 1:length(mistakes)){
-  for(j in 1: 20){
-    
-    mistakes.df[i,j] = mistakes[[i]][j]
-  }
-}
-
-
-which(mistakes.df$Count == "FALSE")
-
-mistakes.cols = list()
+mistakes.cols = list()  #loop to pull out FALSE reads from above into a list
 
 for(i in 1:dim(mistakes.df)[2]){
   
@@ -61,35 +31,22 @@ for(i in 1:dim(mistakes.df)[2]){
   
 }
 
-names(mistakes.cols) = colnames(dat2)
+names(mistakes.cols) = colnames(dat2)   #renaming lists by the columns they represent
+
+mistakes.cols         #list of columns and the row numbers that do not match up 
 
 
+#returning the chunks that do not match up 
 
-
-for(i in 1:dim(dat2)[2]){
-  for(j in 1:dim(dat1)[1]){
-    
-    mistakes[[i]] = dat1[i,j] == dat2[i,j]
-  }
-}
-
-mistakes.df = data.frame()
-
-for(i in 1:length(mistakes)){
-  for(j in 1: 20){
-    
-    mistakes.df[i,j] = mistakes[[i]][j]
-  }
-}
-
-mistakes.cols = list()
-
-for(i in 1:dim(mistakes.df)[2]){
+mistakes.cells = list()
+for(i in 1:length(mistakes.cols)) {
   
-  mistakes.cols[[i]] = which(mistakes.df[,i] == "FALSE")
-  
+    mistakes.cells[[i]] = cbind(dat1[mistakes.cols[[i]],i],dat2[mistakes.cols[[i]],i])
 }
 
-names(mistakes.cols) = colnames(dat2)
+
+
+
+
 
 
