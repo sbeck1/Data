@@ -9,8 +9,9 @@ library(chron)
 tran.2017 = read.csv("Oyster_data/Transect/LCR_oyster_transect_2017.csv", header = TRUE, stringsAsFactors = FALSE) #this is a combo of 2017 and 2013
 tran.2018 = read_excel("Oyster_data/Transect/OysterData_30Jan2018_Transect.xlsx")
 tran.2012 = read.csv("Oyster_data/Transect/Transect_data_Nov_2012_bp.csv", stringsAsFactors = FALSE) #actually 2010 data?
-
+tran.2015 = read_excel("Oyster_data/Transect/2015_transect.xlsx")
 tran.2018 = as.data.frame(tran.2018)
+tran.2015 = as.data.frame(tran.2015)
 #1. Remove Location data from 2017 and 2018 data and make separate location files
 
 loc.2012 = tran.2012 %>% select(Date, Station, StartGPS_E, StartGPS_N, MidGPS_E, MidGPS_N, EndGPS_E, EndGPS_N, Orientation) %>% distinct()
@@ -128,6 +129,49 @@ transect$Replicate = rep("1", dim(transect)[1])  #add in 1 for replicate because
 transect$Treatment = rep("control", dim(transect)[1])
 
 transect = rbind(transect, tran.2017)
+
+
+
+
+##################################
+###  cleaning up 2015 Data #######
+##################################
+
+#create month column 
+tran.2015$Month = month.name[as.numeric(format(tran.2015$Date, format = "%m"))]
+
+#add in empty start, end time, counter
+tran.2015$Start.time = rep(NA, dim(tran.2015)[1])
+tran.2015$End.time = rep(NA, dim(tran.2015)[1])
+tran.2015$Counter = rep(NA, dim(tran.2015)[1])
+
+#add in Locality, Site, Bar, Station 
+tran.2015$Locality = rep("LC", dim(tran.2015)[1]) #create locality
+tran.2015$Site = rep("O", dim(tran.2015)[1])  #create site
+
+#create bar number 
+tran.2015$Bar = apply(tran.2015, 1, function(x) ifelse(str_detect(x[2], pattern = "LCcontrol") , strsplit(x[2], "l")[[1]][2], strsplit(x[2], "C")[[1]][2]))
+
+#change names of columns 
+colnames(tran.2015)[2] = "Station"
+colnames(tran.2015)[4] = "Replicate"
+colnames(tran.2015)[5] = "TransLngth"
+colnames(tran.2015)[6] ="Cnt_Live"
+colnames(tran.2015)[7]= "Cnt_Dead"
+
+#treatment column 
+
+tran.2015$Treatment = apply(tran.2015, 1, function(x) ifelse((x[13] == "01" | x[13] == "02" | x[13] == "05"|x[13] ==  "06"), "restore_post", "control_post"))
+
+#change order 
+
+tran.2015 = tran.2015[,c(1,8,9,10,12,13,14, 2, 11, 5,6, 7, 4, 15)]
+
+
+#combine 
+
+transect = rbind(transect, tran.2015)
+
 
 #write.csv(transect, "transect_combined.csv")
 
