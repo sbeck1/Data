@@ -53,6 +53,18 @@ library(glmmADMB) #known of these models are in this file
 dat=read.sas7bdat("ckm_cu_c.sas7bdat")
 names(dat)
 
+
+
+
+####################################################
+# alternative way to read in data: this method reads the csv right off github, so you don't have to mess with setwd, and you know you're getting the latest version of the data
+library(RCurl)
+dat = read.csv(text=RCurl::getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Fish/Snook/ckm_cu_c.csv"))
+#################################################
+
+
+
+
 plot(dat$month, dat$number, pch=as.integer(dat$Zone))
 
 snook=subset(dat,dat$month>3 & dat$month<11 & dat$Zone=="C") #only snook months 3-10 in Zone C
