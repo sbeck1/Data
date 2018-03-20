@@ -54,7 +54,7 @@ oyster_quadrats$Size[oyster_quadrats$Size==0] = NA
 # the Live_over column is different - it represents counts of live oysters, not sizes
 Live_over = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live_over) %>% filter(!is.na(Live_over))
 names(Live_over)[8] = 'Count'
-Live_over$Live_Dead = rep('L')
+Live_over$Live_Dead = rep('Li')
 Live_over$Size = rep(NA)
 Live_over = Live_over[,c('Date','Location','Recorder','Transect','Condition','Distance_along','Distance_from','Size','Live_Dead','Count')]
 
@@ -62,7 +62,7 @@ oyster_quadrats = rbind(oyster_quadrats,Live_over)
 
 # Do some checking of the data
 #      are there NAs in weird places?
-filter(oyster_quadrats,is.na(Distance_from))
+filter(oyster_quadrats,is.na(Distance_along))
 
 
 
@@ -78,4 +78,4 @@ names(oyster_quadrats)[names(oyster_quadrats)=='Distance_from'] = 'Dist_frm'
 # reorder columns
 oyster_quadrats = oyster_quadrats[,c('Date','Station','Counter','Transect','Condition','Dist_Alng','Dist_frm','Live_Dead','Size','Count')]
 
-write.csv(oyster_quadrats,'Oyster_data/Quadrat/Oyster_grid_2013_2017.csv',row.names=F)
+write.csv(oyster_quadrats,'Oyster_data/Quadrat/Oyster_quadrats.csv',row.names=F)
