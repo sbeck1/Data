@@ -3,14 +3,14 @@ FILE: quadrat.locations.csv
 
 1) All Quad_type = SURFACE, Quad_area = 0.0625, Quad_Depth = NA (exception: Dec 20, 2017, Jan 17, 2018, and Jan 30 2018: LTI1)
 
-2) Nov 6-8, 2017: Several Dist_Alng and Dist_from values do not appear and quadrats with no oysters (zeroes) are not included as replicates. Example LCO8 (new station LCO9). This problem may extend back to earlier data converted from same style. For 2018 quadrat with no oysters we included two rows for zeroes (live and dead).
+2) Nov 6-8, 2017: Missing data created NAs and excluded zeroes.  Raw data corrected on 3/15/18.
 
 3) March 2, 2018 data needs included
 
 
 FILE: quadrat_combined.csv
 
-1) Nov 6-8, 2017: Quadrats with no oysters (zeroes) are not included. Example LCO8 (new station LCO9). This problem may extend back to earlier data.  
+1) Nov 6-8, 2017: Missing data created NAs and excluded zeroes.  Raw data corrected on 3/15/18.
 
 2) March 2, 2018 data needs included
 
@@ -23,7 +23,7 @@ FILE: transect_combined.csv
 
 2) Jan 30, 2018 start.time=9:44am end.time=10.12
 
-3) Treatments should all be "control" except LCO1,LCO2,LCO5,LCO4 from 2014 to present, where treatment="rocks".  It is important to make this change before renaming stations below.
+3) Treatments should all be "control" except LCO1,LCO2,LCO5,LCO6 from 2014 to present, where treatment="rocks".  It is important to make this change before renaming stations below.
 
 
 FILE: transect.locations.csv
@@ -33,24 +33,25 @@ FILE: transect.locations.csv
 
 FILE: quadrat.locations.csv, quadrat_combined.csv, transect.locations.csv, transect_combined.csv
 
-1) Station name edits standardizing across projects/epochs:
-Year	Current		New
-2010-12	LCO1		LCO6
-	LCO2		LCO5
-	LCO3		LCO2
-2013-17	LCO1		LCO5
-	LCO2		LCO6
-	LCO3		LCO6
-	LCO4		LCO7
-	LCO5		LCO7
-	LCO6		LCO8
-	LCO7		LCO8
-	LCO8		LCO9
-2018	NLC01		LCO1
-	NLC02		LCO3
-	NLC03		LCO4
-	GCI1		LCN4
-	GCI2		LCN5
+1) Station name edits standardizing across projects/epochs.  LCO stations standardized using construction reef element designations:
+Year	Current		New	Station
+2010-12	LCO1		LCO9	B
+	LCO2		LCO8	A
+	LCO3		LCO3
+2013-17	LCO1		LCO8	B
+	LCO2		LCO9	A
+	LCO3		LCO9	C
+	LCO4		LCO10	A
+	LCO5		LCO10	B
+	LCO6		LCO11	A
+	LCO7		LCO11	B
+	LCO8		LCO12	
+2018	NLC01		LCO2
+	NLC02		LCO4
+	NLC03		LCO0		(bar will not be restored, does not have a reef element number)
+	GCI1		LCN3
+	GCI2		LCN4
+	LCN3		LCN5
 	LCI1		LCI5
 	LCI2		LCI6
 	LCI3		LCI7
