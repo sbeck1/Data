@@ -4,7 +4,8 @@
 
 library(dplyr)
 
-quadrat = read.csv('Oyster_data/QUadrat/Grid_2013_2017/LCR_oyster_grid_2013_2017.csv',stringsAsFactors = F)
+quadrat = read.csv('Oyster_data/QUadrat/Grid_2013_2017/LCR_oyster_grid_2013_2017.csv',stringsAsFactors = F,na.strings = c('',NA))
+quadrat$Date = as.Date(quadrat$Date,format='%m/%d/%Y')
 
 # split Live1, ... Live6, Dead1, ... Dead4 into separate data frames, which can then be stacked
 Live1 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live1)
@@ -51,31 +52,42 @@ oyster_quadrats$Count[oyster_quadrats$Size>0] = 1
 # Size 0 is meaningless, replace these with NA
 oyster_quadrats$Size[oyster_quadrats$Size==0] = NA
 
+# there could be duplicates of dead =0 if quadrat went onto multiple lines. 
+# separate out all count = 0
+nonzeros = filter(oyster_quadrats,Count!=0)
+zeros = filter(oyster_quadrats,Count==0)
+uniquezeros = unique(zeros)
+oyster_quadrats2 = rbind(nonzeros,uniquezeros)
+
+
 # the Live_over column is different - it represents counts of live oysters, not sizes
 Live_over = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live_over) %>% filter(!is.na(Live_over))
 names(Live_over)[8] = 'Count'
-Live_over$Live_Dead = rep('Li')
+Live_over$Live_Dead = rep('L')
 Live_over$Size = rep(NA)
 Live_over = Live_over[,c('Date','Location','Recorder','Transect','Condition','Distance_along','Distance_from','Size','Live_Dead','Count')]
 
-oyster_quadrats = rbind(oyster_quadrats,Live_over)
+oyster_quadrats2 = rbind(oyster_quadrats2,Live_over)
 
 # Do some checking of the data
 #      are there NAs in weird places?
-filter(oyster_quadrats,is.na(Distance_along))
+filter(oyster_quadrats2,is.na(Distance_from))
 
 
 
 
 # rename columns to match Grid_data_Nov_2012_bp.csv as closely as possible
-names(oyster_quadrats)[names(oyster_quadrats)=='Location'] = 'Station'
-names(oyster_quadrats)[names(oyster_quadrats)=='Recorder'] = 'Counter'
-names(oyster_quadrats)[names(oyster_quadrats)=='Distance_along'] = 'Dist_Alng'
-names(oyster_quadrats)[names(oyster_quadrats)=='Distance_from'] = 'Dist_frm'
+names(oyster_quadrats2)[names(oyster_quadrats2)=='Location'] = 'Station'
+names(oyster_quadrats2)[names(oyster_quadrats2)=='Recorder'] = 'Counter'
+names(oyster_quadrats2)[names(oyster_quadrats2)=='Distance_along'] = 'Dist_Alng'
+names(oyster_quadrats2)[names(oyster_quadrats2)=='Distance_from'] = 'Dist_frm'
 
 
 
 # reorder columns
-oyster_quadrats = oyster_quadrats[,c('Date','Station','Counter','Transect','Condition','Dist_Alng','Dist_frm','Live_Dead','Size','Count')]
+oyster_quadrats2 = oyster_quadrats2[,c('Date','Station','Counter','Transect','Condition','Dist_Alng','Dist_frm','Live_Dead','Size','Count')]
 
-write.csv(oyster_quadrats,'Oyster_data/Quadrat/Oyster_quadrats.csv',row.names=F)
+# put rows in order of date, station, transect, dist_alng, dist_frm
+oyster_quadrats2 = oyster_quadrats2[with(oyster_quadrats2,order(Date,Station,Transect,Condition,Dist_Alng,Dist_frm)),]
+
+write.csv(oyster_quadrats2,'Oyster_data/Quadrat/Oyster_grid_2013_2017.csv',row.names=F,quote=F)
