@@ -8,13 +8,13 @@ quadrat = read.csv('Oyster_data/QUadrat/Grid_2013_2017/LCR_oyster_grid_2013_2017
 quadrat$Date = as.Date(quadrat$Date,format='%m/%d/%Y')
 
 # split Live1, ... Live6, Dead1, ... Dead4 into separate data frames, which can then be stacked
-Live1 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live1)
+Live1 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live1) %>% filter(!is.na(Live1))
 Live2 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live2) %>% filter(!is.na(Live2))
 Live3 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live3) %>% filter(!is.na(Live3))
 Live4 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live4) %>% filter(!is.na(Live4))
 Live5 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live5) %>% filter(!is.na(Live5))
 Live6 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live6) %>% filter(!is.na(Live6))
-Dead1 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Dead1) 
+Dead1 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Dead1) %>% filter(!is.na(Dead1))
 Dead2 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Dead2) %>% filter(!is.na(Dead2))
 Dead3 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Dead3) %>% filter(!is.na(Dead3))
 Dead4 = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Dead4) %>% filter(!is.na(Dead4))
@@ -52,14 +52,8 @@ oyster_quadrats$Count[oyster_quadrats$Size>0] = 1
 # Size 0 is meaningless, replace these with NA
 oyster_quadrats$Size[oyster_quadrats$Size==0] = NA
 
-# there could be duplicates of dead =0 if quadrat went onto multiple lines. 
-# separate out all count = 0
-nonzeros = filter(oyster_quadrats,Count!=0)
-zeros = filter(oyster_quadrats,Count==0)
-uniquezeros = unique(zeros)
-oyster_quadrats2 = rbind(nonzeros,uniquezeros)
 
-
+# ==========================================================================================================
 # the Live_over column is different - it represents counts of live oysters, not sizes
 Live_over = select(quadrat,Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live_over) %>% filter(!is.na(Live_over))
 names(Live_over)[8] = 'Count'
@@ -67,8 +61,27 @@ Live_over$Live_Dead = rep('L')
 Live_over$Size = rep(NA)
 Live_over = Live_over[,c('Date','Location','Recorder','Transect','Condition','Distance_along','Distance_from','Size','Live_Dead','Count')]
 
-oyster_quadrats2 = rbind(oyster_quadrats2,Live_over)
+oyster_quadrats1 = rbind(oyster_quadrats,Live_over)
 
+
+# ========================================================================================================
+# Make sure there is a L and D row for each quadrat (fill in zero counts if necessary)
+allquadrats_L = quadrat %>% select(Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from) %>% unique()
+allquadrats_L$Live_Dead = rep('L')
+allquadrats_D = quadrat %>% select(Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from) %>% unique()
+allquadrats_D$Live_Dead = rep('D')
+allquadrats = rbind(allquadrats_L,allquadrats_D)
+
+nonzeroquads = oyster_quadrats1 %>% select(Date,Location,Recorder,Transect,Condition,Distance_along,Distance_from,Live_Dead) %>% unique()
+zeroquads = anti_join(allquadrats,nonzeroquads,by=c('Date','Location','Recorder','Transect','Condition','Distance_along','Distance_from','Live_Dead'))
+zeroquads$Size = rep(NA)
+zeroquads$Count = rep(0)
+zeroquads = zeroquads[,c('Date','Location','Recorder','Transect','Condition','Distance_along','Distance_from','Size','Live_Dead','Count')]
+
+oyster_quadrats2 = rbind(oyster_quadrats1,zeroquads)
+
+
+# ============================================================================================================
 # Do some checking of the data
 #      are there NAs in weird places?
 filter(oyster_quadrats2,is.na(Distance_from))

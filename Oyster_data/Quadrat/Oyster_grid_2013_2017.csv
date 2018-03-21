@@ -16,8 +16,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-23,LCrestore1,Jenn Seavey,1,pre,13,0,D,34,1
 2013-04-23,LCrestore1,Jenn Seavey,1,pre,17,0,L,NA,0
 2013-04-23,LCrestore1,Jenn Seavey,1,pre,17,0,D,NA,0
-2013-04-23,LCrestore1,Jenn Seavey,2,pre,3,0,D,37.7,1
 2013-04-23,LCrestore1,Jenn Seavey,2,pre,3,0,L,NA,0
+2013-04-23,LCrestore1,Jenn Seavey,2,pre,3,0,D,37.7,1
 2013-04-23,LCrestore1,Jenn Seavey,2,pre,5,0,L,29.3,1
 2013-04-23,LCrestore1,Jenn Seavey,2,pre,5,0,L,36.4,1
 2013-04-23,LCrestore1,Jenn Seavey,2,pre,5,0,D,60.4,1
@@ -69,10 +69,10 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-23,LCrestore2,Jenn Seavey,1,pre,21,0,D,NA,0
 2013-04-23,LCrestore2,Jenn Seavey,2,pre,1,0,L,NA,0
 2013-04-23,LCrestore2,Jenn Seavey,2,pre,1,0,D,NA,0
+2013-04-23,LCrestore2,Jenn Seavey,2,pre,8,0,L,NA,0
 2013-04-23,LCrestore2,Jenn Seavey,2,pre,8,0,D,31.4,1
 2013-04-23,LCrestore2,Jenn Seavey,2,pre,8,0,D,43.8,1
 2013-04-23,LCrestore2,Jenn Seavey,2,pre,8,0,D,42.3,1
-2013-04-23,LCrestore2,Jenn Seavey,2,pre,8,0,L,NA,0
 2013-04-23,LCrestore2,Jenn Seavey,2,pre,9,0,L,22.2,1
 2013-04-23,LCrestore2,Jenn Seavey,2,pre,9,0,D,NA,0
 2013-04-23,LCrestore2,Jenn Seavey,2,pre,12,0,L,33,1
@@ -110,8 +110,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-23,LCrestore3,Jenn Seavey,1,pre,19,0,D,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,6,0,L,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,6,0,D,NA,0
-2013-04-23,LCrestore3,Jenn Seavey,2,pre,8,0,D,58.2,1
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,8,0,L,NA,0
+2013-04-23,LCrestore3,Jenn Seavey,2,pre,8,0,D,58.2,1
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,9,0,L,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,9,0,D,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,11,0,L,NA,0
@@ -123,6 +123,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,18,0,L,20.4,1
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,18,0,D,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,21,0,L,NA,0
+2013-04-23,LCrestore3,Jenn Seavey,2,pre,21,0,L,NA,0
+2013-04-23,LCrestore3,Jenn Seavey,2,pre,21,0,D,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,2,pre,21,0,D,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,2,0,L,41.1,1
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,2,0,L,31.5,1
@@ -144,14 +146,14 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,5,0,D,40.7,1
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,11,0,L,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,11,0,D,NA,0
+2013-04-23,LCrestore3,Jenn Seavey,3,pre,16,0,L,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,16,0,D,26.4,1
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,16,0,D,21.8,1
-2013-04-23,LCrestore3,Jenn Seavey,3,pre,16,0,L,NA,0
+2013-04-23,LCrestore3,Jenn Seavey,3,pre,17,0,L,NA,0
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,17,0,D,25.2,1
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,17,0,D,17.9,1
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,17,0,D,21.3,1
 2013-04-23,LCrestore3,Jenn Seavey,3,pre,17,0,D,10.4,1
-2013-04-23,LCrestore3,Jenn Seavey,3,pre,17,0,L,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,1,pre,0,0,L,38.9,1
 2013-04-23,LCrestore4,Jenn Seavey,1,pre,0,0,D,40.8,1
 2013-04-23,LCrestore4,Jenn Seavey,1,pre,13,0,L,37.1,1
@@ -168,29 +170,29 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-23,LCrestore4,Jenn Seavey,1,pre,20,0,D,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,0,0,L,20.1,1
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,0,0,D,NA,0
-2013-04-23,LCrestore4,Jenn Seavey,2,pre,5,0,D,23.6,1
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,5,0,L,NA,0
+2013-04-23,LCrestore4,Jenn Seavey,2,pre,5,0,D,23.6,1
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,10,0,L,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,10,0,D,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,11,0,L,34.5,1
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,11,0,D,45.1,1
-2013-04-23,LCrestore4,Jenn Seavey,2,pre,15,0,D,47.6,1
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,15,0,L,NA,0
+2013-04-23,LCrestore4,Jenn Seavey,2,pre,15,0,D,47.6,1
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,20,0,L,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,20,0,D,NA,0
-2013-04-23,LCrestore4,Jenn Seavey,2,pre,21,0,D,31.4,1
 2013-04-23,LCrestore4,Jenn Seavey,2,pre,21,0,L,NA,0
+2013-04-23,LCrestore4,Jenn Seavey,2,pre,21,0,D,31.4,1
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,0,0,L,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,0,0,D,NA,0
-2013-04-23,LCrestore4,Jenn Seavey,3,pre,5,0,D,46.1,1
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,5,0,L,NA,0
+2013-04-23,LCrestore4,Jenn Seavey,3,pre,5,0,D,46.1,1
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,6,0,L,39.9,1
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,6,0,D,50.9,1
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,7,0,L,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,7,0,D,NA,0
+2013-04-23,LCrestore4,Jenn Seavey,3,pre,9,0,L,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,9,0,D,64.1,1
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,9,0,D,74.3,1
-2013-04-23,LCrestore4,Jenn Seavey,3,pre,9,0,L,NA,0
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,15,0,L,36.3,1
 2013-04-23,LCrestore4,Jenn Seavey,3,pre,15,0,D,NA,0
 2013-04-24,LCrestore5,Jenn Seavey,1,pre,1,0,L,NA,0
@@ -200,6 +202,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-24,LCrestore5,Jenn Seavey,1,pre,4,0,L,NA,0
 2013-04-24,LCrestore5,Jenn Seavey,1,pre,4,0,D,NA,0
 2013-04-24,LCrestore5,Jenn Seavey,1,pre,7,0,L,NA,0
+2013-04-24,LCrestore5,Jenn Seavey,1,pre,7,0,L,NA,0
+2013-04-24,LCrestore5,Jenn Seavey,1,pre,7,0,D,NA,0
 2013-04-24,LCrestore5,Jenn Seavey,1,pre,7,0,D,NA,0
 2013-04-24,LCrestore5,Jenn Seavey,1,pre,8,0,L,NA,0
 2013-04-24,LCrestore5,Jenn Seavey,1,pre,8,0,D,NA,0
@@ -239,13 +243,15 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-24,LCrestore6,Jenn Seavey,1,pre,11,0,D,NA,0
 2013-04-24,LCrestore6,Jenn Seavey,1,pre,14,0,L,NA,0
 2013-04-24,LCrestore6,Jenn Seavey,1,pre,14,0,D,NA,0
-2013-04-24,LCrestore6,Jenn Seavey,1,pre,17,0,D,104.3,1
 2013-04-24,LCrestore6,Jenn Seavey,1,pre,17,0,L,NA,0
+2013-04-24,LCrestore6,Jenn Seavey,1,pre,17,0,D,104.3,1
 2013-04-24,LCrestore6,Jenn Seavey,1,pre,19,0,L,29.6,1
 2013-04-24,LCrestore6,Jenn Seavey,1,pre,19,0,D,NA,0
 2013-04-24,LCrestore6,Jenn Seavey,1,pre,20,0,L,NA,0
 2013-04-24,LCrestore6,Jenn Seavey,1,pre,20,0,D,NA,0
 2013-04-24,LCrestore6,Jenn Seavey,2,pre,6,0,L,NA,0
+2013-04-24,LCrestore6,Jenn Seavey,2,pre,6,0,L,NA,0
+2013-04-24,LCrestore6,Jenn Seavey,2,pre,6,0,D,NA,0
 2013-04-24,LCrestore6,Jenn Seavey,2,pre,6,0,D,NA,0
 2013-04-24,LCrestore6,Jenn Seavey,2,pre,10,0,L,NA,0
 2013-04-24,LCrestore6,Jenn Seavey,2,pre,10,0,D,NA,0
@@ -297,8 +303,9 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-24,LCrestore7,Jenn Seavey,2,pre,13,0,D,NA,0
 2013-04-24,LCrestore7,Jenn Seavey,2,pre,19,0,L,NA,0
 2013-04-24,LCrestore7,Jenn Seavey,2,pre,19,0,D,NA,0
-2013-04-24,LCrestore7,Jenn Seavey,3,pre,1,0,L,23.1,1
 2013-04-24,LCrestore7,Jenn Seavey,3,pre,1,0,L,NA,0
+2013-04-24,LCrestore7,Jenn Seavey,3,pre,1,0,L,23.1,1
+2013-04-24,LCrestore7,Jenn Seavey,3,pre,1,0,D,NA,0
 2013-04-24,LCrestore7,Jenn Seavey,3,pre,1,0,D,NA,0
 2013-04-24,LCrestore7,Jenn Seavey,3,pre,6,0,L,NA,0
 2013-04-24,LCrestore7,Jenn Seavey,3,pre,6,0,D,NA,0
@@ -339,6 +346,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2013-04-24,LCrestore8,Jenn Seavey,3,pre,4,0,L,NA,0
 2013-04-24,LCrestore8,Jenn Seavey,3,pre,4,0,D,NA,0
 2013-04-24,LCrestore8,Jenn Seavey,3,pre,5,0,L,NA,0
+2013-04-24,LCrestore8,Jenn Seavey,3,pre,5,0,L,NA,0
+2013-04-24,LCrestore8,Jenn Seavey,3,pre,5,0,D,NA,0
 2013-04-24,LCrestore8,Jenn Seavey,3,pre,5,0,D,NA,0
 2013-04-24,LCrestore8,Jenn Seavey,3,pre,10,0,L,NA,0
 2013-04-24,LCrestore8,Jenn Seavey,3,pre,10,0,D,NA,0
@@ -371,7 +380,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,1,post,1,1.1,L,20.1,1
 2014-10-27,LCO2,Nick Vitale,1,post,1,1.1,L,15.2,1
 2014-10-27,LCO2,Nick Vitale,1,post,1,1.1,D,16.8,1
-2014-10-27,LCO2,Nick Vitale,1,post,1,1.1,D,NA,0
 2014-10-27,LCO2,Nick Vitale,1,post,1,7,L,11.5,1
 2014-10-27,LCO2,Nick Vitale,1,post,1,7,L,5.2,1
 2014-10-27,LCO2,Nick Vitale,1,post,1,7,L,14.6,1
@@ -405,7 +413,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,1,post,8,0.4,L,7.7,1
 2014-10-27,LCO2,Nick Vitale,1,post,8,0.4,D,14.4,1
 2014-10-27,LCO2,Nick Vitale,1,post,8,0.4,D,22.8,1
-2014-10-27,LCO2,Nick Vitale,1,post,8,0.4,D,NA,0
 2014-10-27,LCO2,Nick Vitale,1,post,10,1.1,L,12.7,1
 2014-10-27,LCO2,Nick Vitale,1,post,10,1.1,L,24.4,1
 2014-10-27,LCO2,Nick Vitale,1,post,10,1.1,L,18.1,1
@@ -439,15 +446,14 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,1,post,10,1.3,D,15,1
 2014-10-27,LCO2,Nick Vitale,1,post,10,1.3,D,11.3,1
 2014-10-27,LCO2,Nick Vitale,1,post,10,1.3,D,12.2,1
-2014-10-27,LCO2,Nick Vitale,1,post,10,1.3,D,NA,0
 2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,L,14.5,1
 2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,L,19.9,1
 2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,L,35.9,1
 2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,L,51.3,1
 2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,L,19.9,1
 2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,L,20.1,1
-2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,D,NA,0
 2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,L,NA,2
+2014-10-27,LCO2,Nick Vitale,1,post,11,2.6,D,NA,0
 2014-10-27,LCO2,Nick Vitale,1,post,17,3.7,L,29.1,1
 2014-10-27,LCO2,Nick Vitale,1,post,17,3.7,L,26.2,1
 2014-10-27,LCO2,Nick Vitale,1,post,17,3.7,L,14,1
@@ -485,7 +491,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,2,post,11,1,L,25.9,1
 2014-10-27,LCO2,Nick Vitale,2,post,11,1,L,20.2,1
 2014-10-27,LCO2,Nick Vitale,2,post,11,1,D,23.3,1
-2014-10-27,LCO2,Nick Vitale,2,post,11,1,D,NA,0
 2014-10-27,LCO2,Nick Vitale,2,post,11,1,L,NA,7
 2014-10-27,LCO2,Nick Vitale,2,post,14,2,L,50.7,1
 2014-10-27,LCO2,Nick Vitale,2,post,14,2,L,17.9,1
@@ -497,7 +502,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,2,post,14,2,L,26.1,1
 2014-10-27,LCO2,Nick Vitale,2,post,14,2,L,28.2,1
 2014-10-27,LCO2,Nick Vitale,2,post,14,2,D,9.7,1
-2014-10-27,LCO2,Nick Vitale,2,post,14,2,D,NA,0
 2014-10-27,LCO2,Nick Vitale,2,post,15,2.8,L,14.8,1
 2014-10-27,LCO2,Nick Vitale,2,post,15,2.8,L,11.8,1
 2014-10-27,LCO2,Nick Vitale,2,post,15,2.8,L,17.9,1
@@ -543,7 +547,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,2,post,16,2.2,L,16.4,1
 2014-10-27,LCO2,Nick Vitale,2,post,16,2.2,L,18.1,1
 2014-10-27,LCO2,Nick Vitale,2,post,16,2.2,D,14.5,1
-2014-10-27,LCO2,Nick Vitale,2,post,16,2.2,D,NA,0
 2014-10-27,LCO2,Nick Vitale,2,post,18,3,L,30.1,1
 2014-10-27,LCO2,Nick Vitale,2,post,18,3,L,19.4,1
 2014-10-27,LCO2,Nick Vitale,2,post,18,3,L,17.5,1
@@ -581,8 +584,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,3,post,1,0.1,L,21.2,1
 2014-10-27,LCO2,Nick Vitale,3,post,1,0.1,D,NA,0
 2014-10-27,LCO2,Nick Vitale,3,post,1,1.3,L,22.6,1
-2014-10-27,LCO2,Nick Vitale,3,post,1,1.3,D,NA,0
 2014-10-27,LCO2,Nick Vitale,3,post,1,1.3,L,NA,7
+2014-10-27,LCO2,Nick Vitale,3,post,1,1.3,D,NA,0
 2014-10-27,LCO2,Nick Vitale,3,post,1,1.6,L,22.8,1
 2014-10-27,LCO2,Nick Vitale,3,post,1,1.6,L,23.2,1
 2014-10-27,LCO2,Nick Vitale,3,post,1,1.6,L,21.1,1
@@ -602,7 +605,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,3,post,1,1.6,L,29.6,1
 2014-10-27,LCO2,Nick Vitale,3,post,1,1.6,L,21.5,1
 2014-10-27,LCO2,Nick Vitale,3,post,1,1.6,D,32.9,1
-2014-10-27,LCO2,Nick Vitale,3,post,1,1.6,D,NA,0
 2014-10-27,LCO2,Nick Vitale,3,post,2,40,L,15.85,1
 2014-10-27,LCO2,Nick Vitale,3,post,2,40,L,27.8,1
 2014-10-27,LCO2,Nick Vitale,3,post,2,40,L,20.75,1
@@ -634,7 +636,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO2,Nick Vitale,3,post,5,3.8,L,22.1,1
 2014-10-27,LCO2,Nick Vitale,3,post,5,3.8,L,29.6,1
 2014-10-27,LCO2,Nick Vitale,3,post,5,3.8,D,20.2,1
-2014-10-27,LCO2,Nick Vitale,3,post,5,3.8,D,NA,0
 2014-10-27,LCO2,Nick Vitale,3,post,11,2.1,L,16.5,1
 2014-10-27,LCO2,Nick Vitale,3,post,11,2.1,L,29.6,1
 2014-10-27,LCO2,Nick Vitale,3,post,11,2.1,L,26.3,1
@@ -787,7 +788,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO3,Nick Vitale,1,post,15,3.5,L,16.4,1
 2014-10-27,LCO3,Nick Vitale,1,post,15,3.5,L,20.7,1
 2014-10-27,LCO3,Nick Vitale,1,post,15,3.5,D,15.4,1
-2014-10-27,LCO3,Nick Vitale,1,post,15,3.5,D,NA,0
 2014-10-27,LCO3,Nick Vitale,1,post,18,2.6,L,25.2,1
 2014-10-27,LCO3,Nick Vitale,1,post,18,2.6,L,24.1,1
 2014-10-27,LCO3,Nick Vitale,1,post,18,2.6,L,13.1,1
@@ -802,7 +802,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO3,Nick Vitale,1,post,20,0.8,L,24.4,1
 2014-10-27,LCO3,Nick Vitale,1,post,20,0.8,L,14.8,1
 2014-10-27,LCO3,Nick Vitale,1,post,20,0.8,D,17.2,1
-2014-10-27,LCO3,Nick Vitale,1,post,20,0.8,D,NA,0
 2014-10-27,LCO3,Nick Vitale,2,post,0,2.2,L,18.8,1
 2014-10-27,LCO3,Nick Vitale,2,post,0,2.2,L,15,1
 2014-10-27,LCO3,Nick Vitale,2,post,0,2.2,L,21.6,1
@@ -818,7 +817,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO3,Nick Vitale,2,post,4,0.6,L,26.2,1
 2014-10-27,LCO3,Nick Vitale,2,post,4,0.6,L,6,1
 2014-10-27,LCO3,Nick Vitale,2,post,4,0.6,D,75.5,1
-2014-10-27,LCO3,Nick Vitale,2,post,4,0.6,D,NA,0
 2014-10-27,LCO3,Nick Vitale,2,post,7,NA,L,20.9,1
 2014-10-27,LCO3,Nick Vitale,2,post,7,NA,L,16.6,1
 2014-10-27,LCO3,Nick Vitale,2,post,7,NA,L,19.3,1
@@ -837,7 +835,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO3,Nick Vitale,2,post,8,2.6,L,20.5,1
 2014-10-27,LCO3,Nick Vitale,2,post,8,2.6,L,22.7,1
 2014-10-27,LCO3,Nick Vitale,2,post,8,2.6,D,24.3,1
-2014-10-27,LCO3,Nick Vitale,2,post,8,2.6,D,NA,0
 2014-10-27,LCO3,Nick Vitale,2,post,8,NA,L,20.7,1
 2014-10-27,LCO3,Nick Vitale,2,post,8,NA,L,20.8,1
 2014-10-27,LCO3,Nick Vitale,2,post,8,NA,L,21.5,1
@@ -863,7 +860,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO3,Nick Vitale,2,post,9,2.9,L,13.1,1
 2014-10-27,LCO3,Nick Vitale,2,post,9,2.9,L,28.5,1
 2014-10-27,LCO3,Nick Vitale,2,post,9,2.9,D,14.1,1
-2014-10-27,LCO3,Nick Vitale,2,post,9,2.9,D,NA,0
 2014-10-27,LCO3,Nick Vitale,2,post,15,1.2,L,30.5,1
 2014-10-27,LCO3,Nick Vitale,2,post,15,1.2,L,32.5,1
 2014-10-27,LCO3,Nick Vitale,2,post,15,1.2,L,22.5,1
@@ -880,7 +876,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO3,Nick Vitale,2,post,15,1.2,L,12.5,1
 2014-10-27,LCO3,Nick Vitale,2,post,15,1.2,L,22.3,1
 2014-10-27,LCO3,Nick Vitale,2,post,15,1.2,D,11.9,1
-2014-10-27,LCO3,Nick Vitale,2,post,15,1.2,D,NA,0
 2014-10-27,LCO3,Nick Vitale,2,post,18,0,L,24.5,1
 2014-10-27,LCO3,Nick Vitale,2,post,18,0,L,28.4,1
 2014-10-27,LCO3,Nick Vitale,2,post,18,0,D,32.2,1
@@ -952,8 +947,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO3,Nick Vitale,3,post,9,0.6,L,19.8,1
 2014-10-27,LCO3,Nick Vitale,3,post,9,0.6,L,62.3,1
 2014-10-27,LCO3,Nick Vitale,3,post,9,0.6,L,24.6,1
-2014-10-27,LCO3,Nick Vitale,3,post,9,0.6,D,NA,0
 2014-10-27,LCO3,Nick Vitale,3,post,9,0.6,L,NA,31
+2014-10-27,LCO3,Nick Vitale,3,post,9,0.6,D,NA,0
 2014-10-27,LCO3,Nick Vitale,3,post,10,0.5,L,22.9,1
 2014-10-27,LCO3,Nick Vitale,3,post,10,0.5,L,24.8,1
 2014-10-27,LCO3,Nick Vitale,3,post,10,0.5,L,30.9,1
@@ -983,7 +978,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-27,LCO3,Nick Vitale,3,post,11,2.8,L,28.5,1
 2014-10-27,LCO3,Nick Vitale,3,post,11,2.8,D,13.4,1
 2014-10-27,LCO3,Nick Vitale,3,post,11,2.8,D,16.4,1
-2014-10-27,LCO3,Nick Vitale,3,post,11,2.8,D,NA,0
 2014-10-27,LCO3,Nick Vitale,3,post,13,0.1,L,18.2,1
 2014-10-27,LCO3,Nick Vitale,3,post,13,0.1,L,26.3,1
 2014-10-27,LCO3,Nick Vitale,3,post,13,0.1,D,NA,0
@@ -1052,7 +1046,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO1,Nick Vitale,1,post,4,3.9,L,18,1
 2014-10-28,LCO1,Nick Vitale,1,post,4,3.9,L,43,1
 2014-10-28,LCO1,Nick Vitale,1,post,4,3.9,D,17,1
-2014-10-28,LCO1,Nick Vitale,1,post,4,3.9,D,NA,0
 2014-10-28,LCO1,Nick Vitale,1,post,10,1.7,L,28,1
 2014-10-28,LCO1,Nick Vitale,1,post,10,1.7,L,33,1
 2014-10-28,LCO1,Nick Vitale,1,post,10,1.7,L,38,1
@@ -1135,7 +1128,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO1,Nick Vitale,1,post,18,2.9,L,18,1
 2014-10-28,LCO1,Nick Vitale,1,post,18,2.9,D,36,1
 2014-10-28,LCO1,Nick Vitale,1,post,18,2.9,D,27,1
-2014-10-28,LCO1,Nick Vitale,1,post,18,2.9,D,NA,0
 2014-10-28,LCO1,Nick Vitale,1,post,18,2.9,L,NA,4
 2014-10-28,LCO1,Nick Vitale,2,post,5,2.2,L,38,1
 2014-10-28,LCO1,Nick Vitale,2,post,5,2.2,L,18,1
@@ -1204,7 +1196,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO1,Nick Vitale,2,post,12,2,L,18,1
 2014-10-28,LCO1,Nick Vitale,2,post,12,2,L,30,1
 2014-10-28,LCO1,Nick Vitale,2,post,12,2,D,15,1
-2014-10-28,LCO1,Nick Vitale,2,post,12,2,D,NA,0
 2014-10-28,LCO1,Nick Vitale,2,post,14,1.7,L,17,1
 2014-10-28,LCO1,Nick Vitale,2,post,14,1.7,L,24,1
 2014-10-28,LCO1,Nick Vitale,2,post,14,1.7,L,16,1
@@ -1221,7 +1212,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO1,Nick Vitale,2,post,14,1.7,L,23,1
 2014-10-28,LCO1,Nick Vitale,2,post,14,1.7,L,22,1
 2014-10-28,LCO1,Nick Vitale,2,post,14,1.7,D,36,1
-2014-10-28,LCO1,Nick Vitale,2,post,14,1.7,D,NA,0
 2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,L,22,1
 2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,L,27,1
 2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,L,23,1
@@ -1244,8 +1234,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,L,26,1
 2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,L,21,1
 2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,L,7,1
-2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,D,NA,0
 2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,L,NA,15
+2014-10-28,LCO1,Nick Vitale,2,post,16,2.5,D,NA,0
 2014-10-28,LCO1,Nick Vitale,3,post,5,0.5,L,19,1
 2014-10-28,LCO1,Nick Vitale,3,post,5,0.5,L,22,1
 2014-10-28,LCO1,Nick Vitale,3,post,5,0.5,L,25,1
@@ -1282,7 +1272,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO1,Nick Vitale,3,post,5,0.5,L,24,1
 2014-10-28,LCO1,Nick Vitale,3,post,5,0.5,L,20,1
 2014-10-28,LCO1,Nick Vitale,3,post,5,0.5,D,17,1
-2014-10-28,LCO1,Nick Vitale,3,post,5,0.5,D,NA,0
 2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,L,15,1
 2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,L,23,1
 2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,L,22,1
@@ -1299,8 +1288,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,L,33,1
 2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,L,22,1
 2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,L,34,1
-2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,D,NA,0
 2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,L,NA,12
+2014-10-28,LCO1,Nick Vitale,3,post,5,1.9,D,NA,0
 2014-10-28,LCO1,Nick Vitale,3,post,8,2.8,L,31,1
 2014-10-28,LCO1,Nick Vitale,3,post,8,2.8,L,14,1
 2014-10-28,LCO1,Nick Vitale,3,post,8,2.8,L,31,1
@@ -1400,8 +1389,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO5,Nick Vitale,1,post,12,2.2,L,19,1
 2014-10-28,LCO5,Nick Vitale,1,post,12,2.2,L,6,1
 2014-10-28,LCO5,Nick Vitale,1,post,12,2.2,L,24,1
-2014-10-28,LCO5,Nick Vitale,1,post,12,2.2,D,NA,0
 2014-10-28,LCO5,Nick Vitale,1,post,12,2.2,L,NA,4
+2014-10-28,LCO5,Nick Vitale,1,post,12,2.2,D,NA,0
 2014-10-28,LCO5,Nick Vitale,1,post,14,0.7,L,24,1
 2014-10-28,LCO5,Nick Vitale,1,post,14,0.7,L,17,1
 2014-10-28,LCO5,Nick Vitale,1,post,14,0.7,L,24,1
@@ -1442,7 +1431,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO5,Nick Vitale,1,post,14,0.7,L,32,1
 2014-10-28,LCO5,Nick Vitale,1,post,14,0.7,D,18,1
 2014-10-28,LCO5,Nick Vitale,1,post,14,0.7,D,16,1
-2014-10-28,LCO5,Nick Vitale,1,post,14,0.7,D,NA,0
 2014-10-28,LCO5,Nick Vitale,1,post,17,0.7,L,11,1
 2014-10-28,LCO5,Nick Vitale,1,post,17,0.7,L,5,1
 2014-10-28,LCO5,Nick Vitale,1,post,17,0.7,L,4,1
@@ -1492,8 +1480,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO5,Nick Vitale,2,post,2,1.4,D,NA,0
 2014-10-28,LCO5,Nick Vitale,2,post,9,2.3,L,25,1
 2014-10-28,LCO5,Nick Vitale,2,post,9,2.3,L,24,1
-2014-10-28,LCO5,Nick Vitale,2,post,9,2.3,D,NA,0
 2014-10-28,LCO5,Nick Vitale,2,post,9,2.3,L,NA,6
+2014-10-28,LCO5,Nick Vitale,2,post,9,2.3,D,NA,0
 2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,L,29,1
 2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,L,14,1
 2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,L,33,1
@@ -1511,8 +1499,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,L,35,1
 2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,L,17,1
 2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,L,24,1
-2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,D,NA,0
 2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,L,NA,10
+2014-10-28,LCO5,Nick Vitale,2,post,10,1.8,D,NA,0
 2014-10-28,LCO5,Nick Vitale,2,post,13,0.6,L,30,1
 2014-10-28,LCO5,Nick Vitale,2,post,13,0.6,L,28,1
 2014-10-28,LCO5,Nick Vitale,2,post,13,0.6,L,18,1
@@ -1547,7 +1535,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO5,Nick Vitale,2,post,13,0.6,L,28,1
 2014-10-28,LCO5,Nick Vitale,2,post,13,0.6,D,20,1
 2014-10-28,LCO5,Nick Vitale,2,post,13,0.6,D,17,1
-2014-10-28,LCO5,Nick Vitale,2,post,13,0.6,D,NA,0
 2014-10-28,LCO5,Nick Vitale,2,post,17,2.3,L,NA,0
 2014-10-28,LCO5,Nick Vitale,2,post,17,2.3,D,NA,0
 2014-10-28,LCO5,Nick Vitale,2,post,18,2.5,L,27,1
@@ -1598,7 +1585,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO5,Nick Vitale,3,post,9,0.3,L,19,1
 2014-10-28,LCO5,Nick Vitale,3,post,9,0.3,D,27,1
 2014-10-28,LCO5,Nick Vitale,3,post,9,0.3,D,15,1
-2014-10-28,LCO5,Nick Vitale,3,post,9,0.3,D,NA,0
 2014-10-28,LCO5,Nick Vitale,3,post,9,0.3,L,NA,50
 2014-10-28,LCO5,Nick Vitale,3,post,11,3.9,L,16,1
 2014-10-28,LCO5,Nick Vitale,3,post,11,3.9,L,21,1
@@ -1652,8 +1638,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO5,Nick Vitale,3,post,12,0.5,L,18,1
 2014-10-28,LCO5,Nick Vitale,3,post,12,0.5,L,22,1
 2014-10-28,LCO5,Nick Vitale,3,post,12,0.5,L,32,1
-2014-10-28,LCO5,Nick Vitale,3,post,12,0.5,D,NA,0
 2014-10-28,LCO5,Nick Vitale,3,post,12,0.5,L,NA,7
+2014-10-28,LCO5,Nick Vitale,3,post,12,0.5,D,NA,0
 2014-10-28,LCO5,Nick Vitale,3,post,12,2.8,L,26,1
 2014-10-28,LCO5,Nick Vitale,3,post,12,2.8,L,22,1
 2014-10-28,LCO5,Nick Vitale,3,post,12,2.8,L,31,1
@@ -1665,7 +1651,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-10-28,LCO5,Nick Vitale,3,post,12,2.8,L,38,1
 2014-10-28,LCO5,Nick Vitale,3,post,12,2.8,L,11,1
 2014-10-28,LCO5,Nick Vitale,3,post,12,2.8,D,12,1
-2014-10-28,LCO5,Nick Vitale,3,post,12,2.8,D,NA,0
 2014-10-28,LCO5,Nick Vitale,3,post,17,15,L,45,1
 2014-10-28,LCO5,Nick Vitale,3,post,17,15,L,22,1
 2014-10-28,LCO5,Nick Vitale,3,post,17,15,L,18,1
@@ -1699,7 +1684,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO3,Nick Vitale,1,post,13,1.8,L,18,1
 2014-11-11,LCO3,Nick Vitale,1,post,13,1.8,L,19,1
 2014-11-11,LCO3,Nick Vitale,1,post,13,1.8,D,11,1
-2014-11-11,LCO3,Nick Vitale,1,post,13,1.8,D,NA,0
 2014-11-11,LCO3,Nick Vitale,1,post,13,1.8,L,NA,14
 2014-11-11,LCO3,Nick Vitale,1,post,16,0.3,L,27,1
 2014-11-11,LCO3,Nick Vitale,1,post,16,0.3,L,8,1
@@ -1711,8 +1695,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO3,Nick Vitale,1,post,18,2.8,L,20,1
 2014-11-11,LCO3,Nick Vitale,1,post,18,2.8,L,19,1
 2014-11-11,LCO3,Nick Vitale,1,post,18,2.8,L,14,1
-2014-11-11,LCO3,Nick Vitale,1,post,18,2.8,D,NA,0
 2014-11-11,LCO3,Nick Vitale,1,post,18,2.8,L,NA,13
+2014-11-11,LCO3,Nick Vitale,1,post,18,2.8,D,NA,0
 2014-11-11,LCO3,Nick Vitale,1,post,21,0.6,L,52,1
 2014-11-11,LCO3,Nick Vitale,1,post,21,0.6,L,23,1
 2014-11-11,LCO3,Nick Vitale,1,post,21,0.6,L,19,1
@@ -1767,7 +1751,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO3,Nick Vitale,2,post,9,4,D,18,1
 2014-11-11,LCO3,Nick Vitale,2,post,9,4,D,20,1
 2014-11-11,LCO3,Nick Vitale,2,post,9,4,D,19,1
-2014-11-11,LCO3,Nick Vitale,2,post,9,4,D,NA,0
 2014-11-11,LCO3,Nick Vitale,2,post,13,2.9,L,19,1
 2014-11-11,LCO3,Nick Vitale,2,post,13,2.9,L,19,1
 2014-11-11,LCO3,Nick Vitale,2,post,13,2.9,L,17,1
@@ -1825,7 +1808,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO3,Nick Vitale,3,post,11,0.5,L,28,1
 2014-11-11,LCO3,Nick Vitale,3,post,11,0.5,L,19,1
 2014-11-11,LCO3,Nick Vitale,3,post,11,0.5,D,17,1
-2014-11-11,LCO3,Nick Vitale,3,post,11,0.5,D,NA,0
 2014-11-11,LCO3,Nick Vitale,3,post,12,0.5,L,18,1
 2014-11-11,LCO3,Nick Vitale,3,post,12,0.5,L,17,1
 2014-11-11,LCO3,Nick Vitale,3,post,12,0.5,L,17,1
@@ -1841,8 +1823,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO3,Nick Vitale,3,post,12,0.5,L,18,1
 2014-11-11,LCO3,Nick Vitale,3,post,12,0.5,D,NA,0
 2014-11-11,LCO3,Nick Vitale,3,post,19,3.6,L,15,1
-2014-11-11,LCO3,Nick Vitale,3,post,19,3.6,D,NA,0
 2014-11-11,LCO3,Nick Vitale,3,post,19,3.6,L,NA,15
+2014-11-11,LCO3,Nick Vitale,3,post,19,3.6,D,NA,0
 2014-11-11,LCO3,Nick Vitale,3,post,21,0.2,L,22,1
 2014-11-11,LCO3,Nick Vitale,3,post,21,0.2,L,15,1
 2014-11-11,LCO3,Nick Vitale,3,post,21,0.2,L,28,1
@@ -1856,7 +1838,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO3,Nick Vitale,3,post,21,0.2,L,19,1
 2014-11-11,LCO3,Nick Vitale,3,post,21,0.2,L,15,1
 2014-11-11,LCO3,Nick Vitale,3,post,21,0.2,D,7,1
-2014-11-11,LCO3,Nick Vitale,3,post,21,0.2,D,NA,0
 2014-11-11,LCO3,Nick Vitale,3,post,21,0.2,L,NA,12
 2014-11-11,LCO6,Nick Vitale,1,post,3,1.1,L,22,1
 2014-11-11,LCO6,Nick Vitale,1,post,3,1.1,L,20,1
@@ -1882,8 +1863,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO6,Nick Vitale,1,post,9,4.8,L,26,1
 2014-11-11,LCO6,Nick Vitale,1,post,9,4.8,L,18,1
 2014-11-11,LCO6,Nick Vitale,1,post,9,4.8,L,6,1
-2014-11-11,LCO6,Nick Vitale,1,post,9,4.8,D,NA,0
 2014-11-11,LCO6,Nick Vitale,1,post,9,4.8,L,NA,3
+2014-11-11,LCO6,Nick Vitale,1,post,9,4.8,D,NA,0
 2014-11-11,LCO6,Nick Vitale,1,post,13,2.4,L,11,1
 2014-11-11,LCO6,Nick Vitale,1,post,13,2.4,D,19,1
 2014-11-11,LCO6,Nick Vitale,1,post,13,2.4,D,20,1
@@ -1908,7 +1889,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO6,Nick Vitale,1,post,16,1.6,L,22,1
 2014-11-11,LCO6,Nick Vitale,1,post,16,1.6,L,28,1
 2014-11-11,LCO6,Nick Vitale,1,post,16,1.6,D,14,1
-2014-11-11,LCO6,Nick Vitale,1,post,16,1.6,D,NA,0
 2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,L,19,1
 2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,L,19,1
 2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,L,37,1
@@ -1921,8 +1901,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,L,15,1
 2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,L,14,1
 2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,L,22,1
-2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,D,NA,0
 2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,L,NA,8
+2014-11-11,LCO6,Nick Vitale,1,post,19,4.4,D,NA,0
 2014-11-11,LCO6,Nick Vitale,2,post,0,0.7,L,22,1
 2014-11-11,LCO6,Nick Vitale,2,post,0,0.7,L,15,1
 2014-11-11,LCO6,Nick Vitale,2,post,0,0.7,L,20,1
@@ -1936,7 +1916,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO6,Nick Vitale,2,post,5,0.2,L,17,1
 2014-11-11,LCO6,Nick Vitale,2,post,5,0.2,D,18,1
 2014-11-11,LCO6,Nick Vitale,2,post,5,0.2,D,25,1
-2014-11-11,LCO6,Nick Vitale,2,post,5,0.2,D,NA,0
 2014-11-11,LCO6,Nick Vitale,2,post,5,0.2,L,NA,4
 2014-11-11,LCO6,Nick Vitale,2,post,12,4,L,24,1
 2014-11-11,LCO6,Nick Vitale,2,post,12,4,L,33,1
@@ -1978,7 +1957,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO6,Nick Vitale,2,post,20,1.6,L,21,1
 2014-11-11,LCO6,Nick Vitale,2,post,20,1.6,D,20,1
 2014-11-11,LCO6,Nick Vitale,2,post,20,1.6,D,24,1
-2014-11-11,LCO6,Nick Vitale,2,post,20,1.6,D,NA,0
 2014-11-11,LCO6,Nick Vitale,3,post,10,0,L,28,1
 2014-11-11,LCO6,Nick Vitale,3,post,10,0,L,32,1
 2014-11-11,LCO6,Nick Vitale,3,post,10,0,L,17,1
@@ -2020,7 +1998,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO6,Nick Vitale,3,post,10,3,D,9,1
 2014-11-11,LCO6,Nick Vitale,3,post,10,3,D,18,1
 2014-11-11,LCO6,Nick Vitale,3,post,10,3,D,17,1
-2014-11-11,LCO6,Nick Vitale,3,post,10,3,D,NA,0
 2014-11-11,LCO6,Nick Vitale,3,post,14,3.1,L,50,1
 2014-11-11,LCO6,Nick Vitale,3,post,14,3.1,L,38,1
 2014-11-11,LCO6,Nick Vitale,3,post,14,3.1,L,20,1
@@ -2034,7 +2011,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO6,Nick Vitale,3,post,14,3.1,L,8,1
 2014-11-11,LCO6,Nick Vitale,3,post,14,3.1,L,29,1
 2014-11-11,LCO6,Nick Vitale,3,post,14,3.1,D,29,1
-2014-11-11,LCO6,Nick Vitale,3,post,14,3.1,D,NA,0
 2014-11-11,LCO7,Nick Vitale,1,post,0,1.3,L,18,1
 2014-11-11,LCO7,Nick Vitale,1,post,0,1.3,D,NA,0
 2014-11-11,LCO7,Nick Vitale,1,post,0,1.4,L,22,1
@@ -2070,7 +2046,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2014-11-11,LCO7,Nick Vitale,1,post,3,1.5,L,22,1
 2014-11-11,LCO7,Nick Vitale,1,post,3,1.5,L,20,1
 2014-11-11,LCO7,Nick Vitale,1,post,3,1.5,D,29,1
-2014-11-11,LCO7,Nick Vitale,1,post,3,1.5,D,NA,0
 2014-11-11,LCO7,Nick Vitale,1,post,7,2.3,L,22,1
 2014-11-11,LCO7,Nick Vitale,1,post,7,2.3,L,9,1
 2014-11-11,LCO7,Nick Vitale,1,post,7,2.3,L,8,1
@@ -2294,8 +2269,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-06,LCO8,Garner,1,post,0,1.8,L,3,1
 2017-11-06,LCO8,Garner,1,post,0,1.8,L,2,1
 2017-11-06,LCO8,Garner,1,post,0,1.8,L,14,1
-2017-11-06,LCO8,Garner,1,post,0,1.8,D,NA,0
 2017-11-06,LCO8,Garner,1,post,0,1.8,L,NA,7
+2017-11-06,LCO8,Garner,1,post,0,1.8,D,NA,0
 2017-11-06,LCO8,Garner,1,post,0,3,L,85,1
 2017-11-06,LCO8,Garner,1,post,0,3,L,21.5,1
 2017-11-06,LCO8,Garner,1,post,0,3,L,31,1
@@ -2378,7 +2353,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-06,LCO8,Garner,2,post,11,0.7,L,13,1
 2017-11-06,LCO8,Garner,2,post,11,0.7,L,15.1,1
 2017-11-06,LCO8,Garner,2,post,11,0.7,D,17.9,1
-2017-11-06,LCO8,Garner,2,post,11,0.7,D,NA,0
 2017-11-06,LCO8,Garner,2,post,12,2.6,L,11.6,1
 2017-11-06,LCO8,Garner,2,post,12,2.6,D,NA,0
 2017-11-06,LCO8,Garner,2,post,13,0.7,L,22.9,1
@@ -2401,7 +2375,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-06,LCO8,Garner,2,post,13,0.7,L,13,1
 2017-11-06,LCO8,Garner,2,post,13,0.7,D,13.4,1
 2017-11-06,LCO8,Garner,2,post,13,0.7,D,27.8,1
-2017-11-06,LCO8,Garner,2,post,13,0.7,D,NA,0
 2017-11-06,LCO8,Garner,2,post,13,0.7,L,NA,6
 2017-11-06,LCO8,Garner,3,post,2,2.2,L,18.1,1
 2017-11-06,LCO8,Garner,3,post,2,2.2,L,21,1
@@ -2458,7 +2431,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-06,LCO8,Garner,3,post,21,1.3,L,11.6,1
 2017-11-06,LCO8,Garner,3,post,21,1.3,L,6.5,1
 2017-11-06,LCO8,Garner,3,post,21,1.3,D,13.3,1
-2017-11-06,LCO8,Garner,3,post,21,1.3,D,NA,0
 2017-11-06,LCO8,Garner,3,post,21,1.3,L,NA,1
 2017-11-07,LCO1,Garner,1,post,4,2,L,13.2,1
 2017-11-07,LCO1,Garner,1,post,4,2,L,11.4,1
@@ -2468,8 +2440,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,1,post,4,2,D,14.15,1
 2017-11-07,LCO1,Garner,1,post,4,2,D,11.9,1
 2017-11-07,LCO1,Garner,1,post,6,0.6,L,41.5,1
-2017-11-07,LCO1,Garner,1,post,6,0.6,D,NA,0
 2017-11-07,LCO1,Garner,1,post,6,0.6,L,NA,5
+2017-11-07,LCO1,Garner,1,post,6,0.6,D,NA,0
 2017-11-07,LCO1,Garner,1,post,13,2.6,L,20.2,1
 2017-11-07,LCO1,Garner,1,post,13,2.6,L,27.9,1
 2017-11-07,LCO1,Garner,1,post,13,2.6,L,23.5,1
@@ -2483,7 +2455,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,1,post,13,2.6,L,15.1,1
 2017-11-07,LCO1,Garner,1,post,13,2.6,D,15.3,1
 2017-11-07,LCO1,Garner,1,post,13,2.6,D,21.8,1
-2017-11-07,LCO1,Garner,1,post,13,2.6,D,NA,0
 2017-11-07,LCO1,Garner,1,post,13,2.6,L,NA,1
 2017-11-07,LCO1,Garner,1,post,15,1.7,L,15.1,1
 2017-11-07,LCO1,Garner,1,post,15,1.7,L,37.6,1
@@ -2498,7 +2469,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,1,post,16,2,L,60.4,1
 2017-11-07,LCO1,Garner,1,post,16,2,L,53.9,1
 2017-11-07,LCO1,Garner,1,post,16,2,D,61.3,1
-2017-11-07,LCO1,Garner,1,post,16,2,D,NA,0
 2017-11-07,LCO1,Garner,1,post,16,2,L,NA,2
 2017-11-07,LCO1,Garner,1,post,20,3.8,L,26.9,1
 2017-11-07,LCO1,Garner,1,post,20,3.8,L,20.4,1
@@ -2518,7 +2488,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,1,post,20,3.8,L,11.6,1
 2017-11-07,LCO1,Garner,1,post,20,3.8,L,59.4,1
 2017-11-07,LCO1,Garner,1,post,20,3.8,D,17.5,1
-2017-11-07,LCO1,Garner,1,post,20,3.8,D,NA,0
 2017-11-07,LCO1,Garner,2,post,3,3.6,L,30.8,1
 2017-11-07,LCO1,Garner,2,post,3,3.6,L,61.5,1
 2017-11-07,LCO1,Garner,2,post,3,3.6,L,25.9,1
@@ -2559,7 +2528,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,2,post,6,2,L,15.2,1
 2017-11-07,LCO1,Garner,2,post,6,2,L,11.6,1
 2017-11-07,LCO1,Garner,2,post,6,2,D,38.9,1
-2017-11-07,LCO1,Garner,2,post,6,2,D,NA,0
 2017-11-07,LCO1,Garner,2,post,6,2,L,NA,11
 2017-11-07,LCO1,Garner,2,post,15,1.3,L,28,1
 2017-11-07,LCO1,Garner,2,post,15,1.3,L,12.3,1
@@ -2573,7 +2541,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,2,post,15,1.3,L,77.5,1
 2017-11-07,LCO1,Garner,2,post,15,1.3,L,13.4,1
 2017-11-07,LCO1,Garner,2,post,15,1.3,D,15.5,1
-2017-11-07,LCO1,Garner,2,post,15,1.3,D,NA,0
 2017-11-07,LCO1,Garner,3,post,2,1.4,L,26.2,1
 2017-11-07,LCO1,Garner,3,post,2,1.4,L,29.6,1
 2017-11-07,LCO1,Garner,3,post,2,1.4,L,37.7,1
@@ -2587,7 +2554,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,3,post,2,1.4,D,51.2,1
 2017-11-07,LCO1,Garner,3,post,2,1.4,D,42.5,1
 2017-11-07,LCO1,Garner,3,post,2,1.4,D,54.3,1
-2017-11-07,LCO1,Garner,3,post,2,1.4,D,NA,0
 2017-11-07,LCO1,Garner,3,post,5,0.9,L,33.2,1
 2017-11-07,LCO1,Garner,3,post,5,0.9,L,32.4,1
 2017-11-07,LCO1,Garner,3,post,5,0.9,L,59.4,1
@@ -2613,7 +2579,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,3,post,11,0.9,L,43.8,1
 2017-11-07,LCO1,Garner,3,post,11,0.9,L,31.1,1
 2017-11-07,LCO1,Garner,3,post,11,0.9,D,27.6,1
-2017-11-07,LCO1,Garner,3,post,11,0.9,D,NA,0
 2017-11-07,LCO1,Garner,3,post,11,0.9,L,NA,19
 2017-11-07,LCO1,Garner,3,post,19,2,L,24.9,1
 2017-11-07,LCO1,Garner,3,post,19,2,L,40.9,1
@@ -2633,7 +2598,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO1,Garner,3,post,19,2,L,32.9,1
 2017-11-07,LCO1,Garner,3,post,19,2,D,19,1
 2017-11-07,LCO1,Garner,3,post,19,2,D,102,1
-2017-11-07,LCO1,Garner,3,post,19,2,D,NA,0
 2017-11-07,LCO1,Garner,3,post,19,2,L,NA,12
 2017-11-07,LCO2,Garner,1,post,2.6,2.7,L,32.6,1
 2017-11-07,LCO2,Garner,1,post,2.6,2.7,L,28.7,1
@@ -2653,8 +2617,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO2,Garner,1,post,2.6,2.7,L,38.3,1
 2017-11-07,LCO2,Garner,1,post,2.6,2.7,L,25.6,1
 2017-11-07,LCO2,Garner,1,post,2.6,2.7,L,13.6,1
-2017-11-07,LCO2,Garner,1,post,2.6,2.7,D,NA,0
 2017-11-07,LCO2,Garner,1,post,2.6,2.7,L,NA,2
+2017-11-07,LCO2,Garner,1,post,2.6,2.7,D,NA,0
 2017-11-07,LCO2,Garner,1,post,13.6,0.9,L,85,1
 2017-11-07,LCO2,Garner,1,post,13.6,0.9,L,21.1,1
 2017-11-07,LCO2,Garner,1,post,13.6,0.9,L,31.9,1
@@ -2667,8 +2631,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO2,Garner,1,post,13.6,0.9,L,22,1
 2017-11-07,LCO2,Garner,1,post,13.6,0.9,L,51.7,1
 2017-11-07,LCO2,Garner,1,post,13.6,0.9,L,19.3,1
-2017-11-07,LCO2,Garner,1,post,13.6,0.9,D,NA,0
 2017-11-07,LCO2,Garner,1,post,13.6,0.9,L,NA,4
+2017-11-07,LCO2,Garner,1,post,13.6,0.9,D,NA,0
 2017-11-07,LCO2,Garner,1,post,18.6,0,L,59.4,1
 2017-11-07,LCO2,Garner,1,post,18.6,0,L,30.5,1
 2017-11-07,LCO2,Garner,1,post,18.6,0,L,58.6,1
@@ -2689,7 +2653,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO2,Garner,1,post,18.6,0,D,41.4,1
 2017-11-07,LCO2,Garner,1,post,18.6,0,D,27.5,1
 2017-11-07,LCO2,Garner,1,post,18.6,0,D,54,1
-2017-11-07,LCO2,Garner,1,post,18.6,0,D,NA,0
 2017-11-07,LCO2,Garner,1,post,18.6,0,L,NA,8
 2017-11-07,LCO2,Garner,2,post,5.6,1.9,L,43.1,1
 2017-11-07,LCO2,Garner,2,post,5.6,1.9,L,17.4,1
@@ -2726,15 +2689,14 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO2,Garner,2,post,5.6,1.9,L,60.3,1
 2017-11-07,LCO2,Garner,2,post,5.6,1.9,L,25.1,1
 2017-11-07,LCO2,Garner,2,post,5.6,1.9,D,32.8,1
-2017-11-07,LCO2,Garner,2,post,5.6,1.9,D,NA,0
 2017-11-07,LCO2,Garner,2,post,5.6,1.9,L,NA,12
 2017-11-07,LCO2,Garner,2,post,13.6,1.7,L,20.8,1
 2017-11-07,LCO2,Garner,2,post,13.6,1.7,L,33.1,1
 2017-11-07,LCO2,Garner,2,post,13.6,1.7,L,21.4,1
 2017-11-07,LCO2,Garner,2,post,13.6,1.7,L,13,1
 2017-11-07,LCO2,Garner,2,post,13.6,1.7,L,21.1,1
-2017-11-07,LCO2,Garner,2,post,13.6,1.7,D,NA,0
 2017-11-07,LCO2,Garner,2,post,13.6,1.7,L,NA,10
+2017-11-07,LCO2,Garner,2,post,13.6,1.7,D,NA,0
 2017-11-07,LCO2,Garner,2,post,16.6,0,L,28.1,1
 2017-11-07,LCO2,Garner,2,post,16.6,0,L,20,1
 2017-11-07,LCO2,Garner,2,post,16.6,0,L,23.9,1
@@ -2784,7 +2746,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO2,Garner,3,post,14.6,1,L,20.9,1
 2017-11-07,LCO2,Garner,3,post,14.6,1,D,78.4,1
 2017-11-07,LCO2,Garner,3,post,14.6,1,D,60.5,1
-2017-11-07,LCO2,Garner,3,post,14.6,1,D,NA,0
 2017-11-07,LCO2,Garner,3,post,18.6,3.5,L,22.7,1
 2017-11-07,LCO2,Garner,3,post,18.6,3.5,L,55.4,1
 2017-11-07,LCO2,Garner,3,post,18.6,3.5,L,16.7,1
@@ -2798,7 +2759,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO2,Garner,3,post,18.6,3.5,D,85.5,1
 2017-11-07,LCO2,Garner,3,post,18.6,3.5,D,69.6,1
 2017-11-07,LCO2,Garner,3,post,18.6,3.5,D,59.5,1
-2017-11-07,LCO2,Garner,3,post,18.6,3.5,D,NA,0
 2017-11-07,LCO5,Garner,1,post,0,2.8,L,24.5,1
 2017-11-07,LCO5,Garner,1,post,0,2.8,L,27.7,1
 2017-11-07,LCO5,Garner,1,post,0,2.8,L,11.3,1
@@ -2853,7 +2813,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO5,Garner,1,post,13,1.3,L,11.7,1
 2017-11-07,LCO5,Garner,1,post,13,1.3,L,18.1,1
 2017-11-07,LCO5,Garner,1,post,13,1.3,D,58.1,1
-2017-11-07,LCO5,Garner,1,post,13,1.3,D,NA,0
 2017-11-07,LCO5,Garner,1,post,13,1.3,L,NA,17
 2017-11-07,LCO5,Garner,1,post,14,0.3,L,18.4,1
 2017-11-07,LCO5,Garner,1,post,14,0.3,L,11.8,1
@@ -2914,7 +2873,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO5,Garner,2,post,17,2.4,L,39.5,1
 2017-11-07,LCO5,Garner,2,post,17,2.4,D,21.2,1
 2017-11-07,LCO5,Garner,2,post,17,2.4,D,11.1,1
-2017-11-07,LCO5,Garner,2,post,17,2.4,D,NA,0
 2017-11-07,LCO5,Garner,2,post,20,0.7,L,23.7,1
 2017-11-07,LCO5,Garner,2,post,20,0.7,L,88.6,1
 2017-11-07,LCO5,Garner,2,post,20,0.7,L,24.3,1
@@ -2946,8 +2904,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO5,Garner,3,post,1,4,L,46.6,1
 2017-11-07,LCO5,Garner,3,post,1,4,L,56.4,1
 2017-11-07,LCO5,Garner,3,post,1,4,L,33.6,1
-2017-11-07,LCO5,Garner,3,post,1,4,D,NA,0
 2017-11-07,LCO5,Garner,3,post,1,4,L,NA,3
+2017-11-07,LCO5,Garner,3,post,1,4,D,NA,0
 2017-11-07,LCO5,Garner,3,post,4,0.3,L,31.6,1
 2017-11-07,LCO5,Garner,3,post,4,0.3,L,22.6,1
 2017-11-07,LCO5,Garner,3,post,4,0.3,L,54,1
@@ -2958,7 +2916,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO5,Garner,3,post,4,0.3,L,52.3,1
 2017-11-07,LCO5,Garner,3,post,4,0.3,L,17.7,1
 2017-11-07,LCO5,Garner,3,post,4,0.3,D,36.4,1
-2017-11-07,LCO5,Garner,3,post,4,0.3,D,NA,0
 2017-11-07,LCO5,Garner,3,post,4,0.3,L,NA,31
 2017-11-07,LCO5,Garner,3,post,13,0.4,L,35.7,1
 2017-11-07,LCO5,Garner,3,post,13,0.4,L,27.5,1
@@ -2970,7 +2927,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO5,Garner,3,post,13,0.4,L,28.7,1
 2017-11-07,LCO5,Garner,3,post,13,0.4,L,23,1
 2017-11-07,LCO5,Garner,3,post,13,0.4,D,37.1,1
-2017-11-07,LCO5,Garner,3,post,13,0.4,D,NA,0
 2017-11-07,LCO5,Garner,3,post,20,3.1,L,67.6,1
 2017-11-07,LCO5,Garner,3,post,20,3.1,L,63.3,1
 2017-11-07,LCO5,Garner,3,post,20,3.1,L,21.4,1
@@ -2982,12 +2938,11 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO5,Garner,3,post,20,3.1,L,39.2,1
 2017-11-07,LCO5,Garner,3,post,20,3.1,D,20,1
 2017-11-07,LCO5,Garner,3,post,20,3.1,D,37.5,1
-2017-11-07,LCO5,Garner,3,post,20,3.1,D,NA,0
 2017-11-07,LCO6,Garner,1,post,0,1.9,L,39.8,1
 2017-11-07,LCO6,Garner,1,post,0,1.9,L,54.7,1
 2017-11-07,LCO6,Garner,1,post,0,1.9,L,81,1
-2017-11-07,LCO6,Garner,1,post,0,1.9,D,NA,0
 2017-11-07,LCO6,Garner,1,post,0,1.9,L,NA,16
+2017-11-07,LCO6,Garner,1,post,0,1.9,D,NA,0
 2017-11-07,LCO6,Garner,1,post,1,2.4,L,52.7,1
 2017-11-07,LCO6,Garner,1,post,1,2.4,L,46.4,1
 2017-11-07,LCO6,Garner,1,post,1,2.4,L,61.7,1
@@ -3035,7 +2990,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO6,Garner,1,post,19,3.7,L,21,1
 2017-11-07,LCO6,Garner,1,post,19,3.7,D,26.9,1
 2017-11-07,LCO6,Garner,1,post,19,3.7,D,26.8,1
-2017-11-07,LCO6,Garner,1,post,19,3.7,D,NA,0
 2017-11-07,LCO6,Garner,2,post,0,0.7,L,29.5,1
 2017-11-07,LCO6,Garner,2,post,0,0.7,L,31.2,1
 2017-11-07,LCO6,Garner,2,post,0,0.7,L,23.5,1
@@ -3050,7 +3004,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO6,Garner,2,post,0,0.7,D,17.3,1
 2017-11-07,LCO6,Garner,2,post,0,0.7,D,36.2,1
 2017-11-07,LCO6,Garner,2,post,0,0.7,D,40.9,1
-2017-11-07,LCO6,Garner,2,post,0,0.7,D,NA,0
 2017-11-07,LCO6,Garner,2,post,5,1.6,L,19.8,1
 2017-11-07,LCO6,Garner,2,post,5,1.6,L,14.6,1
 2017-11-07,LCO6,Garner,2,post,5,1.6,D,31.5,1
@@ -3063,7 +3016,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO6,Garner,2,post,5,1.6,D,55.7,1
 2017-11-07,LCO6,Garner,2,post,5,1.6,D,24.5,1
 2017-11-07,LCO6,Garner,2,post,5,1.6,D,36.3,1
-2017-11-07,LCO6,Garner,2,post,5,1.6,L,NA,0
 2017-11-07,LCO6,Garner,2,post,8,3.2,L,26.9,1
 2017-11-07,LCO6,Garner,2,post,8,3.2,L,10.8,1
 2017-11-07,LCO6,Garner,2,post,8,3.2,L,17.3,1
@@ -3073,8 +3025,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO6,Garner,2,post,8,3.2,L,10.6,1
 2017-11-07,LCO6,Garner,2,post,8,3.2,L,16,1
 2017-11-07,LCO6,Garner,2,post,8,3.2,L,15.5,1
-2017-11-07,LCO6,Garner,2,post,8,3.2,D,NA,0
 2017-11-07,LCO6,Garner,2,post,8,3.2,L,NA,14
+2017-11-07,LCO6,Garner,2,post,8,3.2,D,NA,0
 2017-11-07,LCO6,Garner,2,post,21,2,L,26.4,1
 2017-11-07,LCO6,Garner,2,post,21,2,L,39.2,1
 2017-11-07,LCO6,Garner,2,post,21,2,L,45.3,1
@@ -3092,7 +3044,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO6,Garner,2,post,21,2,L,57,1
 2017-11-07,LCO6,Garner,2,post,21,2,D,20.1,1
 2017-11-07,LCO6,Garner,2,post,21,2,D,63.9,1
-2017-11-07,LCO6,Garner,2,post,21,2,D,NA,0
 2017-11-07,LCO6,Garner,3,post,2,1.1,L,NA,0
 2017-11-07,LCO6,Garner,3,post,2,1.1,D,NA,0
 2017-11-07,LCO6,Garner,3,post,2,3.8,L,15,1
@@ -3111,7 +3062,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO6,Garner,3,post,5,2.8,D,15.2,1
 2017-11-07,LCO6,Garner,3,post,5,2.8,D,19.8,1
 2017-11-07,LCO6,Garner,3,post,5,2.8,D,4.9,1
-2017-11-07,LCO6,Garner,3,post,5,2.8,L,NA,0
 2017-11-07,LCO6,Garner,3,post,6,2.2,L,22.8,1
 2017-11-07,LCO6,Garner,3,post,6,2.2,L,23.1,1
 2017-11-07,LCO6,Garner,3,post,6,2.2,L,17.7,1
@@ -3213,8 +3163,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO7,Garner,2,post,0,0.6,L,13.6,1
 2017-11-07,LCO7,Garner,2,post,0,0.6,L,11.9,1
 2017-11-07,LCO7,Garner,2,post,0,0.6,L,8.6,1
-2017-11-07,LCO7,Garner,2,post,0,0.6,D,NA,0
 2017-11-07,LCO7,Garner,2,post,0,0.6,L,NA,1
+2017-11-07,LCO7,Garner,2,post,0,0.6,D,NA,0
 2017-11-07,LCO7,Garner,2,post,2,3.1,L,17.7,1
 2017-11-07,LCO7,Garner,2,post,2,3.1,L,18,1
 2017-11-07,LCO7,Garner,2,post,2,3.1,L,20.5,1
@@ -3233,7 +3183,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO7,Garner,2,post,5,0.7,L,13.8,1
 2017-11-07,LCO7,Garner,2,post,5,0.7,L,16,1
 2017-11-07,LCO7,Garner,2,post,5,0.7,D,23.8,1
-2017-11-07,LCO7,Garner,2,post,5,0.7,D,NA,0
 2017-11-07,LCO7,Garner,2,post,5,2.5,L,13.6,1
 2017-11-07,LCO7,Garner,2,post,5,2.5,L,15.3,1
 2017-11-07,LCO7,Garner,2,post,5,2.5,L,21.8,1
@@ -3248,8 +3197,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO7,Garner,2,post,15,0.6,L,17.8,1
 2017-11-07,LCO7,Garner,2,post,15,0.6,L,16.5,1
 2017-11-07,LCO7,Garner,2,post,15,0.6,L,16.9,1
-2017-11-07,LCO7,Garner,2,post,15,0.6,D,NA,0
 2017-11-07,LCO7,Garner,2,post,15,0.6,L,NA,12
+2017-11-07,LCO7,Garner,2,post,15,0.6,D,NA,0
 2017-11-07,LCO7,Garner,2,post,18,1,L,13.6,1
 2017-11-07,LCO7,Garner,2,post,18,1,L,8.9,1
 2017-11-07,LCO7,Garner,2,post,18,1,L,9.7,1
@@ -3272,8 +3221,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO7,Garner,2,post,21,1,L,13.6,1
 2017-11-07,LCO7,Garner,2,post,21,1,D,NA,0
 2017-11-07,LCO7,Garner,2,post,21,3.4,L,15.8,1
-2017-11-07,LCO7,Garner,2,post,21,3.4,D,NA,0
 2017-11-07,LCO7,Garner,2,post,21,3.4,L,NA,3
+2017-11-07,LCO7,Garner,2,post,21,3.4,D,NA,0
 2017-11-07,LCO7,Garner,3,post,2,0.4,L,13.6,1
 2017-11-07,LCO7,Garner,3,post,2,0.4,L,18.8,1
 2017-11-07,LCO7,Garner,3,post,2,0.4,L,40.7,1
@@ -3297,8 +3246,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO7,Garner,3,post,7,3,L,15.9,1
 2017-11-07,LCO7,Garner,3,post,7,3,L,16.6,1
 2017-11-07,LCO7,Garner,3,post,7,3,L,18.3,1
-2017-11-07,LCO7,Garner,3,post,7,3,D,NA,0
 2017-11-07,LCO7,Garner,3,post,7,3,L,NA,1
+2017-11-07,LCO7,Garner,3,post,7,3,D,NA,0
 2017-11-07,LCO7,Garner,3,post,8,2.1,L,34,1
 2017-11-07,LCO7,Garner,3,post,8,2.1,L,22.7,1
 2017-11-07,LCO7,Garner,3,post,8,2.1,L,10.9,1
@@ -3316,7 +3265,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-07,LCO7,Garner,3,post,8,2.7,L,18.9,1
 2017-11-07,LCO7,Garner,3,post,8,2.7,L,12.4,1
 2017-11-07,LCO7,Garner,3,post,8,2.7,D,85.2,1
-2017-11-07,LCO7,Garner,3,post,8,2.7,D,NA,0
 2017-11-07,LCO7,Garner,3,post,14,2,L,13.6,1
 2017-11-07,LCO7,Garner,3,post,14,2,L,40.6,1
 2017-11-07,LCO7,Garner,3,post,14,2,D,NA,0
@@ -3367,8 +3315,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO3,Garner,1,post,9,0.1,L,20,1
 2017-11-08,LCO3,Garner,1,post,9,0.1,L,23,1
 2017-11-08,LCO3,Garner,1,post,9,0.1,L,13.5,1
-2017-11-08,LCO3,Garner,1,post,9,0.1,D,NA,0
 2017-11-08,LCO3,Garner,1,post,9,0.1,L,NA,8
+2017-11-08,LCO3,Garner,1,post,9,0.1,D,NA,0
 2017-11-08,LCO3,Garner,1,post,16,0.9,L,10.8,1
 2017-11-08,LCO3,Garner,1,post,16,0.9,L,10.3,1
 2017-11-08,LCO3,Garner,1,post,16,0.9,L,10,1
@@ -3387,8 +3335,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO3,Garner,1,post,21,1.9,L,8.2,1
 2017-11-08,LCO3,Garner,1,post,21,1.9,L,17.2,1
 2017-11-08,LCO3,Garner,1,post,21,1.9,L,22.8,1
-2017-11-08,LCO3,Garner,1,post,21,1.9,D,NA,0
 2017-11-08,LCO3,Garner,1,post,21,1.9,L,NA,6
+2017-11-08,LCO3,Garner,1,post,21,1.9,D,NA,0
 2017-11-08,LCO3,Garner,2,post,1,0.7,L,19.8,1
 2017-11-08,LCO3,Garner,2,post,1,0.7,L,21.4,1
 2017-11-08,LCO3,Garner,2,post,1,0.7,L,16.6,1
@@ -3401,13 +3349,12 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO3,Garner,2,post,1,0.7,L,14.9,1
 2017-11-08,LCO3,Garner,2,post,1,0.7,L,15.3,1
 2017-11-08,LCO3,Garner,2,post,1,0.7,D,16.7,1
-2017-11-08,LCO3,Garner,2,post,1,0.7,D,NA,0
 2017-11-08,LCO3,Garner,2,post,5,0.5,L,15.1,1
 2017-11-08,LCO3,Garner,2,post,5,0.5,L,15.7,1
 2017-11-08,LCO3,Garner,2,post,5,0.5,L,21,1
 2017-11-08,LCO3,Garner,2,post,5,0.5,L,13,1
-2017-11-08,LCO3,Garner,2,post,5,0.5,D,NA,0
 2017-11-08,LCO3,Garner,2,post,5,0.5,L,NA,5
+2017-11-08,LCO3,Garner,2,post,5,0.5,D,NA,0
 2017-11-08,LCO3,Garner,2,post,8,1.1,L,16.8,1
 2017-11-08,LCO3,Garner,2,post,8,1.1,L,14.2,1
 2017-11-08,LCO3,Garner,2,post,8,1.1,L,19.4,1
@@ -3445,15 +3392,15 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO3,Garner,2,post,19,0.4,L,13.6,1
 2017-11-08,LCO3,Garner,2,post,19,0.4,L,15.3,1
 2017-11-08,LCO3,Garner,2,post,19,0.4,L,11.9,1
-2017-11-08,LCO3,Garner,2,post,19,0.4,D,NA,0
 2017-11-08,LCO3,Garner,2,post,19,0.4,L,NA,6
+2017-11-08,LCO3,Garner,2,post,19,0.4,D,NA,0
 2017-11-08,LCO3,Garner,3,post,10,2.4,L,18.1,1
 2017-11-08,LCO3,Garner,3,post,10,2.4,L,26.1,1
 2017-11-08,LCO3,Garner,3,post,10,2.4,L,26,1
 2017-11-08,LCO3,Garner,3,post,10,2.4,L,15.6,1
 2017-11-08,LCO3,Garner,3,post,10,2.4,L,8.2,1
-2017-11-08,LCO3,Garner,3,post,10,2.4,D,NA,0
 2017-11-08,LCO3,Garner,3,post,10,2.4,L,NA,3
+2017-11-08,LCO3,Garner,3,post,10,2.4,D,NA,0
 2017-11-08,LCO3,Garner,3,post,11,3.3,L,20.2,1
 2017-11-08,LCO3,Garner,3,post,11,3.3,L,11.1,1
 2017-11-08,LCO3,Garner,3,post,11,3.3,L,16.5,1
@@ -3468,7 +3415,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO3,Garner,3,post,11,3.3,L,12.4,1
 2017-11-08,LCO3,Garner,3,post,11,3.3,L,18.1,1
 2017-11-08,LCO3,Garner,3,post,11,3.3,D,9.9,1
-2017-11-08,LCO3,Garner,3,post,11,3.3,D,NA,0
 2017-11-08,LCO3,Garner,3,post,12,2.2,L,27.6,1
 2017-11-08,LCO3,Garner,3,post,12,2.2,L,20.9,1
 2017-11-08,LCO3,Garner,3,post,12,2.2,L,35.5,1
@@ -3494,7 +3440,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO3,Garner,3,post,12,2.2,L,11.3,1
 2017-11-08,LCO3,Garner,3,post,12,2.2,D,10.5,1
 2017-11-08,LCO3,Garner,3,post,12,2.2,D,8.1,1
-2017-11-08,LCO3,Garner,3,post,12,2.2,D,NA,0
 2017-11-08,LCO3,Garner,3,post,13,2.5,L,16.7,1
 2017-11-08,LCO3,Garner,3,post,13,2.5,L,9.7,1
 2017-11-08,LCO3,Garner,3,post,13,2.5,L,6.5,1
@@ -3527,7 +3472,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO4,Garner,1,post,10,0.2,L,19.8,1
 2017-11-08,LCO4,Garner,1,post,10,0.2,L,13.5,1
 2017-11-08,LCO4,Garner,1,post,10,0.2,D,14.6,1
-2017-11-08,LCO4,Garner,1,post,10,0.2,D,NA,0
 2017-11-08,LCO4,Garner,1,post,12,2.3,L,20,1
 2017-11-08,LCO4,Garner,1,post,12,2.3,L,10.3,1
 2017-11-08,LCO4,Garner,1,post,12,2.3,L,24.9,1
@@ -3539,8 +3483,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO4,Garner,1,post,12,2.3,L,17.4,1
 2017-11-08,LCO4,Garner,1,post,12,2.3,L,16.7,1
 2017-11-08,LCO4,Garner,1,post,12,2.3,L,10.9,1
-2017-11-08,LCO4,Garner,1,post,12,2.3,D,NA,0
 2017-11-08,LCO4,Garner,1,post,12,2.3,L,NA,14
+2017-11-08,LCO4,Garner,1,post,12,2.3,D,NA,0
 2017-11-08,LCO4,Garner,1,post,12,3.8,L,8.8,1
 2017-11-08,LCO4,Garner,1,post,12,3.8,L,13.9,1
 2017-11-08,LCO4,Garner,1,post,12,3.8,L,6.4,1
@@ -3555,8 +3499,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO4,Garner,1,post,13,0.2,L,11.5,1
 2017-11-08,LCO4,Garner,1,post,13,0.2,L,23.9,1
 2017-11-08,LCO4,Garner,1,post,13,0.2,L,90.1,1
-2017-11-08,LCO4,Garner,1,post,13,0.2,D,NA,0
 2017-11-08,LCO4,Garner,1,post,13,0.2,L,NA,4
+2017-11-08,LCO4,Garner,1,post,13,0.2,D,NA,0
 2017-11-08,LCO4,Garner,1,post,19,3.3,L,18.1,1
 2017-11-08,LCO4,Garner,1,post,19,3.3,L,16.1,1
 2017-11-08,LCO4,Garner,1,post,19,3.3,L,26.1,1
@@ -3574,7 +3518,6 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO4,Garner,2,post,3,0.8,L,19.4,1
 2017-11-08,LCO4,Garner,2,post,3,0.8,L,88.6,1
 2017-11-08,LCO4,Garner,2,post,3,0.8,D,20,1
-2017-11-08,LCO4,Garner,2,post,3,0.8,D,NA,0
 2017-11-08,LCO4,Garner,2,post,4,1.8,L,19.6,1
 2017-11-08,LCO4,Garner,2,post,4,1.8,L,12.7,1
 2017-11-08,LCO4,Garner,2,post,4,1.8,L,11.5,1
@@ -3654,13 +3597,13 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO4,Garner,3,post,5,1.1,L,29.8,1
 2017-11-08,LCO4,Garner,3,post,5,1.1,L,15.5,1
 2017-11-08,LCO4,Garner,3,post,5,1.1,L,15,1
-2017-11-08,LCO4,Garner,3,post,5,1.1,D,NA,0
 2017-11-08,LCO4,Garner,3,post,5,1.1,L,NA,2
+2017-11-08,LCO4,Garner,3,post,5,1.1,D,NA,0
 2017-11-08,LCO4,Garner,3,post,6,0.9,L,69.8,1
 2017-11-08,LCO4,Garner,3,post,6,0.9,L,17.9,1
 2017-11-08,LCO4,Garner,3,post,6,0.9,L,21.1,1
-2017-11-08,LCO4,Garner,3,post,6,0.9,D,NA,0
 2017-11-08,LCO4,Garner,3,post,6,0.9,L,NA,9
+2017-11-08,LCO4,Garner,3,post,6,0.9,D,NA,0
 2017-11-08,LCO4,Garner,3,post,7,3.2,L,12.6,1
 2017-11-08,LCO4,Garner,3,post,7,3.2,L,19.6,1
 2017-11-08,LCO4,Garner,3,post,7,3.2,L,14,1
@@ -3672,8 +3615,8 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO4,Garner,3,post,9,3.4,D,13,1
 2017-11-08,LCO4,Garner,3,post,18,2,L,26,1
 2017-11-08,LCO4,Garner,3,post,18,2,L,7.9,1
-2017-11-08,LCO4,Garner,3,post,18,2,D,NA,0
 2017-11-08,LCO4,Garner,3,post,18,2,L,NA,1
+2017-11-08,LCO4,Garner,3,post,18,2,D,NA,0
 2017-11-08,LCO4,Garner,3,post,21,2.2,L,9.6,1
 2017-11-08,LCO4,Garner,3,post,21,2.2,L,29.5,1
 2017-11-08,LCO4,Garner,3,post,21,2.2,L,34.3,1
@@ -3682,4 +3625,3 @@ Date,Station,Counter,Transect,Condition,Dist_Alng,Dist_frm,Live_Dead,Size,Count
 2017-11-08,LCO4,Garner,3,post,21,2.2,L,14.7,1
 2017-11-08,LCO4,Garner,3,post,21,2.2,L,13.3,1
 2017-11-08,LCO4,Garner,3,post,21,2.2,D,22.6,1
-2017-11-08,LCO4,Garner,3,post,21,2.2,D,NA,0
