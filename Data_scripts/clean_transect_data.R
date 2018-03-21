@@ -199,12 +199,24 @@ transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO7
 
 
 # changing site names to new format
+#problem that sites prior to 2013 have same current name but different later name than post 2013 data
 
 name = read.csv("/Users/katiezarada/Desktop/Oysters/station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+transect.pre13 = subset(transect, transect$Date < "2013-01-01")
+transect.post13 = subset(transect, transect$Date > "2013-01-01")
 
-index = match(transect$Station, name$Current)
-index.1 = index[!is.na(index)]
-transect$Station[which(index != "NA")] = name[index.1,2] #changing name 
+name.pre13 = name[1:3, ]
+name.post13 = name[4:21,]
+
+index.pre = match(transect.pre13$Station, name.pre13$Current)
+index.pre1 = index.pre[!is.na(index.pre)]
+transect.pre13$Station[which(index.pre != "NA")] = name.pre13[index.pre1,2] #changing name 
+
+index.post = match(transect.post13$Station, name.post13$Current)
+index.post1 = index.post[!is.na(index.post)]
+transect.post13$Station[which(index.post != "NA")] = name.post13[index.post1,2] #changing name 
+
+transect = rbind(transect.pre13, transect.post13)
 
 #check if the switch worked
 transect %>% select(Date, Station, Location) %>% distinct()
