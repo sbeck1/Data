@@ -96,11 +96,17 @@ quad2012$Treatment = rep('control')
 # create Replicate column (only used in 2013-2017)
 quad2012$Replicate = rep(1)
 
+# Quad_type column
+quad2012$Quad_type = rep('SURFACE')
+
+# Quad_area column
+quad2012$Quad_area = rep(0.0625)
+
 # put rows in order
 quad2012 = quad2012[with(quad2012,order(Trip,Station,Dist_Alng,Dist_frm,Direction)),]
 
 # create Quadrat_ID column
-quad2012.locations = make_quadrat_id_dataframe(quad2012,c('Dist_Alng','Dist_frm','Direction'))
+quad2012.locations = make_quadrat_id_dataframe(quad2012,c('Dist_Alng','Dist_frm','Direction','Quad_type','Quad_area'))
 
 # attach Quadrat_ID to quad2012 data frame
 quad2012_modified = merge(quad2012,quad2012.locations,all.x=T)
@@ -150,8 +156,14 @@ quad2013$Station = paste0(quad2013$Locality,quad2013$Site,quad2013$Bar)
 # needs a Direction column even though L/R info was not recorded in this epoch
 quad2013$Direction = rep(NA)
 
+# Quad_type column
+quad2013$Quad_type = rep('SURFACE')
+
+# Quad_area column
+quad2013$Quad_area = rep(0.0625)
+
 # create Quadrat_ID column
-quad2013.locations = make_quadrat_id_dataframe(quad2013,c('Dist_Alng','Dist_frm','Direction'))
+quad2013.locations = make_quadrat_id_dataframe(quad2013,c('Dist_Alng','Dist_frm','Direction','Quad_type','Quad_area'))
 
 # attach Quadrat_ID to quad2012 data frame
 quad2013_modified = merge(quad2013,quad2013.locations,all.x=T)
@@ -189,8 +201,14 @@ quad2015$Treatment = rep('control')
 # needs a Direction column even though L/R info was not recorded in this epoch
 quad2015$Direction = rep(NA)
 
+# Quad_type column
+quad2015$Quad_type = rep('SURFACE')
+
+# Quad_area column
+quad2015$Quad_area = rep(0.0625)
+
 # create Quadrat_ID column
-quad2015.locations = make_quadrat_id_dataframe(quad2015,c('Dist_Alng','Dist_frm','Direction'))
+quad2015.locations = make_quadrat_id_dataframe(quad2015,c('Dist_Alng','Dist_frm','Direction','Quad_type','Quad_area'))
 
 # attach Quadrat_ID to quad2015 data frame
 quad2015_modified = merge(quad2015,quad2015.locations,all.x=T)
