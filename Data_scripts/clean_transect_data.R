@@ -111,7 +111,10 @@ tran.2017$Locality = rep("LC", dim(tran.2017)[1]) #create locality
 tran.2017$Site = rep("O", dim(tran.2017)[1])  #create site
 
 ## Dealing with Treatment, pre vs post; control vs restore 
-tran.2017$Treatment = apply(tran.2017, 1, function(x) ifelse(str_detect(x[2], pattern = "LCrestore"), paste0("restore", "_", x[7]), paste0("control", "_", x[7])))
+tran.2017$Treatment = apply(tran.2017, 1, function(x) ifelse(str_detect(x[2], pattern = "LCrestore"), paste0("restore", "_", x[7]), paste0("control")))
+tran.2017$Treatment[which(tran.2017$Treatment == "restore_pre")] <- "control"
+tran.2017$Treatment[which(tran.2017$Treatment == "restore_post")] <- "rocks"
+
 
 #split bar number from station
 tran.2017$Bar = apply(tran.2017, 1, function(x) ifelse(str_detect(x[2], pattern = "LCrestore") , strsplit(x[2], "e")[[1]][3], strsplit(x[2], "l")[[1]][2]))
@@ -161,7 +164,7 @@ colnames(tran.2015)[7]= "Cnt_Dead"
 
 #treatment column 
 
-tran.2015$Treatment = apply(tran.2015, 1, function(x) ifelse((x[13] == "01" | x[13] == "02" | x[13] == "05"|x[13] ==  "06"), "restore_post", "control_post"))
+tran.2015$Treatment = apply(tran.2015, 1, function(x) ifelse((x[14] == "01" | x[14] == "02" | x[14] == "05"|x[14] ==  "06"), "rocks", "control"))
 
 #change order 
 
@@ -173,5 +176,60 @@ tran.2015 = tran.2015[,c(1,8,9,10,12,13,14, 2, 11, 5,6, 7, 4, 15)]
 transect = rbind(transect, tran.2015)
 
 
+#changing LCrestore to regular site name 
+name = read.csv("/Users/katiezarada/Desktop/Oysters/station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+name.1 = name[22:37,1:2]
+index = match(transect$Station, name.1$Current)
+index.1 = index[!is.na(index)]
+transect$Station[which(index != "NA")] = name.1[index.1,2] #changing name 
+
+#create A,B,C designation 
+transect$Location = rep(NA, dim(transect)[1])
+transect$Location[which(transect$Date < "2013-01-01" & transect$Station == "LCO1")] <- "B"
+transect$Location[which(transect$Date < "2013-01-01" & transect$Station == "LCO2")] <- "A"
+
+transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO1")] <- "B"
+transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO2")] <- "A"
+transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO3")] <- "C"
+transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO4")] <- "A"
+transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO5")] <- "B"
+transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO6")] <- "A"
+transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO7")] <- "B"
+
+
+
+# changing site names to new format
+#problem that sites prior to 2013 have same current name but different later name than post 2013 data
+
+name = read.csv("/Users/katiezarada/Desktop/Oysters/station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+transect.pre13 = subset(transect, transect$Date < "2013-01-01")
+transect.post13 = subset(transect, transect$Date > "2013-01-01")
+
+name.pre13 = name[1:3, ]
+name.post13 = name[4:21,]
+
+index.pre = match(transect.pre13$Station, name.pre13$Current)
+index.pre1 = index.pre[!is.na(index.pre)]
+transect.pre13$Station[which(index.pre != "NA")] = name.pre13[index.pre1,2] #changing name 
+
+index.post = match(transect.post13$Station, name.post13$Current)
+index.post1 = index.post[!is.na(index.post)]
+transect.post13$Station[which(index.post != "NA")] = name.post13[index.post1,2] #changing name 
+
+transect = rbind(transect.pre13, transect.post13)
+
+#check if the switch worked
+transect %>% select(Date, Station, Location) %>% distinct()
+
 #write.csv(transect, "transect_combined.csv")
+
+
+
+
+
+
+
+
+
+
 
