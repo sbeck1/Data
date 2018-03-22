@@ -76,11 +76,12 @@ make_quadrat_id_dataframe = function(quad_df,location_columns) {
 # ====================================================================================================================================
 
 # read in data files
-quad2012 = read.csv('Oyster_data/Quadrat/Grid_data_Nov_2012_bp.csv',stringsAsFactors = F)
+quad2012 = read.csv('Oyster_data/Quadrat/Grid_data_Nov_2012_bp.csv',stringsAsFactors = F,na.strings = c('',' '))
 quad2013 = read.csv('Oyster_data/Quadrat/Oyster_grid_2013_2017.csv',stringsAsFactors = F)
 quad2015 = read.csv('Oyster_data/Quadrat/Oyster_grid_2015.csv',stringsAsFactors = F)
 quad2018 = read.csv('Oyster_data/Quadrat/OysterData_30Jan2018_Quadrat_final.csv',stringsAsFactors = F)
 quad2018b = read.csv('Oyster_data/Quadrat/OysterData_16Feb2018_Quadrat_final.csv',stringsAsFactors = F)
+quad2018c = read.csv('Oyster_data/Quadrat/20180302_oyster_quadrat.csv',stringsAsFactors = F)
 
 
 # ---------------------------------------------------------------------------------------
@@ -263,18 +264,50 @@ quad2018b_modified = merge(quad2018b,quad2018b.locations,all.x=T)
 # select correct columns
 quad.2018b = quad2018b_modified[,c('Date','Month','Locality','Site','Bar','Station','Counter','Quadrat_ID','Live_Dead','Size','Count','Treatment')]
 
+# -----------------------------------------------------------------------------------------------------------
+# 2018 March data cleaning
+
+# create MOnth column
+quad2018c$Date = as.Date(quad2018c$Date,format='%Y/%m/%d')
+quad2018c$Month = format(quad2018c$Date,'%m') %>% as.numeric()
+quad2018c$Month = month.name[quad2018c$Month]
+
+# Station should be Locality, Site, Bar
+quad2018c$Station_old = quad2018c$Station
+quad2018c$Station = paste0(quad2018c$Locality,quad2018c$Site,quad2018c$Bar)
+
+# rename Height col to Size
+colnames(quad2018c)[colnames(quad2018c)=='Height'] <- 'Size'
+
+# Treatment column
+quad2018c$Treatment = rep('control')
+
+# Replicate column
+quad2018c$Replicate = rep(1)
+
+# create Quadrat_ID col
+quad2018c.locations = make_quadrat_id_dataframe(quad2018c,c('Quadrat','Quad_Lat','Quad_Long','Center_Lat','Center_Long','Rand_Coord','Rand_Dist','Quad_type','Quad_area','Quad_Depth'))
+
+# attache Quadrat_ID to quad2018 df
+quad2018c_modified = merge(quad2018c,quad2018c.locations,all.x=T)
+
+# select correct columns
+quad.2018c = quad2018c_modified[,c('Date','Month','Locality','Site','Bar','Station','Counter','Quadrat_ID','Live_Dead','Size','Count','Treatment')]
+
 # =====================================================================================================================
 # combine all quadrat data and location data
 
 # locations
-quadrat.locations = rbind.fill(quad2012.locations,quad2013.locations,quad2015.locations,quad2018.locations,quad2018b.locations)
+quadrat.locations = rbind.fill(quad2012.locations,quad2013.locations,quad2015.locations,quad2018.locations,quad2018b.locations,quad2018c.locations)
 
-quadrat.combined = rbind(quad.2012,quad.2013,quad.2015,quad.2018,quad.2018b)
+quadrat.combined = rbind(quad.2012,quad.2013,quad.2015,quad.2018,quad.2018b,quad.2018c)
 
 # some of the Live oysters are recorded with "Li" instead of "L". Standardize.
 quadrat.combined$Live_Dead[quadrat.combined$Live_Dead=='Li'] = 'L'
 
-
+# put rows in order of quadratID (will be in order by date also)
+quadrat.combined=quadrat.combined[order(quadrat.combined$Quadrat_ID),]
+quadrat.locations=quadrat.locations[order(quadrat.locations$Quadrat_ID),]
 
 write.csv(quadrat.locations,'Oyster_data/Quadrat/quadrat.locations.csv',row.names=F)
 write.csv(quadrat.combined,'Oyster_data/Quadrat/quadrat_combined.csv',row.names = F)
