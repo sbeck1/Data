@@ -39,11 +39,9 @@ library(dplyr)
 #' 
 make_quadrat_id_dataframe = function(quad_df,location_columns) {
   # split Date column into month, day, year columns
-  for (n in 1:length(quad_df$Date)) {
-    quad_df$mo[n] = strsplit(quad_df$Date[n],'/')[[1]][1] %>% as.numeric() %>% sprintf(fmt='%02d')
-    quad_df$dy[n] = strsplit(quad_df$Date[n],'/')[[1]][2] %>% as.numeric() %>% sprintf(fmt='%02d')
-    quad_df$yr[n] = strsplit(quad_df$Date[n],'/')[[1]][3]
-  }
+  quad_df$mo = format(quad_df$Date,'%m') %>% as.numeric() %>% sprintf(fmt='%02d')
+  quad_df$dy = format(quad_df$Date,'%d') %>% as.numeric() %>% sprintf(fmt='%02d')
+  quad_df$yr = format(quad_df$Date,'%Y')
   
   # create location data frame
   quad_df.locations = quad_df %>% select(location_columns,Date,Station,Replicate,yr,mo,dy) %>% unique()
@@ -80,12 +78,16 @@ make_quadrat_id_dataframe = function(quad_df,location_columns) {
 # read in data files
 quad2012 = read.csv('Oyster_data/Quadrat/Grid_data_Nov_2012_bp.csv',stringsAsFactors = F)
 quad2013 = read.csv('Oyster_data/Quadrat/Oyster_grid_2013_2017.csv',stringsAsFactors = F)
+quad2015 = read.csv('Oyster_data/Quadrat/Oyster_grid_2015.csv',stringsAsFactors = F)
 quad2018 = read.csv('Oyster_data/Quadrat/OysterData_30Jan2018_Quadrat_final.csv',stringsAsFactors = F)
 quad2018b = read.csv('Oyster_data/Quadrat/OysterData_16Feb2018_Quadrat_final.csv',stringsAsFactors = F)
 
 
 # ---------------------------------------------------------------------------------------
 # 2012 data cleaning
+
+# format Date column
+quad2012$Date = as.Date(quad2012$Date,format='%m/%d/%Y')
 
 # create Treatment column
 quad2012$Treatment = rep('control')
@@ -110,9 +112,9 @@ quad.2012 = quad2012_modified[,c('Date','Month','Locality','Site','Bar','Station
 # 2013 data cleaning
 
 # create Month column
-for (n in 1:length(quad2013$Date)) {
-  quad2013$Month[n] = strsplit(quad2013$Date[n],'/')[[1]][1]
-}
+quad2013$Date = as.Date(quad2013$Date)
+quad2013$Month = format(quad2013$Date,'%m') %>% as.numeric()
+
 # convert numeric month to month name
 quad2013$Month = month.name[as.numeric(quad2013$Month)]
 
@@ -138,7 +140,7 @@ for (n in 1:length(quad2013$Station)) {
 }
 
 # 'restore' is not a real Site name. All the sites in this file are 'O' 
-quad2013$Site = 'O'
+quad2013$Site = rep('O')
 
 # Station should be combination of Locality, Site, Bar
 quad2013$Station_old = quad2013$Station
@@ -157,13 +159,52 @@ quad2013_modified = merge(quad2013,quad2013.locations,all.x=T)
 quad.2013 = quad2013_modified[,c('Date','Month','Locality','Site','Bar','Station','Counter','Quadrat_ID','Live_Dead','Size','Count','Treatment')]
 
 
+# -------------------------------------------------------------------------------------------------
+# 2015 data cleaning
+
+# create Month column
+quad2015$Date = as.Date(quad2015$Date)
+quad2015$Month = format(quad2015$Date,'%m') %>% as.numeric()
+
+# convert numeric month to month name
+quad2015$Month = month.name[as.numeric(quad2015$Month)]
+
+# rename Transect column to be Replicate
+colnames(quad2015)[colnames(quad2015)=='Transect'] <- 'Replicate'
+
+# create Locality, Site, Bar columns (first 2 characters, middle n characters, and last character of Station respectively)
+for (n in 1:length(quad2015$Station)) {
+  quad2015$Locality[n] = substr(quad2015$Station[n],1,2)
+  quad2015$Site[n] = substr(quad2015$Station[n],3, nchar(quad2015$Station[n])-1)
+  quad2015$Bar[n] = substr(quad2015$Station[n], nchar(quad2015$Station[n]), nchar(quad2015$Station[n]))
+}
+
+#all Site in this file are 'O', but were entered as '0'
+quad2015$Site = rep('O')
+
+# create Treatment column
+quad2015$Treatment = rep('control')
+
+# needs a Direction column even though L/R info was not recorded in this epoch
+quad2015$Direction = rep(NA)
+
+# create Quadrat_ID column
+quad2015.locations = make_quadrat_id_dataframe(quad2015,c('Dist_Alng','Dist_frm','Direction'))
+
+# attach Quadrat_ID to quad2015 data frame
+quad2015_modified = merge(quad2015,quad2015.locations,all.x=T)
+
+# select correct columns
+quad.2015 = quad2015_modified[,c('Date','Month','Locality','Site','Bar','Station','Counter','Quadrat_ID','Live_Dead','Size','Count','Treatment')]
+
+
 # --------------------------------------------------------------------------------------------------
 # 2018 January data cleaning
 
 # create Month column
-for (n in 1:length(quad2018$Date)) {
-  quad2018$Month[n] = strsplit(quad2018$Date[n],'/')[[1]][1]
-}
+quad2018$Date = as.Date(quad2018$Date,format='%m/%d/%Y')
+quad2018$Month = format(quad2018$Date,'%m') %>% as.numeric()
+
 # convert numeric month to month name
 quad2018$Month = month.name[as.numeric(quad2018$Month)]
 
@@ -194,9 +235,9 @@ quad.2018 = quad2018_modified[,c('Date','Month','Locality','Site','Bar','Station
 # 2018 February data cleaning
 
 # create Month column
-for (n in 1:length(quad2018b$Date)) {
-  quad2018b$Month[n] = strsplit(quad2018b$Date[n],'/')[[1]][1]
-}
+quad2018b$Date = as.Date(quad2018b$Date,format='%m/%d/%Y')
+quad2018b$Month = format(quad2018b$Date,'%m') %>% as.numeric()
+
 # convert numeric month to month name
 quad2018b$Month = month.name[as.numeric(quad2018b$Month)]
 
@@ -226,12 +267,14 @@ quad.2018b = quad2018b_modified[,c('Date','Month','Locality','Site','Bar','Stati
 # combine all quadrat data and location data
 
 # locations
-quadrat.locations = rbind.fill(quad2012.locations,quad2013.locations,quad2018.locations,quad2018b.locations)
+quadrat.locations = rbind.fill(quad2012.locations,quad2013.locations,quad2015.locations,quad2018.locations,quad2018b.locations)
 
-quadrat.combined = rbind(quad.2012,quad.2013,quad.2018,quad.2018b)
+quadrat.combined = rbind(quad.2012,quad.2013,quad.2015,quad.2018,quad.2018b)
 
 # some of the Live oysters are recorded with "Li" instead of "L". Standardize.
 quadrat.combined$Live_Dead[quadrat.combined$Live_Dead=='Li'] = 'L'
 
-#write.csv(quadrat.locations,'Oyster_data/Quadrat/quadrat.locations.csv',row.names=F)
-#write.csv(quadrat.combined,'Oyster_data/Quadrat/quadrat_combined.csv',row.names = F)
+
+
+write.csv(quadrat.locations,'Oyster_data/Quadrat/quadrat.locations.csv',row.names=F)
+write.csv(quadrat.combined,'Oyster_data/Quadrat/quadrat_combined.csv',row.names = F)
