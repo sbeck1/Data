@@ -21,12 +21,21 @@ loc.2012[,6] = as.integer(loc.2012[,6])
 loc.2012[,7] = as.integer(loc.2012[,7])
 loc.2012[,8] = as.integer(loc.2012[,8])
 loc.2012[,9] = as.integer(loc.2012[,9])
-
+loc.2012$Date = as.Date(loc.2012$Date, format = "%m/%d/%Y")
 loc.2018 = tran.2018 %>% select(Date, Station, StartGPS_E, StartGPS_N, MidGPS_E, MidGPS_N, EndGPS_E, EndGPS_N, Orientation) %>% distinct()
 loc.2018 = loc.2018[1,] #it was just a repeat but one row was missing orientation so it was double. 
 
 
 transect.locations = rbind(loc.2012, loc.2018)
+
+transect.locations[which(transect.locations$Station == "LT1"),2] <- "LTI1"
+
+#changing site names to match the new names 
+name = read.csv("/Users/katiezarada/Desktop/Oysters/station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+index = match(transect.locations$Station, name$Current)
+index.1 = index[!is.na(index)]
+transect.locations$Station[which(index != "NA")] = name[index.1,2] #changing name 
+
 #write.csv(transect.locations, "transect.locations.csv")
 
 tran.2012 = tran.2012[,-c(10:16)] #removing locations 
