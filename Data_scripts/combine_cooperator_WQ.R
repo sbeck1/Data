@@ -49,16 +49,26 @@ fwc$Year = substr(fwc$Reference,4,7) %>% as.numeric()
 fwc$Month = substr(fwc$Reference,8,9) %>% as.numeric()
 fwc$Day = substr(fwc$Reference,10,11) %>% as.numeric()
 fwc = rename(fwc,Lon=Longitude,
-             Lat=Latitude,
-             Bottom_temp=Temperature,
-             Bottom_conduct=Conductivity,
-             Bottom_sal=Salinity,
-             Bottom_DO=DissolvedO2)
-fwc$Surface_temp = rep(NA)
-fwc$Surface_sal = rep(NA)
-fwc$Surface_DO = rep(NA)
-fwc$Data_source = rep("FWC")
-fwc = fwc[order(fwc$Year,fwc$Month,fwc$Day,fwc$Depth),]
+             Lat=Latitude)
+# find deepest measurement for each Reference ID
+fwc_bottom_surface = data.frame()
+numsamps = c()
+nosurface=c()
+for (ID in unique(fwc$Reference)) {
+  samples = dplyr::filter(fwc,Reference==ID)
+  numsamps = rbind(numsamps,dim(samples)[1])
+  bottom = samples[samples$Depth==max(samples$Depth),]
+  if (dim(samples)[1] > 1 & min(samples$Depth)<.4) {
+    surface = samples[samples$Depth==min(samples$Depth),]
+  } else {surface = data.frame(Temperature=NA,Salinity=NA,DissolvedO2=NA); if(min(samples$Depth)>=.4) {nosurface=rbind(nosurface,ID)}}
+  dat = data.frame(Reference=ID,Year=bottom$Year,Month=bottom$Month,Day=bottom$Day,Lon=bottom$Lon,Lat=bottom$Lat,Depth=bottom$Depth,
+                   Bottom_temp=bottom$Temperature,Bottom_sal=bottom$Salinity,Bottom_DO=bottom$DissolvedO2,
+                   Surface_temp=surface$Temperature,Surface_sal=surface$Salinity,Surface_DO=surface$DissolvedO2,
+                   pH=bottom$pH)
+  fwc_bottom_surface = rbind(fwc_bottom_surface,dat)
+}
+fwc_bottom_surface$Data_source = rep("FWC")
+fwc_bottom_surface = fwc_bottom_surface[order(fwc_bottom_surface$Reference),]
 
 
 
@@ -104,11 +114,11 @@ fraz$Data_source = rep("Frazier")
 fraz = fraz[order(fraz$Year,fraz$Month,fraz$Day,fraz$Depth),]
 
 
-gpspoints = rbind(fwc[,c('Year','Month','Day','Lat','Lon','Depth','Data_source')],
+gpspoints = rbind(fwc_bottom_surface[,c('Year','Month','Day','Lat','Lon','Depth','Data_source')],
                   fdacs[,c('Year','Month','Day','Lat','Lon','Depth','Data_source')],
                   fraz[,c('Year','Month','Day','Lat','Lon','Depth','Data_source')])
 
-waterquality = rbind(fwc[,c('Year','Month','Day','Lat','Lon','Depth','Bottom_temp','Bottom_sal','Bottom_DO','Surface_temp','Surface_sal','Surface_DO','pH','Data_source')],
+waterquality = rbind(fwc_bottom_surface[,c('Year','Month','Day','Lat','Lon','Depth','Bottom_temp','Bottom_sal','Bottom_DO','Surface_temp','Surface_sal','Surface_DO','pH','Data_source')],
                      fdacs[,c('Year','Month','Day','Lat','Lon','Depth','Bottom_temp','Bottom_sal','Bottom_DO','Surface_temp','Surface_sal','Surface_DO','pH','Data_source')],
                      fraz[,c('Year','Month','Day','Lat','Lon','Depth','Bottom_temp','Bottom_sal','Bottom_DO','Surface_temp','Surface_sal','Surface_DO','pH','Data_source')])
 
