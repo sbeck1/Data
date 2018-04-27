@@ -22,6 +22,6 @@ Columns:
 
 Notes:
   - missing values indicated by 'NA'
-  - surface measurements are only available from FDACS data
-  - FWC and Frazier data: each measurement is associated with a Depth, it was assumed this was bottom depth
+  - FWC data: multiple measurements were taken per gps point, deepest measurements were taken to be bottom and shallowest taken as surface
+  - Frazier data: each measurement is associated with a Depth, it was assumed this was bottom depth
 
