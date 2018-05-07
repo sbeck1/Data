@@ -4,8 +4,8 @@
 
 library(devtools)
 #read in data files
-dat1 = read.csv("/Users/fas/Desktop/Oysters/20180302_oyster_quadrat_MM.CSV", header =TRUE, stringsAsFactors = FALSE)
-dat2 = read.csv("/Users/fas/Desktop/Oysters/20180302_oyster_quadrat_SB.CSV", header =TRUE, stringsAsFactors = FALSE)
+dat1 = read.csv("/Users/katiezarada/Desktop/Oysters/20180302_oyster_quadrat_MM.CSV", header =TRUE, stringsAsFactors = FALSE)
+dat2 = read.csv("/Users/katiezarada/Desktop/Oysters/20180302_oyster_quadrat_SB.CSV", header =TRUE, stringsAsFactors = FALSE)
 
 #first, are the columns and rows the same? 
 dim(dat1)
@@ -45,6 +45,7 @@ for(i in 1:length(mistakes.cols)) {
 }
 
 
+mistakes.cells
 
 
 
