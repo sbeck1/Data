@@ -10,8 +10,8 @@ library(gplots)
 library(zoo)
 
 #load data
-tran = read.csv("/Users/katiezarada/Desktop/Oysters/Analyses/Oyster_data/Transect/transect_combined.csv",header=T)
-quad = read.csv("/Users/katiezarada/Desktop/Oysters/Analyses/Oyster_data/Quadrat/quadrat_combined.csv")
+tran = read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
+quad = read.csv("Oyster_data/Quadrat/quadrat_combined.csv")
 
 ################################################################################
 #
@@ -153,7 +153,7 @@ for(i in trips){
 #             Size Distribution with Quadrat Data      
 #
 ################################################################################
-quad = read.csv("/Users/katiezarada/Desktop/Oysters/Analyses/Oyster_data/Quadrat/quadrat_combined.csv")
+quad = read.csv("Oyster_data/Quadrat/quadrat_combined.csv")
 quad$Date = as.Date(quad$Date, format = '%m/%d/%Y')
 quad$Year = format(quad$Date, "%Y")
 quad$Month = month.abb[quad$Month] 

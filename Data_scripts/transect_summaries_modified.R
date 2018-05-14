@@ -8,7 +8,7 @@ library(tidyverse)
 #
 ################################################################################
 #read data
-  tran = read.csv("/Users/katiezarada/Desktop/Oysters/Analyses/Oyster_data/Transect/transect_combined.csv",header=T)
+  tran = read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
 
   #deal with date-time variables
   tran$Date   = as.Date(tran$Date, format ="%Y-%m-%d")
