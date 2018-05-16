@@ -1,0 +1,67 @@
+
+FILE: quadrat.locations.csv
+
+1) All Quad_type = SURFACE, Quad_area = 0.0625, Quad_Depth = NA (exception: Dec 20, 2017, Jan 17, 2018, and Jan 30 2018: LTI1)
+
+2) Nov 6-8, 2017: Missing data created NAs and excluded zeroes.  Raw data corrected on 3/15/18.
+
+3) March 2, 2018 data needs included
+
+
+FILE: quadrat_combined.csv
+
+1) Nov 6-8, 2017: Missing data created NAs and excluded zeroes.  Raw data corrected on 3/15/18.
+
+2) March 2, 2018 data needs included
+
+3) Treatments should all be "control" EXCEPT: LCO1,LCO2,LCO5,LCO6 from 2014 to present, where treatment="rocks".  It is important to make this change before renaming stations as per below.   
+
+
+FILE: transect_combined.csv
+
+1) 2013/14 and Jan 30, 2018 (LTI1) transect data not included
+
+2) Jan 30, 2018 start.time=9:44am end.time=10.12
+
+3) Treatments should all be "control" except LCO1,LCO2,LCO5,LCO6 from 2014 to present, where treatment="rocks".  It is important to make this change before renaming stations below.
+
+
+FILE: transect.locations.csv
+
+1) station LT1 should be LTI1, date format incorrect
+
+
+FILE: quadrat.locations.csv, quadrat_combined.csv, transect.locations.csv, transect_combined.csv
+
+1) Station name edits standardizing across projects/epochs.  LCO stations standardized using construction reef element designations:
+Year	Current		New	Station
+2010-12	LCO1		LCO9	B
+	LCO2		LCO8	A
+	LCO3		LCO3
+2013-17	LCO1		LCO8	B
+	LCO2		LCO9	A
+	LCO3		LCO9	C
+	LCO4		LCO10	A
+	LCO5		LCO10	B
+	LCO6		LCO11	A
+	LCO7		LCO11	B
+	LCO8		LCO12	
+2018	NLC01		LCO2
+	NLC02		LCO4
+	NLC03		LCO0		(bar will not be restored, does not have a reef element number)
+	GCI1		LCN3
+	GCI2		LCN4
+	LCN3		LCN5
+	LCI1		LCI5
+	LCI2		LCI6
+	LCI3		LCI7
+	LCI4		LCI3
+
+2) For all quadrat data pre-2018, sample coordinates are located in transect.locations.csv and can be linked via station name.  This is probably fine if we don't want data duplicated, the alternative is adding transect location columns to quadrat location file.
+
+3) 2015 data needs to be included 
+
+
+FILE: All raw data files
+
+1) rename to match new file name format where possible (YYYYMMDD_organism_type) 

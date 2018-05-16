@@ -1,4 +1,4 @@
-Date,location,transect,distance,live,dead ,condition,tran_width_m
+Date,Station,Transect,TransLngth,Cnt_Live,Cnt_Dead,Condition,tran_width_m
 4/24/2013,LCrestore5,1,2.5,0,0,pre,0.1524
 4/24/2013,LCrestore5,1,5,0,0,pre,0.1524
 4/24/2013,LCrestore5,1,7.5,0,0,pre,0.1524
