@@ -8,10 +8,18 @@ library(tidyverse)
 library(ggplot2)
 library(gplots)
 library(zoo)
+library(RCurl)
 
 #load data
-tran = read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
-quad = read.csv("Oyster_data/Quadrat/quadrat_combined.csv")
+#updated this so it's loading data directly from GitHub
+tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
+tran = read.csv(text = tranurl)
+
+quadurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Quadrat/quadrat_combined.csv")
+quad = read.csv(text = quadurl)
+
+#tran = read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
+#quad = read.csv("Oyster_data/Quadrat/quadrat_combined.csv")
 
 ################################################################################
 #
