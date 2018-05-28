@@ -62,7 +62,23 @@ index = which(is.na(quad$Location))
 Substation[index]= quad$Station[index]
 quad$Substation = Substation
 
+########### Fix Rock and Treatment Groups ##############
 
+tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
+tran = read.csv(text = tranurl)
+tran$Date = as.Date(tran$Date, format = "%Y-%m-%d")
+tran$Year = format(tran$Date, "%Y")
 
+rocks = tran %>% select(Substation, Treatment, Year) %>% filter(tran$Year > 2013) %>% distinct()
+
+quad.pre = subset(quad, quad$Year <= 2013)
+quad.post = subset(quad, quad$Year > 2013)
+
+match = match(quad.post$Substation, rocks$Substation)
+quad.pre$Treatment <- 'control'
+quad.post$Treatment <- rocks[match,2]
+quad = rbind(quad.pre, quad.post)
+quad[is.na(quad$Treatment),13] <- "control"
+quad %>% select(Substation, Treatment, Year) %>% distinct()
 write.csv(quad, "quadrat_combined.csv")
 
