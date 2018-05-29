@@ -161,10 +161,13 @@ for(i in trips){
 #             Size Distribution with Quadrat Data      
 #
 ################################################################################
-quad = read.csv("Oyster_data/Quadrat/quadrat_combined.csv")
-quad$Date = as.Date(quad$Date, format = '%m/%d/%Y')
+#quad = read.csv("Oyster_data/Quadrat/quadrat_combined.csv")
+quadurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Quadrat/quadrat_combined.csv")
+quad = read.csv(text = quadurl)
+
+quad$Date = as.Date(quad$Date, format = '%Y-%m-%d')
 quad$Year = format(quad$Date, "%Y")
-quad$Month = month.abb[quad$Month] 
+quad$Month = month.abb[as.numeric(format(quad$Date, "%m"))] 
 
 
 
@@ -179,7 +182,7 @@ sites = unique(apply(quad, 1, function (x) paste0(x[3], x[4])))
 par(mfrow = c(3,6))
 for(i in 1:length(sites)){
   
-  d =  quad %>% select(SiteLoc, Size, Year) %>% filter(SiteLoc == sites[i]) %>% na.omit()
+  d =  quad %>% dplyr::select(SiteLoc, Size, Year) %>% filter(SiteLoc == sites[i]) %>% na.omit()
   
   hist(d[,2], main= paste0(sites[i]), xlab ="Height(mm)", ylab = "Oyster Size Density", xlim = c(0, 265), freq = FALSE, breaks = seq(0, 265, by = 5), col = 'gray')
   abline(v= 75.4, col = 'red', lwd = 2, lty = 2)
@@ -192,7 +195,7 @@ locality = unique(quad$Locality)
 par(mfrow = c(3,3))
 for(i in 1:length(locality)){
   
-  d =  quad %>% select(Locality, Size, Year) %>% filter(Locality == locality[i]) %>% na.omit()
+  d =  quad %>% dplyr::select(Locality, Size, Year) %>% filter(Locality == locality[i]) %>% na.omit()
   
   hist(d[,2], main= paste0(locality[i]), xlab ="Height(mm)", ylab = "Oyster Size Density", xlim = c(0, 150), freq = FALSE, breaks = seq(0, 265, by = 5), col = 'gray')
   abline(v= 75.4, col = 'red', lwd = 2, lty = 2)
@@ -203,7 +206,7 @@ for(i in 1:length(locality)){
 
 for(i in 1:length(locality)){
   
-  d =  quad %>% select(Locality, Size, Year) %>% filter(Locality == locality[i]) %>% na.omit() %>% arrange(Year)
+  d =  quad %>% dplyr::select(Locality, Size, Year) %>% filter(Locality == locality[i]) %>% na.omit() %>% arrange(Year)
   index = unique(d$Year)
   if(length(index) > 1){
   par(mfrow = c(length(index),1))
@@ -220,7 +223,7 @@ for(i in 1:length(locality)){
 
 for(i in 1:length(locality)){
   
-  d =  quad %>% select(Locality, Size, Live_Dead) %>% filter(Locality == locality[i]) %>% na.omit() 
+  d =  quad %>% dplyr::select(Locality, Size, Live_Dead) %>% filter(Locality == locality[i]) %>% na.omit() 
   
   par(mfrow = c(2,1))
     live = subset(d, d$Live_Dead == "L")
@@ -239,7 +242,7 @@ for(i in 1:length(locality)){
 
 for(i in 1:length(locality)){
   
-  d =  quad %>% select(Locality, Size, Year, Live_Dead) %>% filter(Locality == locality[i]) %>% na.omit() %>% arrange(Year)
+  d =  quad %>% dplyr::select(Locality, Size, Year, Live_Dead) %>% filter(Locality == locality[i]) %>% na.omit() %>% arrange(Year)
   index = unique(d$Year)
   if(length(index) > 1){
   par(mfrow = c(length(index),2))
@@ -258,7 +261,8 @@ for(i in 1:length(locality)){
 ################### Density for Quadrat Data ####################
 
 quad.agg = aggregate(Count ~ Month + Year + Locality + Site + Station , data = quad, sum, na.rm =T)
-quad.agg$Density = quad.agg$Count / 0.25
+
+quad.agg$Density = ifelse(quad.agg$Locality == "LT", quad.agg$Count/0.025,quad.agg$Count / 0.0625)
 
 stats        = aggregate(Density~ Site + Locality + Month + Year ,data=quad.agg, FUN=.sumstats)
 stats        = do.call("data.frame",stats)                                    #flatten that matrix variable
@@ -346,7 +350,7 @@ for(i in trips){
 #
 ################################################################################
 
-tran.treat = tran %>% select(Month, Year, Locality, Site, Bar, Cnt_Live, Treatment, TransLngth) %>% 
+tran.treat = tran %>% dplyr::select(Month, Year, Locality, Site, Bar, Cnt_Live, Treatment, TransLngth) %>% 
   filter(Locality == "LC", Site == "O")
 max_tran  = aggregate(TransLngth ~ Month + Year+ Locality+ Site+ Bar+ Treatment,data=tran.treat,max,na.action=na.pass)
 cnt_treat = aggregate(Cnt_Live~ Month + Year + Locality + Site + Bar + Treatment ,data=tran.treat,sum,na.rm=T,na.action=na.pass)         
@@ -367,7 +371,7 @@ for(i in bar){
 
 ####### Control vs Treatment with Quad data 
 
-quad.treat = quad %>%  select(Month, Year, Locality, Site, Bar, Count, Treatment) %>% 
+quad.treat = quad %>%  dplyr::select(Month, Year, Locality, Site, Bar, Count, Treatment) %>% 
   filter(Locality == "LC", Site == "O")
 
 quad.treat = aggregate(Count ~ Month + Year + Locality + Site + Bar + Treatment, data = quad.treat, sum, na.rm =T)
