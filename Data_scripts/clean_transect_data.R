@@ -1,5 +1,7 @@
 ###### Cleaning up and merging Transect data #########
 
+#set workspace
+setwd("/Users/katiezarada/Desktop/Oysters/Analyses")
 #load packages
 library(readxl) #to read xlsx file
 library(tidyverse)
@@ -229,6 +231,22 @@ transect = rbind(transect.pre13, transect.post13)
 
 #check if the switch worked
 transect %>% select(Date, Station, Location) %>% distinct()
+
+####### Fix col splits ##########
+transect$Locality = substr(transect$Station, 1, 2)
+transect$Site = substr(transect$Station, 3,3)
+transect$Bar = substr(transect$Station, 4,5)
+
+# Make a Sub station col for combo of Station + Location 
+
+Substation = ifelse(transect$Location != "NA", paste0(transect$Station, transect$Location), paste(NA))
+index = which(is.na(transect$Location))
+Substation[index]= transect$Station[index]
+transect$Substation = Substation
+
+#check if the col split worked
+
+transect %>% select(Locality, Site, Bar, Station, Substation) %>% distinct()
 
 #write.csv(transect, "transect_combined.csv")
 
