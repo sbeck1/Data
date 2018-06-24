@@ -28,6 +28,12 @@ head(quad)
 #             Size Distribution with Quadrat Data      
 #
 ################################################################################
+#Function to compute multiple summary stats in aggregate function.
+.sumstats = function(x) c(Mean=mean(x,na.rm=T), Sd=sd(x,na.rm=T), Var=var(x,na.rm=T), Nobs=length(na.omit(x)),
+                          CV    = sd(x,na.rm=T)/mean(x,na.rm=T),
+                          se    = sd(x,na.rm=T)/sqrt(length(na.omit(x))),
+                          L95se = mean(x,na.rm=T)-1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))),
+                          U95se = mean(x,na.rm=T)+1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))))
 
 ########## Size Distribution at Density plots ##################
 
@@ -56,12 +62,6 @@ for(i in 1:length(sites)){
 }
 
 #can swtich scale_color_manual(values = cbbPalette) to scale_color_brewer() for the blues
-
-
-ggplot(data=fish_ar, aes(x = TL_mm, color=fish_ar$Year )) +
-  labs(x="TL_mm", y= 'Density', color= "Year", title= "Apalachicola River Density") +
-  stat_density(aes(group = fish_ar$Year), position="stack",geom="line", size= 1.5) + scale_y_continuous(limits = c(0,.030))
-
 
 
 
@@ -186,6 +186,7 @@ for(i in trips){
 }
 
 #Plot density over time at each locality, sites stacked atop one another for quad aggregated data
+locals = unique(quad$Locality)
 par(mfrow=c(3,1),oma=c(0,0,4,0))
 for(i in locals){
   xy          = stats[stats$Locality== i,]
@@ -244,19 +245,19 @@ for(i in trips){
 ################################################################################
 
 
-quad.treat = quad %>%  dplyr::select(Month, Year, Locality, Site, Bar, Count, Treatment) %>% 
+quad.treat = quad %>%  dplyr::select(Month, Year, Locality, Site, Bar, Substation, Count, Treatment) %>% 
   filter(Locality == "LC", Site == "O")
 
-quad.treat = aggregate(Count ~ Month + Year + Locality + Site + Bar + Treatment, data = quad.treat, sum, na.rm =T)
+quad.treat = aggregate(Count ~ Month + Year + Locality + Site + Bar + Substation +  Treatment, data = quad.treat, sum, na.rm =T)
 quad.treat$Density = quad.treat$Count / 0.25
 quad.treat$Trip = paste(quad.treat$Month, quad.treat$Year)
 
-bar = c(1,2,5,6,3,4,7,8)
+sub = c("LCO11A","LCO10B","LCO8B","LCO9A") ### "LCO11A","LCO10B","LCO8B","LCO9A" are treated sites 
 
-par(mfrow = c(2,4))
-for(i in bar){
-  d = quad.treat %>% filter(Bar == i)
-  bp = barplot(d$Density, main = paste0("LCO", i), cex.names = 1 )
+
+for(i in sub){
+  d = quad.treat %>% filter(Substation == i)
+  bp = barplot(d$Density, main = paste0( i), cex.names = 1 )
   mtext(1, at = as.vector(bp), text = d$Trip, line = 1, las = 2, cex = 0.7)
 }
 

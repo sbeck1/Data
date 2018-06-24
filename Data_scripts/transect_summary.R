@@ -15,6 +15,8 @@ library(RCurl)
 tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
 tran = read.csv(text = tranurl)
 
+tran = tran[-which(tran$Site == 1),]
+tran$Site = factor(tran$Site)
 #tran = read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
 
 ################################################################################
@@ -105,7 +107,7 @@ stats = stats %>% arrange(Trip2) %>% filter(complete.cases(.))   #removing rows 
 
 par(mfrow=c(3,1),oma=c(0,0,4,0))
 for(i in locals){
-  xy          = stats[stats$Locality== i,]
+  xy          = stats[stats$Locality == i,]
   label       = ifelse(i=='CK','Cedar Key',ifelse(i=='CR','Corrigans Reef',ifelse(i=='HB','Horseshoe Beach','Lone Cabbage Reef')))
   avg         = tapply(xy$Mean,list(xy$Trip2,xy$Site),sum)
   colnames(avg) = c('Inshore','Nearshore','Offshore')
@@ -159,21 +161,22 @@ for(i in trips){
 #
 ################################################################################
 
-tran.treat = tran %>% dplyr::select(Month, Year, Locality, Site, Bar, Cnt_Live, Treatment, TransLngth) %>% 
+tran.treat = tran %>% dplyr::select(Month, Year, Locality, Site, Bar, Substation, Cnt_Live, Treatment, TransLngth) %>% 
   filter(Locality == "LC", Site == "O")
-max_tran  = aggregate(TransLngth ~ Month + Year+ Locality+ Site+ Bar+ Treatment,data=tran.treat,max,na.action=na.pass)
-cnt_treat = aggregate(Cnt_Live~ Month + Year + Locality + Site + Bar + Treatment ,data=tran.treat,sum,na.rm=T,na.action=na.pass)         
+max_tran  = aggregate(TransLngth ~ Month + Year+ Locality+ Site+ Bar+ Substation+ Treatment,data=tran.treat,max,na.action=na.pass)
+cnt_treat = aggregate(Cnt_Live~ Month + Year + Locality + Site + Bar + Substation +Treatment ,data=tran.treat,sum,na.rm=T,na.action=na.pass)         
 cnt_treat = merge(cnt_treat,max_tran) 
 cnt_treat = cnt_treat %>% arrange(Year)
 cnt_treat$Trip = paste(cnt_treat$Month, cnt_treat$Year)
 cnt_treat$Density = cnt_treat$Cnt_Live/cnt_treat$TransLngth
 
-bar = c(1,2,5,6,3,4,7,8)
+sub = c("LCO11A","LCO10B","LCO8B","LCO9A") ### "LCO11A","LCO10B","LCO8B","LCO9A" are treated sites 
 
-par(mfrow = c(2,4))
-for(i in bar){
-  d = cnt_treat %>% filter(Bar == i)
-  bp = barplot(d$Density, main = paste0("LCO", i), cex.names = 1 )
+
+par(mfrow = c(2,2))
+for(i in sub){
+  d = cnt_treat %>% filter(Substation == i)
+  bp = barplot(d$Density, main = paste0(i), cex.names = 1 )
   mtext(1, at = as.vector(bp), text = d$Trip, line = 1, las = 2, cex = 0.7)
 }
 
