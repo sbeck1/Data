@@ -32,7 +32,7 @@ tran$Month  = factor(format(tran$Date,"%B"),levels=c(month.name),ordered=T)   #m
 tran$Year   = factor(format(tran$Date, "%Y"))   #pull out year
 tran$Month = month.abb[tran$Month]  #make month abbr.- works better in plots 
 table(tran$Month,tran$Year)         #table to samples per month per year
-table(tran$Month,tran$Locality,tran$Year)           #n samples by year, locality and site
+table(tran$Month,tran$Locality,tran$Site,tran$Year)           #n samples by year, locality and site
 
 
 mos         = levels(factor(tran$Month))  #months as factor
@@ -45,6 +45,9 @@ locals      = unique(tran$Locality)       #unique localities
 #
 ################################################################################
 #Function to compute multiple summary stats in aggregate function.
+
+#note from bp need to thinkn about this function more as not sure these
+#CI are calculated correctly given distributions of oysters
 .sumstats = function(x) c(Mean=mean(x,na.rm=T), Sd=sd(x,na.rm=T), Var=var(x,na.rm=T), Nobs=length(na.omit(x)),
                           CV    = sd(x,na.rm=T)/mean(x,na.rm=T),
                           se    = sd(x,na.rm=T)/sqrt(length(na.omit(x))),
@@ -61,7 +64,7 @@ cnt = cnt %>% arrange(Year)
 cnt$Trip = paste0(cnt$Year, "-", cnt$Month)
 
 #calculate density
-cnt$TranArea  = cnt$TransLngth*0.1524     #0.1524 is width of transect
+cnt$TranArea  = cnt$TransLngth*0.1524     #0.1524 m is width of transect
 cnt$Density   = cnt$Cnt/cnt$TranArea 
 
 ### turning trip into date
@@ -78,6 +81,10 @@ names(stats) = gsub('Density.','',names(stats))                               #r
 stats = stats %>% arrange(Trip2) %>% filter(complete.cases(.))   #removing rows that have NA's
 stats$L95se[stats$L95se < 0] = 0  #making the L95se 0 
 
+#this is a big deal to convert these lower 95 to 0, suggests
+#again need to think about how we are summarizing these data as
+#the distributions are not normal
+
 ################################################################################
 #
 #                     Plots modified from BP's transect summary 
@@ -89,7 +96,9 @@ par(mfrow=c(1,1),oma=c(0,0,0,0))
 ymax = pretty(max(stats$U95se,na.rm=T))[2]+50                                 #this gets a nice number for y-axis range to use on all plots
 for(i in trips){
   xy   = stats[stats$Trip== i,]
-  if(dim(xy)[1] > 2){   #if else statement to remove data that only has 2 sites sampled 
+  if(dim(xy)[1] > 0){   
+    #if else statement to remove data that only has 2 sites sampled 
+    #this is a big switch, bp turn to zero so summaries and plots        #calculated even if only one site such as location was sampled at a #locality
   avg = tapply(xy$Mean,list(xy$Locality,xy$Site),sum)
   low = tapply(xy$L95se,list(xy$Locality,xy$Site),sum)
   low[low<0] = 0                                                              #set minimum lower CI to 0
@@ -103,6 +112,8 @@ for(i in trips){
 
  
 #Plot density over time at each locality, sites stacked atop one another
+#this is designed to only plot when inshore-nearshore-offshore sampled
+#for an area
 
 stats = stats %>% arrange(Trip2) %>% filter(complete.cases(.))   #removing rows that have NA's
 
