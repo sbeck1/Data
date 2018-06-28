@@ -32,7 +32,8 @@ tran$Month  = factor(format(tran$Date,"%B"),levels=c(month.name),ordered=T)   #m
 tran$Year   = factor(format(tran$Date, "%Y"))   #pull out year
 tran$Month = month.abb[tran$Month]  #make month abbr.- works better in plots 
 table(tran$Month,tran$Year)         #table to samples per month per year
-table(tran$Month,tran$Locality,tran$Site,tran$Year)           #n samples by year, locality and site
+table(tran$Month,tran$Locality,tran$Site,tran$Year)           
+#n samples by year, locality and site
 
 
 mos         = levels(factor(tran$Month))  #months as factor
@@ -98,7 +99,7 @@ for(i in trips){
   xy   = stats[stats$Trip== i,]
   if(dim(xy)[1] > 0){   
     #if else statement to remove data that only has 2 sites sampled 
-    #this is a big switch, bp turn to zero so summaries and plots        #calculated even if only one site such as location was sampled at a #locality
+    #this is a big switch, bp turn to zero so summaries and plots        #calculated even if only one site such as offshore only was sampled at a #locality such as LC
   avg = tapply(xy$Mean,list(xy$Locality,xy$Site),sum)
   low = tapply(xy$L95se,list(xy$Locality,xy$Site),sum)
   low[low<0] = 0                                                              #set minimum lower CI to 0
