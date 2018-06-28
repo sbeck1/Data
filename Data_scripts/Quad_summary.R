@@ -1,5 +1,5 @@
 ############################################
-#       Transect Summary Data 
+#       Quad Summary Data 
 #       K. Zarada
 ##############################################
 
@@ -22,6 +22,16 @@ quad$Date = as.Date(quad$Date, format = '%m/%d/%y')
 #quad = quad[-12707,] #this should be updated on git now 
 
 head(quad)
+
+quad$Month  = factor(format(quad$Date,"%B"),levels=c(month.name),ordered=T)   #make month an ordered factor, makes plots go in correct order (rather than alphabetic)
+
+quad$Year   = factor(format(quad$Date, "%Y"))   #pull out year
+quad$Month = month.abb[quad$Month]  #make month abbr.- works better in plots 
+table(quad$Month,quad$Year)         #table to samples per month per year
+table(quad$Month,quad$Year,quad$Locality,quad$Site)           
+#n samples by year, locality and site
+
+
 
 ################################################################################
 #
