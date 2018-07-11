@@ -66,6 +66,9 @@ cnt$Density   = cnt$Cnt/cnt$TranArea
 ### turning trip into date
 cnt$Trip2 = as.yearmon(cnt$Trip, format = "%Y-%b")
 
+table(cnt$Month,cnt$Year)         #table to samples per month per year
+table(cnt$Month,cnt$Locality,cnt$Year)           #n samples by year, locality and site
+
 
 
 #Multiple function outputs from 'aggregate' are stored internally as a weird 
