@@ -9,15 +9,16 @@ library(ggplot2)
 library(gplots)
 library(zoo)
 library(RCurl)
+library(dplyr)
 
 #load data
 #updated this so it's loading data directly from GitHub
-tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
-tran = read.csv(text = tranurl)
+#tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
+#tran = read.csv(text = tranurl)
 
 tran = tran[-which(tran$Site == 1),]
 tran$Site = factor(tran$Site)
-#tran = read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
+tran = read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
 
 ################################################################################
 #
@@ -67,8 +68,15 @@ cnt$Density   = cnt$Cnt/cnt$TranArea
 cnt$Trip2 = as.yearmon(cnt$Trip, format = "%Y-%b")
 
 table(cnt$Month,cnt$Year)         #table to samples per month per year
-table(cnt$Month,cnt$Locality,cnt$Year)           #n samples by year, locality and site
+table(tran$Month,tran$Substation,tran$Year)           #n samples by year, locality and site
 
+aa<-unique(tran$Substation[tran$Year == 2013])
+
+class(transect$Date)
+
+ab<- transect %>%
+  group_by(Date == year(2013))
+  filter(unique(Substation))
 
 
 #Multiple function outputs from 'aggregate' are stored internally as a weird 
