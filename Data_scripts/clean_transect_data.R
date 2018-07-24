@@ -1,7 +1,7 @@
 ###### Cleaning up and merging Transect data #########
 
 #set workspace
-setwd("/Users/katiezarada/Desktop/Oysters/Analyses")
+#setwd("/Users/katiezarada/Desktop/Oysters/Analyses") don't need to set the directory since this is a project
 #load packages
 library(readxl) #to read xlsx file
 library(tidyverse)
@@ -33,7 +33,7 @@ transect.locations = rbind(loc.2012, loc.2018)
 transect.locations[which(transect.locations$Station == "LT1"),2] <- "LTI1"
 
 #changing site names to match the new names 
-name = read.csv("/Users/katiezarada/Desktop/Oysters/station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+name = read.csv("station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
 index = match(transect.locations$Station, name$Current)
 index.1 = index[!is.na(index)]
 transect.locations$Station[which(index != "NA")] = name[index.1,2] #changing name 
@@ -188,7 +188,7 @@ transect = rbind(transect, tran.2015)
 
 
 #changing LCrestore to regular site name 
-name = read.csv("/Users/katiezarada/Desktop/Oysters/station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+name = read.csv("station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
 name.1 = name[22:37,1:2]
 index = match(transect$Station, name.1$Current)
 index.1 = index[!is.na(index)]
@@ -212,7 +212,7 @@ transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO7
 # changing site names to new format
 #problem that sites prior to 2013 have same current name but different later name than post 2013 data
 
-name = read.csv("/Users/katiezarada/Desktop/Oysters/station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+name = read.csv("station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
 transect.pre13 = subset(transect, transect$Date < "2013-01-01")
 transect.post13 = subset(transect, transect$Date > "2013-01-01")
 
@@ -248,7 +248,17 @@ transect$Substation = Substation
 
 transect %>% select(Locality, Site, Bar, Station, Substation) %>% distinct()
 
-#write.csv(transect, "transect_combined.csv")
+#Noticed issues where 0s where in place of Os in the Site, and also upper and lower cas discrepancies in tran$Site
+
+#Changing the 0s to Os in the Site Column
+
+transect$Site[transect$Site == "0"] <- "O"
+
+#Making all of the letters uppercase, this might cause issues since R is case sensitive
+
+transect$Site<-toupper(transect$Site)
+
+write.csv(transect, "transect_combined.csv")
 
 
 
