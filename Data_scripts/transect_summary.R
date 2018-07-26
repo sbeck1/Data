@@ -10,11 +10,16 @@ library(ggplot2)
 library(gplots)
 library(zoo)
 library(RCurl)
+library(dplyr)
 
 #load data
 #updated this so it's loading data directly from GitHub
-tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
-tran = read.csv(text = tranurl)
+#tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
+#tran = read.csv(text = tranurl)
+
+library(readr)
+tran <- read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
+
 
 tran = tran[-which(tran$Site == 1),]
 tran$Site = factor(tran$Site)
@@ -40,6 +45,9 @@ mos         = levels(factor(tran$Month))  #months as factor
 yrs         = unique(tran$Year)           #unique years
 locals      = unique(tran$Locality)       #unique localities 
 
+
+check_tab<-filter(tran, Month=="Apr" & Year=="2013")
+
 ################################################################################
 #
 #                          Modified from BP's transect summaries 
@@ -47,7 +55,7 @@ locals      = unique(tran$Locality)       #unique localities
 ################################################################################
 #Function to compute multiple summary stats in aggregate function.
 
-#note from bp need to thinkn about this function more as not sure these
+#note from bp need to think about this function more as not sure these
 #CI are calculated correctly given distributions of oysters
 .sumstats = function(x) c(Mean=mean(x,na.rm=T), Sd=sd(x,na.rm=T), Var=var(x,na.rm=T), Nobs=length(na.omit(x)),
                           CV    = sd(x,na.rm=T)/mean(x,na.rm=T),
@@ -55,14 +63,52 @@ locals      = unique(tran$Locality)       #unique localities
                           L95se = mean(x,na.rm=T)-1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))),
                           U95se = mean(x,na.rm=T)+1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))))
 
-#get transect length per each bar sampled
-max_tran  = aggregate(TransLngth ~ Month + Year + Station + Site + Locality,data=tran,max,na.action=na.pass)
+#ok this is where I deviate from Katie
+#need to use substation in the creation of CNT not station
+#otherwise the station names are not correct and this results in using data
+#that combines several station names also need to use replicate
 
-#Get total counts per each bar sampled
-cnt = aggregate(Cnt_Live~ Month + Year + Station + Site + Locality,data=tran,sum,na.rm=T,na.action=na.pass)         
+
+#get transect length per each bar sampled
+#this is super critical, here it is getting the max by substation
+
+max_tran  = aggregate(TransLngth ~ Month + Year + Substation + Site + Locality,data=tran,max,na.action=na.pass)
+
+tran1mx<-filter(max_tran, Month=="Apr" & Year =="2013")
+
+#tran1mx and tran2mx are just checks to see if it matters which way you run
+#the aggregate function, it doesn't. This means as long as substation is in
+#the aggregate
+
+# max_tran2  = aggregate(TransLngth ~ Month + Year + Substation,data=tran,max,na.action=na.pass)
+# 
+# tran2mx<-filter(max_tran2, Month=="Apr" & Year =="2013")
+
+
+#cnt is the aggregate by transect, so it is not the individual transect segments
+
+#Get total counts per each bar sampled for each replicate
+cnt = aggregate(Cnt_Live~ Month + Year + Replicate + Substation + Site + Locality,data=tran,sum,na.rm=T,na.action=na.pass)         
 cnt = merge(cnt,max_tran) 
-cnt = cnt %>% arrange(Year)
+cnt = cnt %>% arrange(Year, Month, Substation)
 cnt$Trip = paste0(cnt$Year, "-", cnt$Month)
+
+#Get the average count per 2.5 m segment as Peter does in his #spreadsheet
+#by averaging across segments and replicates
+
+#Get mean counts per each bar sampled to check Peter's paper
+p_cnt = aggregate(Cnt_Live~ Month + Year + Substation + Site + Locality,data=tran,FUN=mean,na.rm=T,na.action=na.pass)         
+p_cnt = merge(cnt,max_tran) 
+p_cnt = cnt %>% arrange(Year, Month, Substation)
+p_cnt$Trip = paste0(cnt$Year, "-", cnt$Month)
+
+#this is just checking to see if this is the same as Peter's spreadsheet
+PF_tab1<-filter(p_cnt, Month=="Apr" & Year=="2013")
+#yes the mean counts are the same as spreadsheet
+
+
+
+
 
 #calculate density
 cnt$TranArea  = cnt$TransLngth*0.1524     #0.1524 m is width of transect
@@ -71,15 +117,18 @@ cnt$Density   = cnt$Cnt/cnt$TranArea
 ### turning trip into date
 cnt$Trip2 = as.yearmon(cnt$Trip, format = "%Y-%b")
 
+table(cnt$Month,cnt$Year)         #table to samples per month per year
+table(tran$Month,tran$Substation,tran$Year)           #n samples by year, locality and site
 
 
 #Multiple function outputs from 'aggregate' are stored internally as a weird 
 #matrix variable so have to 'flatten' it out using the do.call statement.    
 #Density ~by~ Trip + locality + site
-stats = aggregate(Density~ Trip + Trip2 + Year + Locality + Site,data=cnt,FUN=.sumstats)
+stats = aggregate(Density~ Trip + Trip2 + Year + Locality + Site + Substation,data=cnt,FUN=.sumstats)
 stats = do.call("data.frame",stats)                                    #flatten that matrix variable
 names(stats) = gsub('Density.','',names(stats))                               #remove prefix from names made by 'aggregate'
-stats = stats %>% arrange(Trip2) %>% filter(complete.cases(.))   #removing rows that have NA's
+stats = stats %>% arrange(Trip2) %>% filter(complete.cases(.))   
+#removing rows that have NA's
 stats$L95se[stats$L95se < 0] = 0  #making the L95se 0 
 
 #this is a big deal to convert these lower 95 to 0, suggests
@@ -94,7 +143,7 @@ stats$L95se[stats$L95se < 0] = 0  #making the L95se 0
 #Plot density of live oyster counts per trip by Locality 
 trips = unique(stats$Trip)
 par(mfrow=c(1,1),oma=c(0,0,0,0))
-ymax = pretty(max(stats$U95se,na.rm=T))[2]+50                                 #this gets a nice number for y-axis range to use on all plots
+ymax = pretty(max(stats$Mean,na.rm=T))[2]+250                                 #this gets a nice number for y-axis range to use on all plots
 for(i in trips){
   xy   = stats[stats$Trip== i,]
   if(dim(xy)[1] > 0){   
