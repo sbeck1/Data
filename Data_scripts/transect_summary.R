@@ -40,7 +40,6 @@ table(tran$Month,tran$Year)         #table to samples per month per year
 table(tran$Month,tran$Locality,tran$Site,tran$Year)           
 #n samples by year, locality and site
 
-
 mos         = levels(factor(tran$Month))  #months as factor
 yrs         = unique(tran$Year)           #unique years
 locals      = unique(tran$Locality)       #unique localities 
@@ -63,11 +62,38 @@ check_tab<-filter(tran, Month=="Apr" & Year=="2013")
                           L95se = mean(x,na.rm=T)-1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))),
                           U95se = mean(x,na.rm=T)+1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))))
 
+######################################################
+#to add to the summary function, or make new function
+#############################################################
+#need to update this function or add another function to do the bootstrap CI to have the correct
+#lower CI
+# bstrap <- c()
+# for (i in 1:1000){
+#   bstrap <- c(bstrap, mean(sample(cnt$Cnt_Live,(length(cnt$Cnt_Live)),replace=T)))}
+# 
+# View(bstrap) #there are your 1000 boot strap samples of cnt
+# hist(bstrap) #ok what shape are these data now?
+# 
+# mean(bstrap) #here is your mean of the bootstrap
+# 
+# #lower bound
+# quantile(bstrap,.025)
+# #upper bound
+# quantile(bstrap,.975)
+##############################################################
+##############################################################
+#End function
+##############################################################
+
+#############
+##Katie read this
+#############
+#Moving into by reef type summaries (by reef element)
+###########
+
 #ok this is where I deviate from Katie
 #need to use substation in the creation of CNT not station
-#otherwise the station names are not correct and this results in using data
-#that combines several station names also need to use replicate
-
+#otherwise data from several substations (reef elements) are combined
 
 #get transect length per each bar sampled
 #this is super critical, here it is getting the max by substation
@@ -78,14 +104,14 @@ tran1mx<-filter(max_tran, Month=="Apr" & Year =="2013")
 
 #tran1mx and tran2mx are just checks to see if it matters which way you run
 #the aggregate function, it doesn't. This means as long as substation is in
-#the aggregate
+#the aggregate it is aggregating to lowest level
 
 # max_tran2  = aggregate(TransLngth ~ Month + Year + Substation,data=tran,max,na.action=na.pass)
 # 
 # tran2mx<-filter(max_tran2, Month=="Apr" & Year =="2013")
 
 
-#cnt is the aggregate by transect, so it is not the individual transect segments
+#cnt is the aggregate by transect, so it is not the individual transect segments this is an important aggregation
 
 #Get total counts per each bar sampled for each replicate
 cnt = aggregate(Cnt_Live~ Month + Year + Replicate + Substation + Site + Locality,data=tran,sum,na.rm=T,na.action=na.pass)         
@@ -106,10 +132,6 @@ p_cnt$Trip = paste0(cnt$Year, "-", cnt$Month)
 PF_tab1<-filter(p_cnt, Month=="Apr" & Year=="2013")
 #yes the mean counts are the same as spreadsheet
 
-
-
-
-
 #calculate density
 cnt$TranArea  = cnt$TransLngth*0.1524     #0.1524 m is width of transect
 cnt$Density   = cnt$Cnt/cnt$TranArea 
@@ -117,14 +139,32 @@ cnt$Density   = cnt$Cnt/cnt$TranArea
 ### turning trip into date
 cnt$Trip2 = as.yearmon(cnt$Trip, format = "%Y-%b")
 
-table(cnt$Month,cnt$Year)         #table to samples per month per year
-table(tran$Month,tran$Substation,tran$Year)           #n samples by year, locality and site
+table(cnt$Month,cnt$Year)                             
+#table to samples per month per year
+table(cnt$Month,cnt$Substation,cnt$Year)           
+#n samples by year, locality and site
+
+#just take a look at a few years
+
+cnt_2014<-filter(cnt, Year == 2014)
+table(cnt_2014$Month,cnt_2014$Substation) 
+
+cnt_2015<-filter(cnt, Year == 2015)
+table(cnt_2015$Month,cnt_2015$Substation) 
+
+#no samples in 2016
+
+cnt_2017<-filter(cnt, Year == 2017)
+table(cnt_2017$Month,cnt_2017$Substation) 
 
 
 #Multiple function outputs from 'aggregate' are stored internally as a weird 
 #matrix variable so have to 'flatten' it out using the do.call statement.    
 #Density ~by~ Trip + locality + site
-stats = aggregate(Density~ Trip + Trip2 + Year + Locality + Site + Substation,data=cnt,FUN=.sumstats)
+
+#below aggregate is important. If Substation is included then CI not estimated for many substations
+#because a lot of the substations have only had one sampling event
+stats = aggregate(Density~ Trip + Trip2 + Year + Locality + Site+Substation,data=cnt_2017,FUN=.sumstats)
 stats = do.call("data.frame",stats)                                    #flatten that matrix variable
 names(stats) = gsub('Density.','',names(stats))                               #remove prefix from names made by 'aggregate'
 stats = stats %>% arrange(Trip2) %>% filter(complete.cases(.))   
@@ -134,6 +174,10 @@ stats$L95se[stats$L95se < 0] = 0  #making the L95se 0
 #this is a big deal to convert these lower 95 to 0, suggests
 #again need to think about how we are summarizing these data as
 #the distributions are not normal
+
+#####
+##ok start here and make some box plots of density by substation
+#####
 
 ################################################################################
 #
