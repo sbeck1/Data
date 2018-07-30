@@ -11,6 +11,7 @@ library(gplots)
 library(zoo)
 library(RCurl)
 library(dplyr)
+library(magrittr)
 
 #load data
 #updated this so it's loading data directly from GitHub
@@ -62,8 +63,10 @@ check_tab<-filter(tran, Month=="Apr" & Year=="2013")
                           L95se = mean(x,na.rm=T)-1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))),
                           U95se = mean(x,na.rm=T)+1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))))
 
+#############
+##Katie read this
 ######################################################
-#to add to the summary function, or make new function
+#see below to add to the summary function, or make new function
 #############################################################
 #need to update this function or add another function to do the bootstrap CI to have the correct
 #lower CI
@@ -119,8 +122,12 @@ cnt = merge(cnt,max_tran)
 cnt = cnt %>% arrange(Year, Month, Substation)
 cnt$Trip = paste0(cnt$Year, "-", cnt$Month)
 
-#Get the average count per 2.5 m segment as Peter does in his #spreadsheet
+#ok now just checking to see how Peter did some of his calculations
+#Get the average count per 2.5 m segment as Peter does in his 
+#spreadsheet
 #by averaging across segments and replicates
+#I don't think this is the way to go, I think need to sum across the
+#segments for each transect and divide by length of transect for density
 
 #Get mean counts per each bar sampled to check Peter's paper
 p_cnt = aggregate(Cnt_Live~ Month + Year + Substation + Site + Locality,data=tran,FUN=mean,na.rm=T,na.action=na.pass)         
@@ -164,7 +171,7 @@ table(cnt_2017$Month,cnt_2017$Substation)
 
 #below aggregate is important. If Substation is included then CI not estimated for many substations
 #because a lot of the substations have only had one sampling event
-stats = aggregate(Density~ Trip + Trip2 + Year + Locality + Site+Substation,data=cnt_2017,FUN=.sumstats)
+stats = aggregate(Density~ Trip + Trip2 + Year + Locality + Site+Substation,data=cnt,FUN=.sumstats)
 stats = do.call("data.frame",stats)                                    #flatten that matrix variable
 names(stats) = gsub('Density.','',names(stats))                               #remove prefix from names made by 'aggregate'
 stats = stats %>% arrange(Trip2) %>% filter(complete.cases(.))   
@@ -174,10 +181,28 @@ stats$L95se[stats$L95se < 0] = 0  #making the L95se 0
 #this is a big deal to convert these lower 95 to 0, suggests
 #again need to think about how we are summarizing these data as
 #the distributions are not normal
-
-#####
+################################################################
+################################################################
 ##ok start here and make some box plots of density by substation
 #####
+ggplot(cnt, aes(x=Year,y=Density)) + geom_boxplot() +
+  facet_grid(Locality ~ .)
+
+# ggplot(cnt, aes(x=Year,y=Density)) + geom_boxplot() +
+#   facet_grid(. ~ Locality )
+
+# Filter to just a few months I'm interested in
+cnt_LCO<-filter(cnt, Locality == "LC")
+cnt_LCO_winter <- cnt_LCO[cnt_LCO$Month %in% c("Oct","Nov","Dec","Jan"),]
+
+# cnt_LCO_winter %>%
+#   filter(cnt$Locality == "LC")%>%
+#   filter(cnt$Month == "Oct","Nov","Dec","Jan")
+
+ggplot(cnt_LCO_winter, aes(x=Year,y=Density)) + geom_boxplot() +
+  facet_grid(Locality ~ .)
+################################################################
+################################################################
 
 ################################################################################
 #
@@ -278,6 +303,18 @@ cnt_treat$Density = cnt_treat$Cnt_Live/cnt_treat$TransLngth
 
 sub = c("LCO11A","LCO10B","LCO8B","LCO9A") ### "LCO11A","LCO10B","LCO8B","LCO9A" are treated sites 
 
+#######################################
+#######################################
+# Filter to just a few months I'm interested in
+cnt_treat_winter <- cnt_treat[cnt_treat$Month %in% c("Oct","Nov","Dec","Jan"),]
+
+#need to be careful because epoch 2 was mostly sampled summer
+#so winter filters too much
+
+ggplot(cnt_treat, aes(x=Year,y=Density)) + geom_boxplot() +
+  facet_grid(Treatment ~ .)
+#######################################
+#######################################
 
 par(mfrow = c(2,2))
 for(i in sub){
