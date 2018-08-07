@@ -14,8 +14,11 @@ library(RCurl)
 library(dplyr)
 library(magrittr)
 
-#load data
-#updated this so it's loading data directly from GitHub
+############
+#Load the data
+############
+
+#Updated this so it's loading data directly from GitHub
 #tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
 #tran = read.csv(text = tranurl)
 
@@ -26,80 +29,97 @@ tran <- read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
 tran = tran[-which(tran$Site == 1),]
 tran$Site = factor(tran$Site)
 
+############
+#Manipulate the dates within the data
+############
 
-#tran = read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
+#Deal with date-time variables
+tran$Date   = as.Date(tran$Date, format ="%Y-%m-%d")  
+#convert date from factor to date
 
-################################################################################
-#
-#                
-#
-################################################################################
+tran$Month  = factor(format(tran$Date,"%B"),levels=c(month.name),ordered=T) #make month an ordered factor, makes plots go in correct order (rather than alphabetic)
 
-#deal with date-time variables
-tran$Date   = as.Date(tran$Date, format ="%Y-%m-%d")  #convert date from factor to date
-tran$Month  = factor(format(tran$Date,"%B"),levels=c(month.name),ordered=T)   
-#make month an ordered factor, makes plots go in correct order (rather than alphabetic)
-tran$Year   = factor(format(tran$Date, "%Y"))   #pull out year
+tran$Year   = factor(format(tran$Date, "%Y"))   
+#pull out year
 tran$Month = month.abb[tran$Month]  
 #make month abbr.- works better in plots 
 
-####################
-###This is important
-####################
-
-#the below is designed to get rid of TransLngth that aren't entered
-#I think this is only July 2011 for CK, datasheets are there, but data 
-#not entered
-tran_y <- filter(tran,TransLngth !="NA")
-
-#making tran and tran_y the same, lazy way
-tran=tran_y
-
-
-table(tran$Month,tran$Year)         
-#table to samples per month per year
-#be careful as this is counting samples by month even if there are
-#NA in the sample because the data aren't entered such as July 2011 CK
-
-table(tran$Month,tran$Locality,tran$Site,tran$Year)           
-#n samples by year, locality and site
-#be careful as this is counting samples by month even if there are
-#NA in the sample because the data aren't entered such as July 2011 CK
-
+#############
+#Create new variables related to unique months, years, and "locals" for #"localities".  These are used in the stat summary function and graphing #loops
+#############
 mos         = levels(factor(tran$Month))  #months as factor
 yrs         = unique(tran$Year)           #unique years
 locals      = unique(tran$Locality)       #unique localities 
 
+####################
+###This is manipulation to the data that is a temporary
+###solution to a problem with the dataset
+####################
+
+#Below I filter everything not equal (!=) to TransLngth =NA
+#This is to remove the July 2011 CK data that are not entered but we have
+#datasheets
+
+tran_y <- filter(tran,TransLngth !="NA")
+
+#Making tran and tran_y the same, lazy way
+#This is so I don't have to change all the code I've already written to
+#tran_y.  Should probably have done this as mutate
+
+tran=tran_y
+
+############
+#Make data summary tables
+############
+
+table(tran$Month,tran$Year)         
+#table to samples (counts in a segment) per month per year
+#these numbers are large because these are the number of transect "segments
+#that are counted
+
+table(tran$Month,tran$Locality,tran$Site,tran$Year)           
+#n samples by year, locality and site
 
 check_tab<-filter(tran, Month=="Jul" & Year=="2011" & Locality =="CK")
-#ok Jul 2011 CK is showing as samples, but no observations
-#checked data sheets data are not entered
-#now jul 2011 CK is not showing because I filtered it out earlier
-#creating tran_y
+#Jul 2011 CK is not showing because I filtered it out earlier
 
-################################################################################
-#
-#                          Modified from BP's transect summaries 
-#
-################################################################################
-#Function to compute multiple summary stats in aggregate function.
+############
+#Define function to calculate summary stats
+############
 
-#note from bp need to think about this function more as not sure these
+
+###########################################################################
+#
+# Modified from BP's transect summaries 
+#
+##########################################################################
+
+#Note from bp need to think about this function more as not sure these
 #CI are calculated correctly given distributions of oysters
-.sumstats = function(x) c(Mean=mean(x,na.rm=T), Sd=sd(x,na.rm=T), Var=var(x,na.rm=T), Nobs=length(na.omit(x)),
-                      CV    = sd(x,na.rm=T)/mean(x,na.rm=T),
-                      se    = sd(x,na.rm=T)/sqrt(length(na.omit(x))),
-                      L95se = mean(x,na.rm=T)-1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))),
-                      U95se = mean(x,na.rm=T)+1.96*(sd(x,na.rm=T)/sqrt(length(na.omit(x)))))
+
+#Dan Maxwell says "never use a dot at the beginning of a funtion#
+
+.sumstats = function(x) 
+  c(Mean=mean(x,na.rm=T), 
+    Sd=sd(x,na.rm=T), 
+    Var=var(x,na.rm=T), 
+    Nobs=length(na.omit(x)),
+    CV    = sd(x,na.rm=T)/mean(x,na.rm=T),
+    se    = sd(x,na.rm=T)/sqrt(length(na.omit(x))),
+    L95se = mean(x,na.rm=T)-1.96*(sd(x,na.rm=T)/
+                                    sqrt(length(na.omit(x)))),
+    U95se = mean(x,na.rm=T)+1.96*(sd(x,na.rm=T)/
+                                    sqrt(length(na.omit(x)))))
 
 #############
 ##Katie read this
 ######################################################
 #see below to add to the summary function, or make new function
 #############################################################
-#need to update this function or add another function to do the bootstrap CI to have the correct, note right now this is calling cnt as an example which hasn't been built 
-#yet at this point in the code
-#lower CI
+
+#Below is a function that is just parked here that can be used to do #bootstrap CI using quantile method on the oyster count data
+#https://en.wikipedia.org/wiki/Bootstrapping_(statistics)
+
 # bstrap <- c()
 # for (i in 1:1000){
 #   bstrap <- c(bstrap, mean(sample(cnt$Cnt_Live,(length(cnt$Cnt_Live)),replace=T)))}
@@ -119,32 +139,35 @@ check_tab<-filter(tran, Month=="Jul" & Year=="2011" & Locality =="CK")
 ##############################################################
 
 #############
-##Katie read this
-#############
-#Moving into by reef type summaries (by reef element)
+#Moving into by reef element summaries
 ###########
 
-#ok this is where I deviate from Katie
-#need to use substation in the creation of CNT not station
+#OK this is where I deviate from Katie
+#Need to use substation in the creation of CNT not station
 #otherwise data from several substations (reef elements) are combined
 
-#get transect length per each bar sampled
+#Remember Station and Substation are different for the LCO sites that 
+#reprent epoch 3.  Only Substation has the "A" and "B" designations
+
+#Get transect length per each reef element sampled
 #this is super critical, here it is getting the max by substation
 
 max_tran  = aggregate(TransLngth ~ Month + Year + Substation + Site + Locality,data=tran,max,na.action=na.pass)
 
-#tran1mx and tran2mx are just checks to see if it matters which way you run
-#the aggregate function, it doesn't. This means as long as substation is in
-#the aggregate it is aggregating to lowest level
+# tran1mx and tran2mx are just checks to see if it 
+# matters which way you run the aggregate function, it doesn't. 
+# This means as long as substation is in
+# the aggregate it is aggregating to lowest level
 
-#tran1mx<-filter(max_tran, Month=="Apr" & Year =="2013")
-
+# tran1mx<-filter(max_tran, Month=="Apr" & Year =="2013")
 # max_tran2  = aggregate(TransLngth ~ Month + Year + Substation,data=tran,max,na.action=na.pass)
-# 
+#  
 # tran2mx<-filter(max_tran2, Month=="Apr" & Year =="2013")
 
-
-#cnt is the aggregate by transect, so it is not the individual transect segments this is an important aggregation
+#############
+#Aggregate by transect, not individual segments in transect.
+#This is an important aggregation
+###########
 
 #Get total counts per each bar sampled for each replicate
 cnt = aggregate(Cnt_Live~ Month + Year + Replicate + Substation + Site + Locality,data=tran,sum,na.rm=T,na.action=na.pass)         
@@ -152,43 +175,52 @@ cnt = merge(cnt,max_tran)
 cnt = cnt %>% arrange(Year, Month, Substation)
 cnt$Trip = paste0(cnt$Year, "-", cnt$Month)
 
-#this is a weird sample, the data are missing, data sheets are present
-check_tab<-filter(cnt, Month=="Jul" & Year=="2011" & Locality =="CK")
+###########################################################
 
-
-#ok now just checking to see how Peter did some of his calculations
+#OK now just checking to see how Peter did some of his calculations
+#that were used in the Frederick et al. paper.
 #Get the average count per 2.5 m segment as Peter does in his 
 #spreadsheet by averaging across segments and replicates
 #I don't think this is the way to go, I think need to sum across the
 #segments for each transect and divide by length of transect for density
 #this is something to think more about
 
-#Get mean counts per each bar sampled to check Peter's paper
-p_cnt = aggregate(Cnt_Live~ Month + Year + Substation + Site + Locality,data=tran,FUN=mean,na.rm=T,na.action=na.pass)         
-p_cnt = merge(cnt,max_tran) 
-p_cnt = cnt %>% arrange(Year, Month, Substation)
-p_cnt$Trip = paste0(cnt$Year, "-", cnt$Month)
+# #Get mean counts per each bar sampled to check Peter's paper
+# p_cnt = aggregate(Cnt_Live~ Month + Year + Substation + Site + Locality,data=tran,FUN=mean,na.rm=T,na.action=na.pass)         
+# p_cnt = merge(cnt,max_tran) 
+# p_cnt = cnt %>% arrange(Year, Month, Substation)
+# p_cnt$Trip = paste0(cnt$Year, "-", cnt$Month)
+# 
+# #this is just checking to see if this is the same as Peter's spreadsheet
+# PF_tab1<-filter(p_cnt, Month=="Apr" & Year=="2013")
+# #Yes the mean counts are the same as spreadsheet and same as paper. Good.
+#############################################################
 
-#this is just checking to see if this is the same as Peter's spreadsheet
-PF_tab1<-filter(p_cnt, Month=="Apr" & Year=="2013")
-#yes the mean counts are the same as spreadsheet
+#####################
+##Calculating Density
+#####################
 
-#calculate density
-cnt$TranArea  = cnt$TransLngth*0.1524     #0.1524 m is width of transect
+cnt$TranArea  = cnt$TransLngth*0.1524     
+#0.1524 m is width of transect.  Transect measured as 6 inches in field.
+
 cnt$Density   = cnt$Cnt/cnt$TranArea 
 
-### turning trip into date
 cnt$Trip2 = as.yearmon(cnt$Trip, format = "%Y-%b")
+### turning trip into date
+
+
+#####################
+##Some tables tell us the number of transects (not segments)
+#####################
 
 table(cnt$Month,cnt$Year) 
-
 table(cnt$Trip2,cnt$Year)
 
 month_yr<- cnt %>%
   group_by(Year, Month) %>%
   summarize(n())
+#table samples per month per year
 
-#table to samples per month per year
 table(cnt$Month,cnt$Substation,cnt$Year)           
 #n samples by year, locality and site
 
@@ -205,43 +237,54 @@ table(cnt_2015$Month,cnt_2015$Substation)
 cnt_2017<-filter(cnt, Year == 2017)
 table(cnt_2017$Month,cnt_2017$Substation) 
 
+#####################
+##Begin summarizing the density on each element using stats function written above
+#####################
 
-#Multiple function outputs from 'aggregate' are stored internally as a weird 
-#matrix variable so have to 'flatten' it out using the do.call statement.    
+
+#Multiple function outputs from 'aggregate' are stored internally as a weird #matrix variable so have to 'flatten' it out using the do.call statement.    
 #Density ~by~ Trip + locality + site
 
-#below aggregate is important. If Substation is included then CI not estimated for many substations
-#because a lot of the substations have only had one sampling event
-stats = aggregate(Density~ Trip + Trip2 + Year + Locality + Site+Substation,data=cnt,FUN=.sumstats)
-stats = do.call("data.frame",stats)                                    #flatten that matrix variable
-names(stats) = gsub('Density.','',names(stats))                               #remove prefix from names made by 'aggregate'
+# Below aggregate is important. If Substation is included then CI not estimated for many substations because a lot of the substations have only had one sampling event
+
+stats = aggregate(Density~ Trip + Trip2 + Year + Locality + Site + Substation,data=cnt,FUN=.sumstats)
+
+stats = do.call("data.frame",stats)                   #flatten that matrix variable
+
+names(stats) = gsub('Density.','',names(stats))        #remove prefix from names made by 'aggregate'
+
 stats = stats %>% arrange(Trip2) %>% filter(complete.cases(.))   
 #removing rows that have NA's
-stats$L95se[stats$L95se < 0] = 0  #making the L95se 0 
 
-#this is a big deal to convert these lower 95 to 0, suggests
-#again need to think about how we are summarizing these data as
-#the distributions are not normal
-################################################################
-################################################################
-##ok start here and make some box plots of density by substation
-#####
-ggplot(cnt, aes(x=Year,y=Density)) + geom_boxplot() +
-  facet_grid(Locality ~ .)
+stats$L95se[stats$L95se < 0] = 0  
+#making the L95se 0 
 
-# Filter to just a few months I'm interested in
-cnt_LCO<-filter(cnt, Locality == "LC")
-cnt_LCO_winter <- cnt_LCO[cnt_LCO$Month %in% c("Oct","Nov","Dec","Jan"),]
-cnt_LCO_summer <- cnt_LCO[cnt_LCO$Month %in% c("Apr","May","Jun","Jul"),]
 
-# cnt_LCO_winter %>%
-#   filter(cnt$Locality == "LC")%>%
-#   filter(cnt$Month == "Oct","Nov","Dec","Jan")
+#I don't like this, a big deal to convert these lower 95 to 0, suggests again need to think about how we are summarizing these data as the distributions are not normal
+#######################################################
 
-ggplot(cnt_LCO_winter, aes(x=Year,y=Density)) + geom_boxplot() +
-  facet_grid(Locality ~ .)
-ggplot(cnt_LCO_summer, aes(x=Year,y=Density)) + geom_boxplot() +
-  facet_grid(Locality ~ .)
+
+#####################
+##Could add new variable "season" this way
+#Need to define seasons better, at some point revisit what Caleb did for CK
+#####################
+
+# cnt%>%mutate(Season= 
+#       ifelse(Month== c("Oct","Nov","Dec","Jan"), "Winter", "Summer"))
+#this works, but I forget why mutate creates only a "temporary" new #variable
+             
+cnt$Season<-ifelse(cnt$Month==
+        c("Oct","Nov","Dec","Jan"), "Winter", "Summer")
+
+ggplot(data=cnt) +
+  labs(title="Transects only: Seasonal density by locality and year. Summer = Apr-Aug & Winter = Oct-Jan")+
+  geom_boxplot(
+  mapping = aes(
+      x=Year,
+      y=Density))+
+  facet_grid(Locality ~ Season)
+
+
 ################################################################
 ################################################################
 
@@ -250,15 +293,16 @@ ggplot(cnt_LCO_summer, aes(x=Year,y=Density)) + geom_boxplot() +
 #                     Plots modified from BP's transect summary 
 #
 ################################################################################
+
 #Plot density of live oyster counts per trip by Locality 
 trips = unique(stats$Trip)
 par(mfrow=c(1,1),oma=c(0,0,0,0))
-ymax = pretty(max(stats$Mean,na.rm=T))[2]+250                                 #this gets a nice number for y-axis range to use on all plots
+ymax = pretty(max(stats$Mean,na.rm=T))[2]+500                           #this gets a nice number for y-axis range to use on all plots
 for(i in trips){
   xy   = stats[stats$Trip== i,]
-  if(dim(xy)[1] > 0){   
-    #if else statement to remove data that only has 2 sites sampled 
-    #this is a big switch, bp turn to zero so summaries and plots        #calculated even if only one site such as offshore only was sampled at a #locality such as LC
+  if(dim(xy)[1] > 1){   
+#if else statement to remove data that only has 2 sites sampled 
+#this is a big switch, bp turn to zero so summaries and plots       #calculated even if only one site such as offshore only was sampled at a #locality such as LC
   avg = tapply(xy$Mean,list(xy$Locality,xy$Site),sum)
   low = tapply(xy$L95se,list(xy$Locality,xy$Site),sum)
   low[low<0] = 0                                                              #set minimum lower CI to 0
