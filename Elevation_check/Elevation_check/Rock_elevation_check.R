@@ -8,11 +8,18 @@
 
 library("tidyverse")
 library("MASS")
+library("lubridate")
 
 dat<- read_csv("20180731_surv_el_trans.csv")
-View(dat) 
-#if you look through dat you see there is a "GS DIRT" listed in transect for row
+
+dat$Date=mdy("7/31/2018") #need to add the sampling date
+
+dat2<-subset(dat, select =c("Elev", "Transect", "Element_id", "Date"))
+#just the columns I want
+
+#if you look through dat2 you see there is a "GS DIRT" listed in transect for row
 #217, we don't want to use the "dirt shot" survey points
+#for the dirt points use Tom's original data, but that doesn't have the reef elements listed in the data file.
 
 #Two ways to get rid of this row
 #Just work with rows 1-216 to not use the last row which is the dirt shot
@@ -22,21 +29,71 @@ View(dat)
 #or dplyr way using filter.  Note the != means "is not equal to" so this is #saying to convert dat to a dataframe that only has Transect variables that are
 #not equal to GS DIRT
 
-dat<-filter(dat,dat$Transect!=c("GS DIRT"))
+dat2<-filter(dat2,dat2$Transect!=c("GS DIRT"))
 
-View(dat)
-# ok so that got rid of the GS DIRT, 
-#so I'm only working with rock elevation #measurements
-
-#but transect is still a character
-str(dat$Transect)
-
-#So I convert it to a number just in case I need it as a number
-dat$Transect<-as.numeric(dat$Transect)
+#create new dataframe dat2 by mutating dat to create new elment id
+#name 11c for the most southern 3 transects of 11b.  These transects
+#are the new rock size transects. the notation is 7 or 8 or 9
+dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 6, "11c", Element_id))
 
 #ok this is creating the new Element_id_2 as a factor for use in plotting below
-dat$Element_id_2<-factor(dat$Element_id, levels =c ("5", "7", "8a", "9b", "10b", "11b"))
+dat3$Element_id_3<-factor(dat3$Element_id_2, 
+          levels =c ("5", "7", "8a", "9b", "10b", "11b", "11c"))
 
+###Tables
+#just do some summarizing using pipes for fun and practice.  Remember %>% should be thought of as "then"
+
+#simple summary of points by Element_id and Transect
+n_element_trans<- dat3 %>%
+  group_by(Element_id_2, Transect) %>%
+  summarize(n())
+
+reefs <-  dat3 %>%
+  group_by(Element_id_3) %>%
+  summarize(
+    count=n(),
+    mean_elev=mean(Elev),na.rm=TRUE,
+    max_elev=max(Elev))
+names(reefs) <- c("Reef", "Count_rocks", "Mean_elev",
+                  "Max_elev")
+
+#be careful here as 11c has none over so it only returns 6 reefs, not 7
+over_spec <-  dat3 %>%
+  group_by(Element_id_3) %>%
+  filter(Elev > -1.2) %>%
+  summarize(
+    count_over=n())
+#the above returns 6 reefs that meet condition
+
+num_rocks <-  dat3 %>%
+  group_by(Element_id_3) %>%
+    summarize(
+    num_rocks=n())
+#this returns all 7 reefs 
+
+#so you can look at over_spec and num_rock and get the % that are over by hand
+
+
+#how many overall are outside of the bounds
+total_num<-length(dat3$Elev)
+over<-sum(ifelse(dat3$Elev>-1.2,1,0))
+under<-sum(ifelse(dat3$Elev<-1.95,1,0))
+
+
+# #this was almost working
+# x<-dat3 %>% 
+#   group_by(Element_id_3) %>%
+#   filter(Elev > -1.2) %>%
+#   summarize(
+#     count_over=n())
+# str(x)
+# 
+# x_spread<-x %>% 
+#   spread(key=Element_id_3,value=count_over)
+# 
+# 
+# x %>% 
+#   spread(Element_id_3,count_over,fill=0)
 
 # #################################################################
 # ##What are we trying to do?#######
@@ -79,10 +136,10 @@ windows(record=T)
 #in the code below the first line is defining the data we want to plot
 #Elev, then we give the graph labels, then we define the bin size in line 3 and then we define the x and y limits.  note one part of the graph per line
 
-p1<-ggplot(data=dat) +
+p1<-ggplot(data=dat3) +
   aes(Elev) + 
   #super critical to just call Elev here and not dat$Elev or it goofs up facet_wrap
-  labs(x="Elev", y="Frequency", title="Elevation of rock top surface") +
+  labs(x="Elev", y="Frequency", title="Elevation of rock top surface elements 5-11b") +
   geom_histogram(breaks=seq(-2.5, 0.5, by=0.01)) +
   xlim(c(-2.5,0.5)) +
   ylim(c(0,10))
@@ -111,17 +168,12 @@ head(ggplot_build(p1)$data[[1]], 10)
 
 #ok adding Element_id which is a character
 p2<-p1+
-  facet_wrap(~Element_id, nrow=6) +
-  labs(title = "Element_id")
+  facet_wrap(~Element_id_3, nrow=7) +
+  labs(title = "Elevation of rock top surface by reef element")
 
 p2
 
-#now try with Element_id_2 which is a factor
-p2.1<-p1+
-  facet_wrap(~Element_id_2, nrow=6) +
-  labs(title = "Element_id_2") +
 
-p2.1
 
 ##OK so the bin size, axis, and everything are the same as p2 and p2.1
 ##but the difference is wraping as Element_id (a character) or Element_id_2 (a factor)
@@ -130,13 +182,13 @@ p2.1
 #ok just adding some vertical lines to mark the elevation ranges
 
 p3<-p1+
-  labs(title = "All reef elements")+
+  labs(title = "Elevation of rock top surface by reef element")+
   geom_vline(xintercept = -1.2, color = "black", size=1, linetype = 2) +
   geom_vline(xintercept = -1.95, color = "black", size=1, linetype = 2)
 
 p3
 
-p4<-p2.1+
+p4<-p2+
   labs(title = "Frequency histogram of reef elevation by reef element")+
   geom_vline(xintercept = -1.2, color = "black", size=1, linetype = 2) +
   geom_vline(xintercept = -1.95, color = "black", size=1, linetype = 2)
@@ -146,32 +198,20 @@ p4
 #now let's use facet_grid instead. this is useful for rows~columns, but we only want rows so we use Element_id~. as we don't have a column
 
 p3.1<-p1+
-  facet_grid(Element_id_2~.) +
-  labs(title = "Element_id_2") +
+  facet_grid(Element_id_3~.) +
+  labs(title = "Frequency histogram of reef elevation by reef element") +
   geom_vline(xintercept = -1.2, color = "black", size=1, linetype = 2) +
   geom_vline(xintercept = -1.95, color = "black", size=1, linetype = 2)
 
 p3.1
 
 
-#just do some summarizing using pipes for fun and practice.  Remember %>% should be thought of as "then"
-
-reefs <-  dat %>%
-          group_by(Element_id) %>%
-          summarize(
-            count=n(),
-            mean_elev=mean(Elev),na.rm=TRUE,
-            max_elev=max(Elev))
-names(reefs) <- c("Reef", "Count_rocks", "Mean_elev",
-                  "Max_elev")
-
-
 #some boxplots of elevation
-p5<-ggplot(data=dat) +
+p5<-ggplot(data=dat3) +
           labs(title="Elevation of rock top surface") + 
           geom_boxplot(
           mapping = aes(
-            x=Element_id_2,
+            x=Element_id_3,
             y=Elev))+
   geom_hline(yintercept = -1.2, color = "black", size=1, linetype = 2) +
   geom_hline(yintercept = -1.95, color = "black", size=1, linetype = 2)
@@ -180,13 +220,16 @@ p5
 
 #this is kind of neat, now put in order by mean elevation
 
-p6<-ggplot(data=dat) +
+p6<-ggplot(data=dat3) +
       labs(title="Reef element elevation in order of mean elevation") +
       geom_boxplot(
       mapping = aes(
-        x=reorder(Element_id, Elev, FUN=mean),
-        y=Elev)
-      )
+        x=reorder(Element_id_3, Elev, FUN=mean),
+        y=Elev))+
+        geom_hline(yintercept = -1.2, color = "black", 
+                   size=1, linetype = 2) +
+        geom_hline(yintercept = -1.95, color = "black", 
+                   size=1, linetype = 2)
 p6
    
 # # # add counts of observations DIDN"T WORK  
@@ -200,21 +243,21 @@ p6
 #  p7
 
  #violin plot so we can better see distribution of data
- p8<-ggplot(data=dat) +
+ p8<-ggplot(data=dat3) +
    labs(title="Reef element elevation from north to south") +
    geom_violin(
      mapping = aes(
-       x=Element_id_2,
+       x=Element_id_3,
        y=Elev)
    )
  p8
  
 #now scale the violin plot width based on sample size, more samples = fatter violin
- p9.1<-ggplot(data=dat) +
+ p9.1<-ggplot(data=dat3) +
    labs(title="Reef element elevation from north to south") +
    geom_violin(
      mapping = aes(
-       x=Element_id_2,
+       x=Element_id_3,
        y=Elev),
      scale = "count"
    )
@@ -229,9 +272,9 @@ p6
 
 cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
-p10<-ggplot(data=dat)+ 
+p10<-ggplot(data=dat3)+ 
   aes(x = Elev, 
-      color=Element_id_2) +
+      color=Element_id_3) +
       labs(x="Elevation", 
            y= 'Probaility Density', 
            color= "Element_id", 
@@ -239,11 +282,14 @@ p10<-ggplot(data=dat)+
   scale_colour_manual(values=cbbPalette) +
   geom_vline(xintercept = -1.2, color = "black", size=1,linetype = 2) +
   geom_vline(xintercept = -1.95, color = "black", size=1,linetype = 2) +
-  stat_density(aes(group = Element_id_2), position="stack",geom="line", size= 1.5)
+  stat_density(aes(group = Element_id_3), position="stack",geom="line", size= 1.5)
 
 p10
 
 ########
+
+#Not working
+
 ##need to calculate the number of observations greater than
 ##the minimum elevation
 
@@ -253,30 +299,30 @@ surveys_sml <- surveys %>%
   filter(weight < 5) %>%
   select(species_id, sex, weight)
 
-Over <- dat %>%
+Over <- dat3 %>%
   filter(Elev <- 1.95)
 
 table(elev_overtran$Month,tran$Locality,tran$Site,tran$Year)           
 #n samples by year, locality and site
 
-table(elev_over$Elev, elev_over$Element_id_2, data=elev_over)
+table(elev_over$Elev, elev_over$Element_id_3, data=elev_over)
   
 
 #%>%
 #  mutate(PERCENT = prop.table(n))
 
 max.elev =-1.95
-dat %>%
-  group_by(Element_id_2) %>%
+dat3 %>%
+  group_by(Element_id_3) %>%
   mutate(n=n()) %>%
-  #group_by(Element_id_2) %>%
+  #group_by(Element_id_3) %>%
   filter(n() > max.elev) %>% select(-n)
 
 
 
 
 ####
-xy<-density(dat$Elev, na.rm=T)
+xy<-density(dat3$Elev, na.rm=T)
 View(xy)
 
 #this will give you the elevations
