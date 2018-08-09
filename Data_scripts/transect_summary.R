@@ -26,7 +26,7 @@ library(readr)
 tran <- read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
 
 str(tran)
-#checking structure of tran
+#checking structure of tran 
 #note "Site" which is I, N, O for inshore, nearshore, offshore
 #is showing 4 factors including a number "1"
 
