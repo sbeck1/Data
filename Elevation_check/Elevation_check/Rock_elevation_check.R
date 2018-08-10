@@ -14,7 +14,7 @@ dat<- read_csv("20180731_surv_el_trans.csv")
 
 dat$Date=mdy("7/31/2018") #need to add the sampling date
 
-dat2<-subset(dat, select =c("Elev", "Transect", "Element_id", "Date"))
+dat2<-subset(dat, select =c("Date","Transect", "Elev", "Element_id"))
 #just the columns I want
 
 #if you look through dat2 you see there is a "GS DIRT" listed in transect for row
@@ -211,7 +211,7 @@ p5<-ggplot(data=dat3) +
           labs(title="Elevation of rock top surface") + 
           geom_boxplot(
           mapping = aes(
-            x=Element_id_3,
+            x=Element    _id_3,
             y=Elev))+
   geom_hline(yintercept = -1.2, color = "black", size=1, linetype = 2) +
   geom_hline(yintercept = -1.95, color = "black", size=1, linetype = 2)
@@ -330,6 +330,28 @@ xy[["x"]]
 #this will give you all the densities for every reef element
 xy[["y"]]
 
+
+################################
+################################
+##data from Aug 8 Reef 13
+
+dat13<- read_csv("asbuilt_80918_13.csv")
+
+dat13$Date=mdy("8/8/2018") #need to add the sampling date
+
+dat13$Element_id=13 #need to add reef Element
+
+dat13$Element_id_2=13 #need to add reef Element
+
+dat13_2<-filter(dat13,dat13$Type!=c("GS"))
+#only keep the rocks, get rid of GS or ground shots != is saying is not equal to
+
+
+dat13_3<-subset(dat13_2, select =c("Date", "Transect", "Elev", "Element_id", "Element_id_2"))
+#just the columns I want
+
+
+#joint dat 3 and dat 13_3
 
 
 
