@@ -6,39 +6,40 @@
 #good ideas here https://ggplot2.tidyverse.org/reference/geom_histogram.html
 #https://bbolker.github.io/R-ecology-lesson/04-visualization-ggplot2.html
 
+#https://owi.usgs.gov/blog/boxplots/
+
 library("tidyverse")
 library("MASS")
 library("lubridate")
 
-dat<- read_csv("20180731_surv_el_trans.csv")
+#dat<- read_csv("20180731_surv_el_trans.csv")
+dat<- read_csv("elevation_check_data_bp.csv")
 
-dat$Date=mdy("7/31/2018") #need to add the sampling date
 
-dat2<-subset(dat, select =c("Date","Transect", "Elev", "Element_id"))
-#just the columns I want
+#dat$Date=mdy("7/31/2018") #need to add the sampling date
 
-#if you look through dat2 you see there is a "GS DIRT" listed in transect for row
-#217, we don't want to use the "dirt shot" survey points
-#for the dirt points use Tom's original data, but that doesn't have the reef elements listed in the data file.
+dat2<-subset(dat, select =c("Date","Transect", "Elev", "Element_id", "Type"))
 
-#Two ways to get rid of this row
-#Just work with rows 1-216 to not use the last row which is the dirt shot
+dat2.1<-filter(dat2,dat2$Transect!=c("GS DIRT")) 
+dat2.2<-filter(dat2.1,dat2.1$Type!=c("GS"))  
 
-#dat<- dat[c(1:216),]
- 
-#or dplyr way using filter.  Note the != means "is not equal to" so this is #saying to convert dat to a dataframe that only has Transect variables that are
-#not equal to GS DIRT
-
-dat2<-filter(dat2,dat2$Transect!=c("GS DIRT"))
+dat2<-dat2.2
 
 #create new dataframe dat2 by mutating dat to create new elment id
 #name 11c for the most southern 3 transects of 11b.  These transects
 #are the new rock size transects. the notation is 7 or 8 or 9
-dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 6, "11c", Element_id))
+dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 99, "11c", Element_id))
+
+#need to turn this off because with the second date there are now multiple transects with same number
+#need to get this to work as a "by" date
+
+#dat3<-transform(dat2, Element_id_2 = ifelse(Transect > 6 & Date = c(7/31/2018), "11c", Element_id))
+
+
 
 #ok this is creating the new Element_id_2 as a factor for use in plotting below
 dat3$Element_id_3<-factor(dat3$Element_id_2, 
-          levels =c ("5", "7", "8a", "9b", "10b", "11b", "11c"))
+          levels =c ("5", "7", "8a", "9b", "10b", "11b", "13"))
 
 ###Tables
 #just do some summarizing using pipes for fun and practice.  Remember %>% should be thought of as "then"
@@ -57,7 +58,7 @@ reefs <-  dat3 %>%
 names(reefs) <- c("Reef", "Count_rocks", "Mean_elev",
                   "Max_elev")
 
-#be careful here as 11c has none over so it only returns 6 reefs, not 7
+#be careful here as if none over not returned
 over_spec <-  dat3 %>%
   group_by(Element_id_3) %>%
   filter(Elev > -1.2) %>%
@@ -211,7 +212,7 @@ p5<-ggplot(data=dat3) +
           labs(title="Elevation of rock top surface") + 
           geom_boxplot(
           mapping = aes(
-            x=Element    _id_3,
+            x=Element_id_3,
             y=Elev))+
   geom_hline(yintercept = -1.2, color = "black", size=1, linetype = 2) +
   geom_hline(yintercept = -1.95, color = "black", size=1, linetype = 2)
@@ -333,25 +334,6 @@ xy[["y"]]
 
 ################################
 ################################
-##data from Aug 8 Reef 13
-
-dat13<- read_csv("asbuilt_80918_13.csv")
-
-dat13$Date=mdy("8/8/2018") #need to add the sampling date
-
-dat13$Element_id=13 #need to add reef Element
-
-dat13$Element_id_2=13 #need to add reef Element
-
-dat13_2<-filter(dat13,dat13$Type!=c("GS"))
-#only keep the rocks, get rid of GS or ground shots != is saying is not equal to
-
-
-dat13_3<-subset(dat13_2, select =c("Date", "Transect", "Elev", "Element_id", "Element_id_2"))
-#just the columns I want
-
-
-#joint dat 3 and dat 13_3
 
 
 
