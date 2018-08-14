@@ -30,8 +30,8 @@ dat2<-dat2.2
 #are the new rock size transects. the notation is 7 or 8 or 9
 dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 99, "11c", Element_id))
 
-#need to turn this off because with the second date there are now multiple transects with same number
-#need to get this to work as a "by" date
+#need to turn this off now simply by setting transect to 99.  This is because with the second date of transect sampling there are now multiple transects with same number
+#need to get this to work with a "by" date clause to go with the if else on the transect, but for now this is ok.
 
 #dat3<-transform(dat2, Element_id_2 = ifelse(Transect > 6 & Date = c(7/31/2018), "11c", Element_id))
 
@@ -49,22 +49,25 @@ n_element_trans<- dat3 %>%
   group_by(Element_id_2, Transect) %>%
   summarize(n())
 
+#simple summary statistics by each reef
 reefs <-  dat3 %>%
   group_by(Element_id_3) %>%
   summarize(
     count=n(),
-    mean_elev=mean(Elev),na.rm=TRUE,
-    max_elev=max(Elev))
+    mean_elev=mean(Elev),
+    max_elev=max(Elev),
+    sd_elev=sd(Elev),
+    CV_elev=(sd(Elev)/mean(Elev)*100))
 names(reefs) <- c("Reef", "Count_rocks", "Mean_elev",
-                  "Max_elev")
+                  "Max_elev", "SD_elev", "CV_elev")
 
-#be careful here as if none over not returned
+#be careful here as if there are none over, then that reef element is  not returned so it can appear the number of elements is not correct
 over_spec <-  dat3 %>%
   group_by(Element_id_3) %>%
   filter(Elev > -1.2) %>%
   summarize(
     count_over=n())
-#the above returns 6 reefs that meet condition
+#the above returns 6 reefs that meet condition, 13 not included because none are over
 
 num_rocks <-  dat3 %>%
   group_by(Element_id_3) %>%
@@ -91,8 +94,6 @@ under<-sum(ifelse(dat3$Elev<-1.95,1,0))
 # 
 # x_spread<-x %>% 
 #   spread(key=Element_id_3,value=count_over)
-# 
-# 
 # x %>% 
 #   spread(Element_id_3,count_over,fill=0)
 
@@ -267,7 +268,7 @@ p6
 
 ##############################
 #Density plots################
-##############################
+############################## 
 
 #Color bling palette, with black as the starting color
 
@@ -289,38 +290,7 @@ p10
 
 ########
 
-#Not working
-
-##need to calculate the number of observations greater than
-##the minimum elevation
-
-#use summarize
-
-surveys_sml <- surveys %>%
-  filter(weight < 5) %>%
-  select(species_id, sex, weight)
-
-Over <- dat3 %>%
-  filter(Elev <- 1.95)
-
-table(elev_overtran$Month,tran$Locality,tran$Site,tran$Year)           
-#n samples by year, locality and site
-
-table(elev_over$Elev, elev_over$Element_id_3, data=elev_over)
-  
-
-#%>%
-#  mutate(PERCENT = prop.table(n))
-
-max.elev =-1.95
-dat3 %>%
-  group_by(Element_id_3) %>%
-  mutate(n=n()) %>%
-  #group_by(Element_id_3) %>%
-  filter(n() > max.elev) %>% select(-n)
-
-
-
+#END
 
 ####
 xy<-density(dat3$Elev, na.rm=T)
