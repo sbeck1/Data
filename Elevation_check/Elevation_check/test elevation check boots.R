@@ -1,41 +1,30 @@
-#This R code is used to take a look at the late night survey data from reef
-#elements approximately 2-11 that was collected on LCR the night of July 31
-#This is also a "lab guide" for making these types of plots
-#I put a lot of notes in this code to highlight "what I'm watching for"
 
-#good ideas here https://ggplot2.tidyverse.org/reference/geom_histogram.html
-#https://bbolker.github.io/R-ecology-lesson/04-visualization-ggplot2.html
+#August 2018
+#this is a program that can be used to help think about the number of transects to measure on the reef elements. the program reads in the survey data we have in hand as of 8.11.2018 and then you choose which reef you want to then "resample" to calculate the average elevation for a given number of transects.  it then makes a plot that shows the mean elevations of each of the transects that you take and compares this to a reference line that is the target for the construction people to achieve.  
+
+windows(record=T)
 
 library("tidyverse")
 library("MASS")
 library("lubridate")
 
-dat<- read_csv("20180731_surv_el_trans.csv")
+#dat<- read_csv("20180731_surv_el_trans.csv")
+dat<- read_csv("elevation_check_data_bp.csv")
 
-dat$Date=mdy("7/31/2018") #need to add the sampling date
 
-dat2<-subset(dat, select =c("Elev", "Transect", "Element_id", "Date"))
-#just the columns I want
+#dat$Date=mdy("7/31/2018") #need to add the sampling date
 
-#if you look through dat2 you see there is a "GS DIRT" listed in transect for row
-#217, we don't want to use the "dirt shot" survey points
-#for the dirt points use Tom's original data, but that doesn't have the reef elements listed in the data file.
+dat2<-subset(dat, select =c("Date","Transect", "Elev", "Element_id", "Type"))
 
-#Two ways to get rid of this row
-#Just work with rows 1-216 to not use the last row which is the dirt shot
+dat2.1<-filter(dat2,dat2$Transect!=c("GS DIRT")) 
+dat2.2<-filter(dat2.1,dat2.1$Type!=c("GS"))  
 
-#dat<- dat[c(1:216),]
-
-#or dplyr way using filter.  Note the != means "is not equal to" so this is #saying to convert dat to a dataframe that only has Transect variables that are
-#not equal to GS DIRT
-
-dat2<-filter(dat2,dat2$Transect!=c("GS DIRT"))
+dat2<-dat2.2
 
 #create new dataframe dat2 by mutating dat to create new elment id
 #name 11c for the most southern 3 transects of 11b.  These transects
 #are the new rock size transects. the notation is 7 or 8 or 9
-dat3<-mutate(dat2, Element_id_2 = 
-               ifelse(Transect > 6, "11c", Element_id))
+dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 99, "11c", Element_id))
 
 #table of survey points by transect and reef
 n_element_trans<- dat3 %>%
@@ -44,13 +33,14 @@ n_element_trans<- dat3 %>%
 
 #ok this is creating the new Element_id_2 as a factor for use in plotting below
 dat3$Element_id_3<-factor(dat3$Element_id_2, 
-      levels =c ("5", "7", "8a", "9b", "10b", "11b", "11c"))
+      levels =c ("5", "7", "8a", "9b", "10b", "11b", "13"))
 
-#"5", "7", "8a", "9b", "10b", "11b", "11c"
+#"5", "7", "8a", "9b", "10b", "11b", "13"
 
 #look at specific reefs
-dat_reef<-filter(dat3, Element_id_3 == "5")
+dat_reef<-filter(dat3, Element_id_3 == "7")
 
+num_trans=4
 
 #############################################################
 
@@ -62,17 +52,17 @@ dat_reef<-filter(dat3, Element_id_3 == "5")
 #you would potentially take
 
 bstrap <- c()
-for (i in 1:4){
+for (i in 1:(num_trans)){
   bstrap <- c(bstrap, mean(sample(dat_reef$Elev,(length(dat_reef$Elev)),replace=T)))}
 
 View(bstrap) #there are your XX boot strap samples of cnt
-hist(bstrap,xlim=c(-2,-1.0)) #ok what shape are these data now?
-abline(v = -1.2, col = "blue", lwd = 2)
+hist(bstrap,xlim=c(-2,0)) #ok what shape are these data now?
+abline(v = -1.2, col = "blue", lwd = 2) #add the vertical line
 
 mean(bstrap) 
 
 #here is your mean of the bootstrap
-#mean(dat_reef8$Elev) #here is the mean of your original
+#mean(dat_reef$Elev) #here is the mean of your original
 
 #lower bound
 quantile(bstrap,.025)
