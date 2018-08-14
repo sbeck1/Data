@@ -6,39 +6,40 @@
 #good ideas here https://ggplot2.tidyverse.org/reference/geom_histogram.html
 #https://bbolker.github.io/R-ecology-lesson/04-visualization-ggplot2.html
 
+#https://owi.usgs.gov/blog/boxplots/
+
 library("tidyverse")
 library("MASS")
 library("lubridate")
 
-dat<- read_csv("20180731_surv_el_trans.csv")
+#dat<- read_csv("20180731_surv_el_trans.csv")
+dat<- read_csv("elevation_check_data_bp.csv")
 
-dat$Date=mdy("7/31/2018") #need to add the sampling date
 
-dat2<-subset(dat, select =c("Elev", "Transect", "Element_id", "Date"))
-#just the columns I want
+#dat$Date=mdy("7/31/2018") #need to add the sampling date
 
-#if you look through dat2 you see there is a "GS DIRT" listed in transect for row
-#217, we don't want to use the "dirt shot" survey points
-#for the dirt points use Tom's original data, but that doesn't have the reef elements listed in the data file.
+dat2<-subset(dat, select =c("Date","Transect", "Elev", "Element_id", "Type"))
 
-#Two ways to get rid of this row
-#Just work with rows 1-216 to not use the last row which is the dirt shot
+dat2.1<-filter(dat2,dat2$Transect!=c("GS DIRT")) 
+dat2.2<-filter(dat2.1,dat2.1$Type!=c("GS"))  
 
-#dat<- dat[c(1:216),]
- 
-#or dplyr way using filter.  Note the != means "is not equal to" so this is #saying to convert dat to a dataframe that only has Transect variables that are
-#not equal to GS DIRT
-
-dat2<-filter(dat2,dat2$Transect!=c("GS DIRT"))
+dat2<-dat2.2
 
 #create new dataframe dat2 by mutating dat to create new elment id
 #name 11c for the most southern 3 transects of 11b.  These transects
 #are the new rock size transects. the notation is 7 or 8 or 9
-dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 6, "11c", Element_id))
+dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 99, "11c", Element_id))
+
+#need to turn this off now simply by setting transect to 99.  This is because with the second date of transect sampling there are now multiple transects with same number
+#need to get this to work with a "by" date clause to go with the if else on the transect, but for now this is ok.
+
+#dat3<-transform(dat2, Element_id_2 = ifelse(Transect > 6 & Date = c(7/31/2018), "11c", Element_id))
+
+
 
 #ok this is creating the new Element_id_2 as a factor for use in plotting below
 dat3$Element_id_3<-factor(dat3$Element_id_2, 
-          levels =c ("5", "7", "8a", "9b", "10b", "11b", "11c"))
+          levels =c ("5", "7", "8a", "9b", "10b", "11b", "13"))
 
 ###Tables
 #just do some summarizing using pipes for fun and practice.  Remember %>% should be thought of as "then"
@@ -48,22 +49,25 @@ n_element_trans<- dat3 %>%
   group_by(Element_id_2, Transect) %>%
   summarize(n())
 
+#simple summary statistics by each reef
 reefs <-  dat3 %>%
   group_by(Element_id_3) %>%
   summarize(
     count=n(),
-    mean_elev=mean(Elev),na.rm=TRUE,
-    max_elev=max(Elev))
+    mean_elev=mean(Elev),
+    max_elev=max(Elev),
+    sd_elev=sd(Elev),
+    CV_elev=(sd(Elev)/mean(Elev)*100))
 names(reefs) <- c("Reef", "Count_rocks", "Mean_elev",
-                  "Max_elev")
+                  "Max_elev", "SD_elev", "CV_elev")
 
-#be careful here as 11c has none over so it only returns 6 reefs, not 7
+#be careful here as if there are none over, then that reef element is  not returned so it can appear the number of elements is not correct
 over_spec <-  dat3 %>%
   group_by(Element_id_3) %>%
   filter(Elev > -1.2) %>%
   summarize(
     count_over=n())
-#the above returns 6 reefs that meet condition
+#the above returns 6 reefs that meet condition, 13 not included because none are over
 
 num_rocks <-  dat3 %>%
   group_by(Element_id_3) %>%
@@ -90,8 +94,6 @@ under<-sum(ifelse(dat3$Elev<-1.95,1,0))
 # 
 # x_spread<-x %>% 
 #   spread(key=Element_id_3,value=count_over)
-# 
-# 
 # x %>% 
 #   spread(Element_id_3,count_over,fill=0)
 
@@ -266,7 +268,7 @@ p6
 
 ##############################
 #Density plots################
-##############################
+############################## 
 
 #Color bling palette, with black as the starting color
 
@@ -288,38 +290,7 @@ p10
 
 ########
 
-#Not working
-
-##need to calculate the number of observations greater than
-##the minimum elevation
-
-#use summarize
-
-surveys_sml <- surveys %>%
-  filter(weight < 5) %>%
-  select(species_id, sex, weight)
-
-Over <- dat3 %>%
-  filter(Elev <- 1.95)
-
-table(elev_overtran$Month,tran$Locality,tran$Site,tran$Year)           
-#n samples by year, locality and site
-
-table(elev_over$Elev, elev_over$Element_id_3, data=elev_over)
-  
-
-#%>%
-#  mutate(PERCENT = prop.table(n))
-
-max.elev =-1.95
-dat3 %>%
-  group_by(Element_id_3) %>%
-  mutate(n=n()) %>%
-  #group_by(Element_id_3) %>%
-  filter(n() > max.elev) %>% select(-n)
-
-
-
+#END
 
 ####
 xy<-density(dat3$Elev, na.rm=T)
@@ -330,6 +301,9 @@ xy[["x"]]
 #this will give you all the densities for every reef element
 xy[["y"]]
 
+
+################################
+################################
 
 
 
