@@ -34,16 +34,22 @@ dat2<-filter(dat2,dat2$Transect!=c("GS DIRT"))
 #create new dataframe dat2 by mutating dat to create new elment id
 #name 11c for the most southern 3 transects of 11b.  These transects
 #are the new rock size transects. the notation is 7 or 8 or 9
-dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 6, "11c", Element_id))
+dat3<-mutate(dat2, Element_id_2 = 
+               ifelse(Transect > 6, "11c", Element_id))
+
+#table of survey points by transect and reef
+n_element_trans<- dat3 %>%
+  group_by(Element_id_2, Transect) %>%
+  summarize(n())
 
 #ok this is creating the new Element_id_2 as a factor for use in plotting below
 dat3$Element_id_3<-factor(dat3$Element_id_2, 
-                          levels =c ("5", "7", "8a", "9b", "10b", "11b", "11c"))
+      levels =c ("5", "7", "8a", "9b", "10b", "11b", "11c"))
 
 #"5", "7", "8a", "9b", "10b", "11b", "11c"
 
 #look at specific reefs
-dat_reef<-filter(dat3, Element_id_3 == "11b")
+dat_reef<-filter(dat3, Element_id_3 == "5")
 
 
 #############################################################
@@ -52,24 +58,28 @@ dat_reef<-filter(dat3, Element_id_3 == "11b")
 
 #https://en.wikipedia.org/wiki/Bootstrapping_(statistics)
 
+#change in the i in 1:X, the X is the number of transects
+#you would potentially take
+
 bstrap <- c()
-for (i in 1:6){
+for (i in 1:4){
   bstrap <- c(bstrap, mean(sample(dat_reef$Elev,(length(dat_reef$Elev)),replace=T)))}
 
-View(bstrap) #there are your 1000 boot strap samples of cnt
+View(bstrap) #there are your XX boot strap samples of cnt
 hist(bstrap,xlim=c(-2,-1.0)) #ok what shape are these data now?
 abline(v = -1.2, col = "blue", lwd = 2)
 
-mean(bstrap) #here is your mean of the bootstrap
+mean(bstrap) 
+
+#here is your mean of the bootstrap
 #mean(dat_reef8$Elev) #here is the mean of your original
+
 #lower bound
 quantile(bstrap,.025)
 #upper bound
 quantile(bstrap,.975)
 
 quantile(bstrap,0.8)
-
-
 
 # p1<-ggplot(data=bstrap) +
 #   aes(Elev) + 
