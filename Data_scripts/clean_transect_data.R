@@ -6,7 +6,7 @@
 library(readxl) #to read xlsx file
 library(tidyverse)
 library(chron)
-
+library(RCurl)
 #load data
 tran.2017 = read.csv("Oyster_data/Transect/LCR_oyster_transect_2017.csv", header = TRUE, stringsAsFactors = FALSE) #this is a combo of 2017 and 2013
 tran.2018 = read_excel("Oyster_data/Transect/OysterData_30Jan2018_Transect.xlsx")
@@ -14,6 +14,14 @@ tran.2012 = read.csv("Oyster_data/Transect/Transect_data_Nov_2012_bp.csv", strin
 tran.2015 = read_excel("Oyster_data/Transect/2015_transect.xlsx")
 tran.2018 = as.data.frame(tran.2018)
 tran.2015 = as.data.frame(tran.2015)
+
+#Read in the new station name file from Git 
+nameurl = getURL("https://github.com/LCRoysterproject/Data/blob/master/Oyster_data/Transect/station_name_change.xlsx")
+station_name = read.csv(text = nameurl)
+
+#if reading from personal file
+station_name = read.csv("Oyster_data/Transect/station_name_change.csv", header = TRUE, stringsAsFactors = FALSE)
+
 #1. Remove Location data from 2017 and 2018 data and make separate location files
 
 loc.2012 = tran.2012 %>% select(Date, Station, StartGPS_E, StartGPS_N, MidGPS_E, MidGPS_N, EndGPS_E, EndGPS_N, Orientation) %>% distinct()
@@ -33,16 +41,18 @@ transect.locations = rbind(loc.2012, loc.2018)
 transect.locations[which(transect.locations$Station == "LT1"),2] <- "LTI1"
 
 #changing site names to match the new names 
-name = read.csv("station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
-index = match(transect.locations$Station, name$Current)
+name = station_name[,4:5]
+index = match(transect.locations$Station, name$Original_Station)
 index.1 = index[!is.na(index)]
 transect.locations$Station[which(index != "NA")] = name[index.1,2] #changing name 
 
-#write.csv(transect.locations, "transect.locations.csv")
+#Writing a new transect location file with the new files
+write.csv(transect.locations, "transect.locations.csv")
 
 tran.2012 = tran.2012[,-c(10:16)] #removing locations 
 tran.2018 = tran.2018[,-c(12:18)] #removing locations
 
+#####################################################################################################
 ## 2. Clean transect data frames to merge
 
 #cleaning 2012 Epoch
@@ -123,8 +133,9 @@ tran.2017$Site = rep("O", dim(tran.2017)[1])  #create site
 
 ## Dealing with Treatment, pre vs post; control vs restore 
 tran.2017$Treatment = apply(tran.2017, 1, function(x) ifelse(str_detect(x[2], pattern = "LCrestore"), paste0("restore", "_", x[7]), paste0("control")))
-tran.2017$Treatment[which(tran.2017$Treatment == "restore_pre")] <- "control"
-tran.2017$Treatment[which(tran.2017$Treatment == "restore_post")] <- "rocks"
+tran.2017$Treatment[which(tran.2017$Treatment == "restore_pre")] <- "control" #so here I am changing the restore post and pre to control or rocks 
+tran.2017$Treatment[which(tran.2017$Treatment == "restore_post")] <- "rocks" #all sites that were restore with rocks 
+#This code has it designated at control for all sites without rocks (sites that will have rocks are called control before rocks are added)
 
 
 #split bar number from station
@@ -188,49 +199,54 @@ transect = rbind(transect, tran.2015)
 
 
 #changing LCrestore to regular site name 
-name = read.csv("station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
-name.1 = name[22:37,1:2]
-index = match(transect$Station, name.1$Current)
+restore_name = cbind(c("LCrestore1", "LCrestore2", "LCrestore5", "LCrestore6", "LCcontrol3", "LCcontrol4", "LCcontrol7", "LCcontrol8", "LC01","LC02","LC03","LC04","LC05","LC06","LC07", "LC08"), 
+                          c("LCO1", "LCO2", "LCO5", "LCO6", "LCO3", "LCO4", "LCO7", "LCO8", "LCO1","LCO2","LCO3","LCO4","LCO5","LCO6","LCO7", "LCO8"))
+
+index = match(transect$Station, restore_name[,1])
 index.1 = index[!is.na(index)]
 transect$Station[which(index != "NA")] = name.1[index.1,2] #changing name 
 
 #create A,B,C designation 
-transect$Location = rep(NA, dim(transect)[1])
-transect$Location[which(transect$Date < "2013-01-01" & transect$Station == "LCO1")] <- "B"
-transect$Location[which(transect$Date < "2013-01-01" & transect$Station == "LCO2")] <- "A"
-
-transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO1")] <- "B"
-transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO2")] <- "A"
-transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO3")] <- "C"
-transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO4")] <- "A"
-transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO5")] <- "B"
-transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO6")] <- "A"
-transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO7")] <- "B"
+#USED THIS BEFORE WE HAD THE SITE NAME CHANGE WITH A AND B DESIGNATIONS
+#transect$Location = rep(NA, dim(transect)[1])
+#transect$Location[which(transect$Date < "2013-01-01" & transect$Station == "LCO1")] <- "B"
+#transect$Location[which(transect$Date < "2013-01-01" & transect$Station == "LCO2")] <- "A"
+#transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO1")] <- "B"
+#transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO2")] <- "A"
+#transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO3")] <- "C"
+#transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO4")] <- "A"
+#transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO5")] <- "B"
+#transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO6")] <- "A"
+#transect$Location[which(transect$Date > "2013-01-01" & transect$Station == "LCO7")] <- "B"
 
 
 
 # changing site names to new format
 #problem that sites prior to 2013 have same current name but different later name than post 2013 data
 
-name = read.csv("station_name_change.csv", header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+name = station_name[,4:5]
 transect.pre13 = subset(transect, transect$Date < "2013-01-01")
 transect.post13 = subset(transect, transect$Date > "2013-01-01")
 
-name.pre13 = name[1:3, ]
-name.post13 = name[4:21,]
+name.pre13 = name[-c(39:46), ]
+name.post13 = name[-c(29,30,31),]
 
-index.pre = match(transect.pre13$Station, name.pre13$Current)
+index.pre = match(transect.pre13$Station, name.pre13$Original_Station)
 index.pre1 = index.pre[!is.na(index.pre)]
 transect.pre13$Station[which(index.pre != "NA")] = name.pre13[index.pre1,2] #changing name 
 
-index.post = match(transect.post13$Station, name.post13$Current)
+index.post = match(transect.post13$Station, name.post13$Original_Station)
 index.post1 = index.post[!is.na(index.post)]
 transect.post13$Station[which(index.post != "NA")] = name.post13[index.post1,2] #changing name 
 
 transect = rbind(transect.pre13, transect.post13)
 
 #check if the switch worked
-transect %>% select(Date, Station, Location) %>% distinct()
+transect %>% select(Date, Station, Locality) %>% distinct()
+
+###### Change LT1 to LTI1 so the split works properly ########
+
+transect[which(transect$Station == "LT1"),8] <- "LTI1"
 
 ####### Fix col splits ##########
 transect$Locality = substr(transect$Station, 1, 2)
@@ -238,15 +254,16 @@ transect$Site = substr(transect$Station, 3,3)
 transect$Bar = substr(transect$Station, 4,5)
 
 # Make a Sub station col for combo of Station + Location 
+### DONT NEED THIS NOW WITH THE NEW NAME CHANGE
 
-Substation = ifelse(transect$Location != "NA", paste0(transect$Station, transect$Location), paste(NA))
-index = which(is.na(transect$Location))
-Substation[index]= transect$Station[index]
-transect$Substation = Substation
+#Substation = ifelse(transect$Location != "NA", paste0(transect$Station, transect$Location), paste(NA))
+#index = which(is.na(transect$Location))
+#Substation[index]= transect$Station[index]
+#transect$Substation = Substation
 
 #check if the col split worked
 
-transect %>% select(Locality, Site, Bar, Station, Substation) %>% distinct()
+transect %>% select(Locality, Site, Bar, Station) %>% distinct()
 
 #Noticed issues where 0s where in place of Os in the Site, and also upper and lower cas discrepancies in tran$Site
 
