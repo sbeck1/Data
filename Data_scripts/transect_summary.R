@@ -20,10 +20,10 @@ library(readr)
 ############
 
 #Updated this so it's loading data directly from GitHub
-#tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
-#tran = read.csv(text = tranurl)
+tranurl = getURL("https://raw.githubusercontent.com/LCRoysterproject/Data/master/Oyster_data/Transect/transect_combined.csv")
+tran = read.csv(text = tranurl)
 
-tran <- read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
+#tran <- read.csv("Oyster_data/Transect/transect_combined.csv",header=T)
 
 str(tran)
 #checking structure of tran 
@@ -122,7 +122,7 @@ check_tab<-filter(tran, Month=="Jul" &
 
 #Dan Maxwell says "never use a dot at the beginning of a funtion#
 
-.sumstats = function(x) 
+sumstats = function(x) 
   c(Mean=mean(x,na.rm=T), 
     Sd=sd(x,na.rm=T), 
     Var=var(x,na.rm=T), 
@@ -144,20 +144,25 @@ check_tab<-filter(tran, Month=="Jul" &
 
 #https://en.wikipedia.org/wiki/Bootstrapping_(statistics)
 
-# bstrap <- c()
-# for (i in 1:1000){
-#   bstrap <- c(bstrap, mean(sample(cnt$Cnt_Live,(length(cnt$Cnt_Live)),replace=T)))}
-# 
-# View(bstrap) #there are your 1000 boot strap samples of cnt
-# hist(bstrap) #ok what shape are these data now?
-# 
-# mean(bstrap) #here is your mean of the bootstrap
-# mean(cnt$Cnt_Live) #here is the mean of your original
-# #lower bound
-# quantile(bstrap,.025)
-# #upper bound
-# quantile(bstrap,.975)
-##############################################################
+index = tran[-which(is.na(tran$Cnt_Live) == TRUE),]
+
+
+ bstrap <- c()
+ for (i in 1:1000){
+   bstrap <- c(bstrap, mean(sample(tran$Cnt_Live,(length(tran$Cnt_Live)),replace=T), na.rm = TRUE))}
+ 
+ View(bstrap) #there are your 1000 boot strap samples of cnt
+ hist(bstrap) #ok what shape are these data now?
+ 
+ mean(bstrap) #here is your mean of the bootstrap
+ mean(tran$Cnt_Live, na.rm = TRUE) #here is the mean of your original
+ #lower bound
+ quantile(bstrap,.025)
+ #upper bound
+ quantile(bstrap,.975) 
+########################
+ 
+ ######################################
 ##############################################################
 #End function
 ##############################################################
