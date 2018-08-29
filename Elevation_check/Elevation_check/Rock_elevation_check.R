@@ -13,7 +13,7 @@ library("MASS")
 library("lubridate")
 
 #dat<- read_csv("20180731_surv_el_trans.csv")
-dat<- read_csv("elevation_check_data_bp.csv")
+dat<- read_csv("elevation_check_data_20180828.csv")
 
 
 #dat$Date=mdy("7/31/2018") #need to add the sampling date
@@ -39,7 +39,7 @@ dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 99, "11c", Element_id))
 
 #ok this is creating the new Element_id_2 as a factor for use in plotting below
 dat3$Element_id_3<-factor(dat3$Element_id_2, 
-          levels =c ("5", "7", "8a", "9b", "10b", "11b", "13"))
+          levels =c ("2","3","4","5","6", "7", "8a", "9b", "10b", "11b", "13"))
 
 ###Tables
 #just do some summarizing using pipes for fun and practice.  Remember %>% should be thought of as "then"
