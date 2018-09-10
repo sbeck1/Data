@@ -13,50 +13,47 @@ library("MASS")
 library("lubridate")
 
 #dat<- read_csv("20180731_surv_el_trans.csv")
-dat<- read_csv("elevation_check_data_20180828.csv")
+dat<- read_csv("asbuilt_20180905.csv")
 
 
-#dat$Date=mdy("7/31/2018") #need to add the sampling date
+dat$Date=mdy("09/05/2018") #need to add the sampling date
 
-dat2<-subset(dat, select =c("Date","Transect", "Elev", "Element_id", "Type","Version"))
+
+dat2<-subset(dat, select =c("Date","Transect", "Elev", "Element", "Type"))
+
+unique(dat2$Type)
+
+
 
 #!= is "is not equal to"
 
-dat2.1<-filter(dat2,dat2$Transect!=c("GS DIRT")) 
-dat2.2<-filter(dat2.1,dat2.1$Type!=c("GS"))
+#just filtering out, one at a time to make sure I get this
+#right, the "other" names for GS. I'm assuming these are
+#all GS
 
-#there is one transect labeled as GS DIRT so need to remove that
+dat2.1<-filter(dat2,dat2$Type!=c("GS/BEG 7"))
+dat2.2<-filter(dat2.1,dat2.1$Type!=c("GS/END 7"))
+dat2.3<-filter(dat2.2,dat2.2$Type!=c("GS/8 BEG"))
+dat2.4<-filter(dat2.3,dat2.3$Type!=c("GS/END 8"))
+dat2.5<-filter(dat2.4,dat2.4$Type!=c("GS"))
 
-dat2.3<-filter(dat2.2,dat2.2$Transect!=c("GS DIRT"))
+#now in 2.5 we are only working with ROCK TOPS
+#I did it this way incase we have to go back and easily
+#allow some of these random names back in
 
-
-#now remove all of the original surveys of the reefs and
-#just work with what provided Aug 28 which is the version 2
-#of the reefs
-
-#create dat2.4 by pulling everything out of dat2.3 that is not equal to Version = 1
-#this is key, I'm not sure when a given reef was "reworked" so there is a possibility that some of the data that are labeled version 1 have actually been reworked or perhaps were made 
-
-dat2.4<-filter(dat2.3,dat2.3$Version!=c("1"))  
-
-#ok this is just renaming dat2.3 back to dat2
-dat2<-dat2.4
+#ok this is just renaming dat2.5 back to dat2
+dat2<-dat2.5
 
 #create new dataframe dat2 by mutating dat to create new elment id
 #name 11c for the most southern 3 transects of 11b.  These transects
 #are the new rock size transects. the notation is 7 or 8 or 9
-dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 99, "11c", Element_id))
+dat3<-mutate(dat2, Element_id_2 = ifelse(Transect > 99, "11c", Element))
 
 #need to turn this off now simply by setting transect to 99.  This is because with the second date of transect sampling there are now multiple transects with same number
-#need to get this to work with a "by" date clause to go with the if else on the transect, but for now this is ok.
-
-#dat3<-transform(dat2, Element_id_2 = ifelse(Transect > 6 & Date = c(7/31/2018), "11c", Element_id))
-
-
 
 #ok this is creating the new Element_id_2 as a factor for use in plotting below
 dat3$Element_id_3<-factor(dat3$Element_id_2, 
-          levels =c ("2","3","4","5","6", "7", "8a", "9b", "10b", "11b", "13"))
+          levels =c ("2","3","4","5","6", "7", "8A"))
 
 ###Tables
 #just do some summarizing using pipes for fun and practice.  Remember %>% should be thought of as "then"
@@ -84,7 +81,7 @@ over_spec <-  dat3 %>%
   filter(Elev > -1.2) %>%
   summarize(
     count_over=n())
-#the above returns 6 reefs that meet condition, 13 not included because none are over
+#the above returns X reefs that meet condition, Z not included because none are over
 
 num_rocks <-  dat3 %>%
   group_by(Element_id_3) %>%
@@ -99,20 +96,6 @@ num_rocks <-  dat3 %>%
 total_num<-length(dat3$Elev)
 over<-sum(ifelse(dat3$Elev>-1.2,1,0))
 under<-sum(ifelse(dat3$Elev<-1.95,1,0))
-
-
-# #this was almost working
-# x<-dat3 %>% 
-#   group_by(Element_id_3) %>%
-#   filter(Elev > -1.2) %>%
-#   summarize(
-#     count_over=n())
-# str(x)
-# 
-# x_spread<-x %>% 
-#   spread(key=Element_id_3,value=count_over)
-# x %>% 
-#   spread(Element_id_3,count_over,fill=0)
 
 # #################################################################
 # ##What are we trying to do?#######
@@ -160,8 +143,8 @@ p1<-ggplot(data=dat3) +
   #super critical to just call Elev here and not dat$Elev or it goofs up facet_wrap
   labs(x="Elev", y="Frequency", title="Elevation of rock top surface elements 5-11b") +
   geom_histogram(breaks=seq(-2.5, 0.5, by=0.01)) +
-  xlim(c(-2.5,0.5)) +
-  ylim(c(0,10))
+  xlim(c(-2.5,1.5)) +
+  ylim(c(0,15))
 
 p1
 
@@ -187,7 +170,7 @@ head(ggplot_build(p1)$data[[1]], 10)
 
 #ok adding Element_id which is a character
 p2<-p1+
-  facet_wrap(~Element_id_3, nrow=7) +
+  facet_wrap(~Element_id_2, nrow=7) +
   labs(title = "Elevation of rock top surface by reef element")
 
 p2
@@ -217,7 +200,7 @@ p4
 #now let's use facet_grid instead. this is useful for rows~columns, but we only want rows so we use Element_id~. as we don't have a column
 
 p3.1<-p1+
-  facet_grid(Element_id_3~.) +
+  facet_grid(Element_id_2~.) +
   labs(title = "Frequency histogram of reef elevation by reef element") +
   geom_vline(xintercept = -1.2, color = "black", size=1, linetype = 2) +
   geom_vline(xintercept = -1.95, color = "black", size=1, linetype = 2)
@@ -230,7 +213,7 @@ p5<-ggplot(data=dat3) +
           labs(title="Elevation of rock top surface") + 
           geom_boxplot(
           mapping = aes(
-            x=Element_id_3,
+            x=Element_id_2,
             y=Elev))+
   geom_hline(yintercept = -1.2, color = "black", size=1, linetype = 2) +
   geom_hline(yintercept = -1.95, color = "black", size=1, linetype = 2)
@@ -243,7 +226,7 @@ p6<-ggplot(data=dat3) +
       labs(title="Reef element elevation in order of mean elevation") +
       geom_boxplot(
       mapping = aes(
-        x=reorder(Element_id_3, Elev, FUN=mean),
+        x=reorder(Element_id_2, Elev, FUN=mean),
         y=Elev))+
         geom_hline(yintercept = -1.2, color = "black", 
                    size=1, linetype = 2) +
